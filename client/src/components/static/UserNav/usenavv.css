@@ -1,0 +1,141 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+.user-top-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 8%;
+  background: rgba(10, 25, 60, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* LOGO */
+.nav-logo h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #4da3ff;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #e6ecff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* ❌ HIDE ICONS ON LARGE SCREENS */
+.topnav-icons {
+  display: none;
+}
+
+/* HOVER */
+.nav-link:hover {
+  color: #4da3ff;
+}
+
+/* ACTIVE */
+.nav-link.active {
+  color: #4da3ff;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #4da3ff;
+}
+
+/* =========================
+   MENU TOGGLE
+========================= */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* =========================
+   MOBILE STYLES
+========================= */
+@media (max-width: 992px) {
+  /* SHOW MENU ICON */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* SHOW NAV AS SIDEBAR */
+  .navigation {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: #0a193c;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 25px;
+    gap: 25px;
+    transition: right 0.4s ease;
+  }
+
+  .navigation.active {
+    right: 0;
+  }
+
+  /* ✅ SHOW ICONS ONLY ON SMALL SCREEN */
+  .topnav-icons {
+    display: inline-flex;
+    font-size: 18px;
+  }
+
+  .nav-link {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+}
+
+/* =========================
+   SMALL DEVICES
+========================= */
+@media (max-width: 576px) {
+  .user-top-nav {
+    padding: 12px 5%;
+  }
+
+  .navigation {
+    width: 85%;
+  }
+
+  .nav-logo h3 {
+    font-size: 1.3rem;
+  }
+}

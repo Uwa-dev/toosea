@@ -1,0 +1,184 @@
+/* =========================
+   ABOUT PAGE STYLING
+========================= */
+
+.about-page {
+  padding: 6rem 10%;
+  background: linear-gradient(to bottom, #f9fafc, #ffffff);
+  font-family: "Poppins", sans-serif;
+  color: #1a1a1a;
+}
+
+/* Title */
+.about-page h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #111;
+  letter-spacing: -0.5px;
+}
+
+/* Intro text */
+.about-page > p {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 4rem;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #555;
+}
+
+/* =========================
+   ABOUT CARDS GRID
+========================= */
+
+.about-sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Card */
+.about-section {
+  background: #ffffff;
+  padding: 2.2rem;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Luxury hover effect */
+.about-section:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* Gold accent top line */
+.about-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #c9a227, #e6c85a);
+}
+
+/* Card title */
+.about-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #c9a227;
+  font-weight: 600;
+}
+
+/* Card text */
+.about-section p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* =========================
+   NEWSLETTER SECTION
+========================= */
+
+.newsletter {
+  margin-top: 5rem;
+  padding: 5rem 10%;
+  background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+  text-align: center;
+  color: #fff;
+  border-radius: 0;
+}
+
+/* Heading */
+.newsletter h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+/* Form */
+.newsletter form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Input */
+.newsletter input {
+  flex: 1;
+  padding: 1rem 1.2rem;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+/* Input focus glow */
+.newsletter input:focus {
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.5);
+}
+
+/* Button */
+.newsletter .btn {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  background: #c9a227;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover button */
+.newsletter .btn:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .about-sections {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-page {
+    padding: 5rem 6%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .about-page h1 {
+    font-size: 2.3rem;
+  }
+
+  .about-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+  }
+
+  .newsletter input,
+  .newsletter .btn {
+    width: 100%;
+  }
+}

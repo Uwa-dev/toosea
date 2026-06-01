@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu, X, House, BookText, Contact } from "lucide-react";
-import "./usernav.css";
+import {
+  Menu,
+  X,
+  House,
+  BookText,
+  Contact,
+  DoorOpen
+} from "lucide-react";
+import "./usenavv.css";
+
 
 const UserNav = ({ handleLogout }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <nav className="user-top-nav">
-
+      
       {/* Mobile Hamburger Menu */}
-      <button
-        className="menu-toggle"
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
+      <button className="menu-toggle" onClick={toggleMenu}>
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
@@ -23,14 +31,15 @@ const UserNav = ({ handleLogout }) => {
         <h3>ToOseA</h3>
       </div>
 
-      {/* Desktop Navigation */}
+      {/* Navigation Links */}
       <div className={`navigation ${isOpen ? "active" : ""}`}>
+
         <Link
           to="/"
           className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
-          onClick={() => setIsOpen(false)}
+          onClick={closeMenu}
         >
-          <House className="topnav-icons"/>
+          <House className="topnav-icons" />
           Home
         </Link>
 
@@ -39,10 +48,24 @@ const UserNav = ({ handleLogout }) => {
           className={`nav-link ${
             location.pathname.includes("/about") ? "active" : ""
           }`}
-          onClick={() => setIsOpen(false)}
+          onClick={closeMenu}
         >
-          <BookText className="topnav-icons"/>
-          About us
+          <BookText className="topnav-icons" />
+          About Us
+        </Link>
+
+     
+
+
+        <Link
+          to="/rooms"
+          className={`nav-link ${
+            location.pathname.includes("/rooms") ? "active" : ""
+          }`}
+          onClick={closeMenu}
+        >
+          <DoorOpen className="topnav-icons" />
+          Apartments
         </Link>
 
         <Link
@@ -50,14 +73,39 @@ const UserNav = ({ handleLogout }) => {
           className={`nav-link ${
             location.pathname.includes("/contact") ? "active" : ""
           }`}
-          onClick={() => setIsOpen(false)}
+          onClick={closeMenu}
         >
-          <Contact className="topnav-icons"/>
-          Contact us
+          <Contact className="topnav-icons" />
+          Contact Us
         </Link>
 
-      </div>
+        
+        <Link
+          to="/services"
+          className={`nav-link ${
+            location.pathname.includes("/services") ? "active" : ""
+          }`}
+          onClick={closeMenu}
+        >
+          <DoorOpen className="topnav-icons" />
+          Services
+        </Link>
 
+         <Link
+          to="/gallery"
+          className={`nav-link ${
+            location.pathname.includes("/gallery") ? "active" : ""
+          }`}
+          onClick={closeMenu}
+        >
+          <DoorOpen className="topnav-icons" />
+          Gallery
+        </Link>
+
+
+        
+
+      </div>
     </nav>
   );
 };

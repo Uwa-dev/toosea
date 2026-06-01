@@ -1,9 +1,79 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./about.css";
 
 const About = () => {
-  return (
-    <div>About page</div>
-  )
-}
+  const [email, setEmail] = useState("");
 
-export default About
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    alert(`Thank you for subscribing: ${email}`);
+    setEmail("");
+  };
+
+  return (
+    <>
+      
+      {/* ABOUT SECTION */}
+      <section className="about-page">
+        <h1>About ToOSeA Shortlet</h1>
+
+        <p>
+          ToOSeA Shortlet is Nigeria’s premier property management and short
+          stay rental company, delivering comfort, convenience, and exceptional
+          service. Our mission is to provide luxurious, safe, and fully
+          serviced apartments across Nigeria.
+        </p>
+
+        <div className="about-sections">
+          <div className="about-section">
+            <h2>Our Vision</h2>
+            <p>
+              To redefine shortlet living in Nigeria by combining premium
+              quality, convenience, and unparalleled service.
+            </p>
+          </div>
+
+          <div className="about-section">
+            <h2>Our Mission</h2>
+            <p>
+              We ensure every stay is memorable, comfortable, and secure. Our
+              team handles bookings, property management, and customer care
+              with utmost professionalism.
+            </p>
+          </div>
+
+          <div className="about-section">
+            <h2>Regulatory Compliance</h2>
+            <p>
+              Empirean Heights Ltd. is fully registered with CAC, FIRS, and
+              SCUML, compliant with all regulatory standards in Nigeria.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* NEWSLETTER */}
+      <section className="newsletter">
+        <h3>Subscribe for Updates & Premium Listings</h3>
+
+        <form onSubmit={handleSubscribe}>
+          <input
+            type="email"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <button type="submit" className="btn">
+            Subscribe
+          </button>
+        </form>
+      </section>
+
+   
+    </>
+  );
+};
+
+export default About;
