@@ -28,17 +28,18 @@ const About = () => {
           <div className="about-section">
             <h2>Our Vision</h2>
             <p>
-              To redefine shortlet living in Nigeria by combining premium
-              quality, convenience, and unparalleled service.
+              To provide a comfortable and reliable stay where guests can enjoy quality
+              hospitality, modern living, and a stress free experience from 
+              booking to check out 
             </p>
           </div>
 
           <div className="about-section">
             <h2>Our Mission</h2>
             <p>
-              We ensure every stay is memorable, comfortable, and secure. Our
-              team handles bookings, property management, and customer care
-              with utmost professionalism.
+              We aim to become one of most trusted Airbnb brands on Lagos 
+              Island by consistently delivering excellent service, beautiful spaces,
+              and memorable guest experiences.
             </p>
           </div>
 

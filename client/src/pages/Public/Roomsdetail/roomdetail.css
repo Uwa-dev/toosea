@@ -78,3 +78,115 @@
     height: 40px;
   }
 }
+
+
+/* =========================
+BOOKING SECTION
+========================= */
+.booking-box {
+  margin-top: 40px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 18px;
+  max-width: 500px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+.booking-box h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #111;
+}
+
+.booking-box label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* =========================
+CALENDAR INPUT
+========================= */
+.booking-box input[type="date"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  background: #fafafa;
+  transition: 0.3s;
+}
+
+.booking-box input[type="date"]:focus {
+  border-color: #00a884;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(0,168,132,0.12);
+}
+
+.booking-box input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+/* =========================
+PRICE SUMMARY
+========================= */
+.booking-box p {
+  margin-top: 18px;
+  font-size: 16px;
+}
+
+.booking-box h3:last-of-type {
+  color: #00a884;
+  margin-top: 10px;
+}
+
+/* =========================
+PAYSTACK BUTTON
+========================= */
+.btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    #00a884,
+    #006bff
+  );
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,107,255,.25);
+}
+
+.btn:active {
+  transform: scale(.98);
+}
+
+/* =========================
+MOBILE
+========================= */
+@media (max-width: 768px) {
+  .booking-box {
+    padding: 20px;
+  }
+
+  .booking-box h3 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 15px;
+  }
+}

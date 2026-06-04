@@ -70,10 +70,11 @@ const  Dashboard = () => {
         </div>
 
         <div className="hero-content">
-          <h1>Unlock Your Perfect Shortlet</h1>
+          <h1>Luxury comfort in the heart of Lagos Island</h1>
           <p>
-            Premium serviced apartments and home rentals across Nigeria.
-            Comfortable, convenient, and perfectly located for business or leisure.
+            ToOseA provides a stylish Airbnd experience with modern amenities,
+            exceptional hospitality, and easy access to the city's top destinations
+            which is perfect for business trips,weekend getaways, and unforgettable stays.
           </p>
 
           <div className="hero-buttons">

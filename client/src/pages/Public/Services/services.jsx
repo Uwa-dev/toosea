@@ -20,11 +20,14 @@ export default function Services() {
 
         <div className="grid">
           {[
-            "Luxury Spa",
-            "Gourmet Dining",
-            "Poolside Bar",
-            "Event Planning",
-            "Outdoor Activities",
+            "High-Speed Wifi",
+            "Smart Entertainment",
+            "Uninterrupted Electricity",
+            "Premuim Appliances",
+            "Air Conditioning",
+            "Privacy",
+            "Security",
+            "Relaxation",
           ].map((service, index) => (
             <div key={index} className="card">
               {service}
