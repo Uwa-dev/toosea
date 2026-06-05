@@ -13,34 +13,22 @@ const paymentSchema = new mongoose.Schema(
       required: true
     },
 
-    currency: {
+    paymentMethod: {
       type: String,
-      default: "NGN"
+      enum: ["PAYSTACK", "CASH", "TRANSFER", "POS"]
     },
 
-    method: {
+    paymentStatus: {
       type: String,
-      enum: ["paystack", "offline", "other"],
-      default: "paystack"
+      enum: ["PENDING", "PAID", "FAILED"],
+      default: "PENDING"
     },
 
-    status: {
-      type: String,
-      enum: ["pending", "success", "failed"],
-      default: "pending"
-    },
-
-    transactionId: {
-      type: String,
-      required: true,
-      unique: true
-    },
-
-    paidAt: {
-      type: Date
-    }
+    transactionReference: String
   },
-  { timestamps: true }
+  {
+    timestamps: true
+  }
 );
 
 const Payment = mongoose.model("Payment", paymentSchema);

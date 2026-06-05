@@ -3,6 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import multer from "multer";
 import connectDB from "./dbConnection.js";
+import bookingRouter from './routes/bookingRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import apartmentRouter from './routes/apartmentRoutes.js';
+import analyticsRouter from "./routes/analyticsRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +18,11 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
+
+app.use("/api/users", userRouter);
+app.use("/api/booking", bookingRouter);
+app.use('api/apartment', apartmentRouter);
+app.use("api/analytics", analyticsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)

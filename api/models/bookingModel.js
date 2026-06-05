@@ -2,32 +2,89 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    fullName: String,
-    email: String,
-    phone: String,
+    customer: {
+      fullName: {
+        type: String,
+        required: true,
+        trim: true
+      },
 
-    room: {
+      email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        default: null
+      },
+
+      phone: {
+        type: String,
+        trim: true,
+        default: null
+      }
+    },
+    
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Room"
+      ref: "User",
+      default: null
     },
 
-    checkInDate: Date,
-    checkOutDate: Date,
-
-    totalPrice: Number,
-
-    bookedBy: {
-      type: String,
-      enum: ["guest", "receptionist"]
+    apartment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Apartment",
+      required: true
     },
 
-    status: {
+    checkInDate: {
+      type: Date,
+      required: true
+    },
+
+    checkOutDate: {
+      type: Date,
+      required: true
+    },
+
+    totalPrice: {
+      type: Number,
+      required: true
+    },
+
+    bookingStatus: {
       type: String,
-      enum: ["pending", "confirmed", "failed"],
-      default: "pending" // Pending until payment is confirmed
-    }
+      enum: [
+        "PENDING",
+        "CONFIRMED",
+        "CHECKED_IN",
+        "CHECKED_OUT",
+        "CANCELLED"
+      ],
+      default: "PENDING"
+    },
+
+    paymentStatus: {
+      type: String,
+      enum: ["PENDING", "PAID", "FAILED"],
+      default: "PENDING"
+    },
+
+    bookingSource: {
+      type: String,
+      enum: ["ONLINE", "WALK_IN"],
+      required: true
+    },
+
+    paymentMethod: {
+      type: String,
+      enum: ["PAYSTACK", "CASH", "TRANSFER", "POS"],
+      required: true
+    },
+
+    paymentReference: String
   },
-  { timestamps: true }
+  {
+    timestamps: true
+  }
 );
 
 const Booking = mongoose.model("Booking", bookingSchema);
