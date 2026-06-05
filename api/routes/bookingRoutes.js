@@ -27,17 +27,17 @@ export default BookingRouter
 
 
 
-router.post(
-  "/:id/images",
-  protect,
-  authorizeRoles("OWNER"),
-  upload.array("images", 15),
-  uploadApartmentImages
-);
+// router.post(
+//   "/:id/images",
+//   protect,
+//   authorizeRoles("OWNER"),
+//   upload.array("images", 15),
+//   uploadApartmentImages
+// );
 
-router.delete(
-  "/:id/images/:publicId",
-  protect,
-  authorizeRoles("OWNER"),
-  deleteApartmentImage
-);
+// router.delete(
+//   "/:id/images/:publicId",
+//   protect,
+//   authorizeRoles("OWNER"),
+//   deleteApartmentImage
+// );

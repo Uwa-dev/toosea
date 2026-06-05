@@ -1,4 +1,4 @@
-import Counter from "../models/Counter.js";
+import Counter from "../models/counterModel.js";
 
 export const generateStaffCode = async (role) => {
   const prefix =
