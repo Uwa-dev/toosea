@@ -11,14 +11,18 @@ import AuthLayout from "../components/Layout/AuthLayout/AuthLayout.jsx";
 // import ScrollToTop from "../components/ScrollToTop.jsx";
 
 const Dashboard = lazy(() => import("../pages/Public/Dashboard/dashboard.jsx"));
-const About = lazy(() => import("../pages/Public/About/about.jsx"))
-const Rooms = lazy(() => import("../pages/Public/Rooms/Rooms.jsx"))
-const Contact = lazy(() => import("../pages/Public/Contact/contact.jsx"))
-const Services = lazy(() => import("../pages/Public/Services/services.jsx"))
-const Gallery = lazy(() => import("../pages/Public/Gallery/gallery.jsx"))
-const RoomDetail = lazy(() => import("../pages/Public/Roomsdetail/roomdetail.jsx"))
+const About = lazy(() => import("../pages/Public/About/about.jsx"));
+const Rooms = lazy(() => import("../pages/Public/Rooms/Rooms.jsx"));
+const Contact = lazy(() => import("../pages/Public/Contact/contact.jsx"));
+const Services = lazy(() => import("../pages/Public/Services/services.jsx"));
+const Gallery = lazy(() => import("../pages/Public/Gallery/gallery.jsx"));
+const RoomDetail = lazy(() => import("../pages/Public/Roomsdetail/roomdetail.jsx"));
 // const NoPage = lazy(() => import("../pages/Public/NoPage/NoPage.jsx"))
-const ReceptDashboard = lazy(() => import("../pages/Receptionist/ReceptDashboard/ReceptDashboard.jsx"))
+const ReceptDashboard = lazy(() => import("../pages/Receptionist/ReceptDashboard/ReceptDashboard.jsx"));
+const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard.jsx"));
+const AllUsers = lazy(() => import('../pages/Admin/AllUsers.jsx'));
+const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers.jsx"));
+const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
 
 const routesConfig = [
   {
@@ -62,18 +66,27 @@ const routesConfig = [
       {
         index: true,
         element: <ReceptDashboard />
+      }, 
+    ]
+  }, {
+    path: "/login",
+    element: <Login />,
+  }, {
+    path:"/admin",
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard />
+      }, {
+        path: "allusers",
+        element: <AllUsers />
+      }, {
+        path: "createusers",
+        element: <CreateUsers />
       }
     ]
   }
-  // , {
-  //   path:"/manager",
-  //   element: <AuthLayout />,
-  //   children: [
-  //     {
-        
-  //     }
-  //   ]
-  // }
 ]
 
 export const mainRouter = createBrowserRouter(routesConfig);
