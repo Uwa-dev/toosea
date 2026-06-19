@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+/* ===========================
+   Dashboard Container
+=========================== */
+
+.dashboard-container{
+    padding:35px;
+    min-height:100vh;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.dashboard-header{
+    margin-bottom:35px;
+}
+
+.dashboard-header h1{
+    font-size:34px;
+    color:#1e293b;
+    margin-bottom:8px;
+    font-weight:700;
+}
+
+.dashboard-header p{
+    color:#64748b;
+    font-size:16px;
+}
+
+/* ===========================
+   Dashboard Grid
+=========================== */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin-bottom:40px;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.dashboard-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+    cursor:pointer;
+    border-left:6px solid #2563eb;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.dashboard-icon{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:34px;
+    color:#fff;
+    flex-shrink:0;
+}
+
+.dashboard-content{
+    flex:1;
+}
+
+.dashboard-content h3{
+    color:#64748b;
+    font-size:16px;
+    margin-bottom:10px;
+    font-weight:500;
+}
+
+.dashboard-content h2{
+    color:#0f172a;
+    font-size:32px;
+    font-weight:700;
+}
+
+/* ===========================
+   Bottom Section
+=========================== */
+
+.dashboard-bottom{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+/* ===========================
+   Bottom Cards
+=========================== */
+
+.recent-card{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.recent-card h2{
+    color:#1e293b;
+    margin-bottom:20px;
+    font-size:24px;
+}
+
+.recent-card ul{
+    list-style:none;
+}
+
+.recent-card ul li{
+    padding:14px 0;
+    border-bottom:1px solid #edf2f7;
+    color:#475569;
+    font-size:15px;
+}
+
+.recent-card ul li:last-child{
+    border-bottom:none;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.recent-card button{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.recent-card button:last-child{
+    margin-bottom:0;
+}
+
+.recent-card button:hover{
+    background:#1d4ed8;
+    transform:translateY(-3px);
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563eb;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+    background:#e2e8f0;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:992px){
+
+    .dashboard-bottom{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-container{
+        padding:20px;
+    }
+
+    .dashboard-header h1{
+        font-size:28px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-card{
+        padding:20px;
+    }
+
+    .dashboard-icon{
+        width:60px;
+        height:60px;
+        font-size:28px;
+    }
+
+    .dashboard-content h2{
+        font-size:26px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .dashboard-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .dashboard-content h3{
+        margin-top:10px;
+    }
+
+}

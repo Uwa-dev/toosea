@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+}
+
+/* ===========================
+   Container
+=========================== */
+
+.create-user-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* ===========================
+   Form Card
+=========================== */
+
+.create-user-form{
+    width:100%;
+    max-width:500px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 20px 45px rgba(0,0,0,.3);
+    animation:fadeIn .6s ease-in-out;
+}
+
+.create-user-form h2{
+    text-align:center;
+    color:#fff;
+    margin-bottom:30px;
+    font-size:30px;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
+/* ===========================
+   Form Group
+=========================== */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    color:#f8fafc;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:500;
+}
+
+.form-group input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:2px solid transparent;
+    outline:none;
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    font-size:15px;
+    transition:.3s ease;
+}
+
+.form-group input::placeholder{
+    color:#d1d5db;
+}
+
+.form-group input:focus{
+    border-color:#60a5fa;
+    background:rgba(255,255,255,.25);
+    box-shadow:0 0 15px rgba(96,165,250,.45);
+}
+
+/* ===========================
+   Checkbox
+=========================== */
+
+.show-password{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0 25px;
+}
+
+.show-password input{
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+
+.show-password label{
+    color:#fff;
+    cursor:pointer;
+    font-size:14px;
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.create-user-form button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:0 10px 25px rgba(37,99,235,.35);
+}
+
+.create-user-form button:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    box-shadow:0 15px 35px rgba(37,99,235,.45);
+}
+
+.create-user-form button:active{
+    transform:scale(.98);
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:600px){
+
+    .create-user-form{
+        padding:30px 20px;
+    }
+
+    .create-user-form h2{
+        font-size:24px;
+    }
+
+    .form-group input{
+        padding:12px;
+    }
+
+}

@@ -63,50 +63,56 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
               </Link>
 
               {/* ================= USERS DROPDOWN ================= */}
-              <div className="dropdown">
-                <button
-                  onClick={() => setUsersOpen(!usersOpen)}
-                  className={`dropdown-button ${
-                    location.pathname.includes("/admin/users") ? "active" : ""
-                  }`}
-                >
-                  <Users className="icon" />
-                  Users
-                  {usersOpen ? (
-                    <ChevronUp className="dropdown-icon" />
-                  ) : (
-                    <ChevronDownIcon className="dropdown-icon" />
-                  )}
-                </button>
+        <div className="dropdown">
+  <button
+    onClick={() => setUsersOpen(!usersOpen)}
+    className={`dropdown-button ${
+      location.pathname === "/admin/allusers" ||
+      location.pathname === "/admin/createusers"
+        ? "active"
+        : ""
+    }`}
+  >
+    <Users className="icon" />
+    Staff
 
-                {usersOpen && (
-                  <div className="dropdown-content">
-                    <Link
-                      to="/admin/users"
-                      className={`dropdown-link ${
-                        location.pathname === "/admin/allusers"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      View Users
-                    </Link>
+    {usersOpen ? (
+      <ChevronUp className="dropdown-icon" />
+    ) : (
+      <ChevronDownIcon className="dropdown-icon" />
+    )}
+  </button>
 
-                    <Link
-                      to="/admin/createusers"
-                      className={`dropdown-link ${
-                        location.pathname === "/admin/users/create"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      Create User
-                    </Link>
-                  </div>
-                )}
-              </div>
+  {usersOpen && (
+    <div className="dropdown-content">
+
+      <Link
+        to="/admin/allusers"
+        className={`dropdown-link ${
+          location.pathname === "/admin/allusers"
+            ? "active"
+            : ""
+        }`}
+        onClick={() => setSidebarOpen(false)}
+      >
+        View Staff
+      </Link>
+
+      <Link
+        to="/admin/createusers"
+        className={`dropdown-link ${
+          location.pathname === "/admin/createusers"
+            ? "active"
+            : ""
+        }`}
+        onClick={() => setSidebarOpen(false)}
+      >
+        Create User
+      </Link>
+
+    </div>
+  )}
+</div>
 
               {/* ================= APARTMENTS DROPDOWN ================= */}
               <div className="dropdown">

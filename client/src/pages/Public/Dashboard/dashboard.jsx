@@ -106,26 +106,61 @@ const  Dashboard = () => {
       </section>
 
       {/* ATTRACTIONS */}
-      <section className="attractions">
-        <h2>Nearby Attractions</h2>
+    <section className="attractions">
+  <h2>Nearby Attractions</h2>
 
-        <div className="attraction-grid">
-          <div className="attraction-card">
-            <img src="./toimages/lusa park.jpg" alt="" />
-            <h3>LUFASI Nature Park</h3>
-          </div>
+  <div className="attraction-grid">
 
-          <div className="attraction-card">
-            <img src="./toimages/lekkibeach.jpg" alt="" />
-            <h3>Lekki Beach</h3>
-          </div>
+    <div className="attraction-card">
+      <img src="./toimages/lufasi-park.jpg" alt="LUFASI Nature Park" />
+      <h3>LUFASI Nature Park</h3>
+      <p>Beautiful wildlife park with nature trails and family activities.</p>
+    </div>
 
-          <div className="attraction-card">
-            <img src="./toimages/lekkicon.jpg" alt="" />
-            <h3>Lekki Conservation Centre</h3>
-          </div>
-        </div>
-      </section>
+    <div className="attraction-card">
+      <img src="./toimages/lekkicon.jpg" alt="Lekki Conservation Centre" />
+      <h3>Lekki Conservation Centre</h3>
+      <p>Experience Africa's famous canopy walkway and serene nature reserve.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/novare-mall.jpg" alt="Novare Lekki Mall" />
+      <h3>Novare Lekki Mall</h3>
+      <p>Shopping, restaurants, cinema, and entertainment just minutes away.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/atican-beach.jpg" alt="Atican Beach" />
+      <h3>Atican Beach</h3>
+      <p>One of Lagos' most peaceful beaches for relaxation and fun.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/lekki-art-market.jpg" alt="Lekki Arts & Crafts Market" />
+      <h3>Lekki Arts & Crafts Market</h3>
+      <p>Discover authentic Nigerian art, souvenirs, and handcrafted items.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/omu-resort.jpg" alt="Omu Resort" />
+      <h3>Omu Resort</h3>
+      <p>A complete family destination featuring a zoo, amusement park, and water activities.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/lakowe-golf.jpg" alt="Lakowe Lakes Golf Estate" />
+      <h3>Lakowe Lakes Golf Estate</h3>
+      <p>Premium golf course with lakeside scenery and luxury ambience.</p>
+    </div>
+
+    <div className="attraction-card">
+      <img src="./toimages/eleko-beach.jpg" alt="Eleko Beach" />
+      <h3>Eleko Beach</h3>
+      <p>Enjoy a quieter beach experience with ocean views and fresh seafood.</p>
+    </div>
+
+  </div>
+</section>
 
       {/* SERVICES */}
       <section className="services">
@@ -180,14 +215,56 @@ const  Dashboard = () => {
 
   <div className="property-grid">
     {[
-      { id: 1, name: "Apartment 1", price: "100,000" },
-      { id: 2, name: "Apartment 2 (1BR)", price: "100,000" },
-      { id: 3, name: "Block A", price: "130,000" },
-      { id: 4, name: "Block B", price: "255,000" },
-      { id: 5, name: "Apartment 3", price: "170,000" },
-      { id: 6, name: "Block 3", price: "140,000" },
-      { id: 7, name: "Apartment 4", price: "70,000" },
-    ].map((item) => (
+  {
+    id: 1,
+    name: "Apartment 1",
+    price: "100,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=j-luxe",
+  },
+  {
+    id: 2,
+    name: "Apartment 2",
+    price: "100,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=jojo-1br",
+  },
+  {
+    id: 3,
+    name: "Block A",
+    price: "130,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=jojo-2br",
+  },
+  {
+    id: 4,
+    name: "Block B",
+    price: "255,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=ikate-4br",
+  },
+  {
+    id: 5,
+    name: "Apartment 3",
+    price: "170,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=fine-duplex",
+  },
+  {
+    id: 6,
+    name: "Block 3",
+    price: "140,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=sangotedo-2br",
+  },
+  {
+    id: 7,
+    name: "Apartment 4",
+    price: "70,000",
+    img: "./toimages/room1.jpg",
+    link: "/roomdetails?prop=sangotedo-3br",
+  },
+].map((item) => (
       <div key={item.id} className="property-card">
         <img src="./toimages/room1.jpg" alt={item.name} />
 
@@ -197,11 +274,49 @@ const  Dashboard = () => {
         <span>NGN {item.price}/night</span>
 
         {/* ✅ FIX: pass ID in URL */}
-        <Link to={`/roomdetails/${item.id}`} className="btn">
-          View
-        </Link>
+       <Link to={item.link} className="btn">
+    View Details
+</Link>
       </div>
     ))}
+  </div>
+</section>
+
+{/* ================= NEWSLETTER ================= */}
+
+<section className="newsletter">
+  <div className="newsletter-overlay">
+
+    <div className="newsletter-content">
+
+      <h2>Stay Updated</h2>
+
+      <p>
+        Subscribe to our newsletter and be the first to receive exclusive
+        discounts, luxury apartment offers, travel inspiration, and special
+        holiday packages from ToOSeA Shortlet.
+      </p>
+
+      <form className="newsletter-form">
+
+        <input
+          type="email"
+          placeholder="Enter your email address"
+          required
+        />
+
+        <button type="submit">
+          Subscribe
+        </button>
+
+      </form>
+
+      <small>
+        We respect your privacy. No spam, only exclusive offers.
+      </small>
+
+    </div>
+
   </div>
 </section>
 
