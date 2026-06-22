@@ -11,31 +11,6 @@ body{
     background:#f4f7fc;
 }
 
-.header-actions{
-    display:flex;
-    gap:15px;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-.add-btn{
-    padding:14px 22px;
-    border:none;
-    border-radius:10px;
-    background:#10b981;
-    color:#fff;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.add-btn:hover{
-    background:#059669;
-    transform:translateY(-2px);
-}
-
-
 /* ==========================
    Main Container
 ========================== */

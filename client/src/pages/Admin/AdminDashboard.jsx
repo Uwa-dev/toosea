@@ -1,96 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import "./dashboard.css";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-
-  const [dashboardData, setDashboardData] = useState({
-    totalApartments: 0,
-    totalStaff: 0,
-    todayBookings: 0,
-    monthlyRevenue: 0,
-    occupiedApartments: 0,
-    availableApartments: 0,
-  });
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  // =====================================
-  // Fetch Dashboard Data
-  // =====================================
-
-  useEffect(() => {
-    fetchDashboard();
-  }, []);
-
-  const fetchDashboard = async () => {
-    try {
-      setLoading(true);
-      setError("");
-
-      // Change to your backend endpoint
-      const response = await fetch(
-        "http://localhost:5000/api/dashboard"
-      );
-
-      if (!response.ok) {
-        throw new Error("Unable to load dashboard.");
-      }
-
-      const data = await response.json();
-
-      setDashboardData(data);
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // =====================================
-  // Dashboard Cards
-  // =====================================
-
-  const cards = [
+  const dashboardData = [
     {
       id: 1,
       title: "Total Active Apartments",
-      value: dashboardData.totalApartments,
+      value: 48,
       icon: "🏢",
     },
     {
       id: 2,
       title: "Total Current Staff",
-      value: dashboardData.totalStaff,
+      value: 22,
       icon: "👨‍💼",
     },
     {
       id: 3,
       title: "Today's Bookings",
-      value: dashboardData.todayBookings,
+      value: 15,
       icon: "📅",
     },
     {
       id: 4,
       title: "Revenue This Month",
-      value: `₦${Number(
-        dashboardData.monthlyRevenue
-      ).toLocaleString()}`,
+      value: "₦12,500,000",
       icon: "💰",
     },
     {
       id: 5,
       title: "Occupied Apartments Today",
-      value: dashboardData.occupiedApartments,
+      value: 36,
       icon: "🛏️",
     },
     {
       id: 6,
       title: "Available Apartments",
-      value: dashboardData.availableApartments,
+      value: 12,
       icon: "✅",
     },
   ];
@@ -102,93 +48,43 @@ const Dashboard = () => {
         <p>Welcome back! Here's an overview of today's activities.</p>
       </div>
 
-      {loading ? (
-        <h2>Loading Dashboard...</h2>
-      ) : error ? (
-        <h2>{error}</h2>
-      ) : (
-        <>
-          <div className="dashboard-grid">
-            {cards.map((item) => (
-              <div className="dashboard-card" key={item.id}>
-                <div className="dashboard-icon">
-                  {item.icon}
-                </div>
-
-                <div className="dashboard-content">
-                  <h3>{item.title}</h3>
-                  <h2>{item.value}</h2>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="dashboard-bottom">
-
-            <div className="recent-card">
-              <h2>Today's Summary</h2>
-
-              <ul>
-                <li>
-                  ✔ {dashboardData.todayBookings} bookings received today
-                </li>
-
-                <li>
-                  ✔ {dashboardData.occupiedApartments} apartments occupied
-                </li>
-
-                <li>
-                  ✔ {dashboardData.availableApartments} apartments available
-                </li>
-
-                <li>
-                  ✔ ₦
-                  {Number(
-                    dashboardData.monthlyRevenue
-                  ).toLocaleString()} revenue this month
-                </li>
-
-                <li>
-                  ✔ {dashboardData.totalStaff} active staff members
-                </li>
-              </ul>
+      <div className="dashboard-grid">
+        {dashboardData.map((item) => (
+          <div className="dashboard-card" key={item.id}>
+            <div className="dashboard-icon">
+              {item.icon}
             </div>
 
-            <div className="recent-card">
-              <h2>Quick Actions</h2>
-
-              <button
-                onClick={() =>
-                  navigate("/admin/createapartment")
-                }
-              >
-                Add New Apartment
-              </button>
-
-              <button
-                onClick={() =>
-                  navigate("/admin/createusers")
-                }
-              >
-                Create Staff
-              </button>
-
-              <button
-                onClick={() =>
-                  navigate("/admin/bookings")
-                }
-              >
-                View Bookings
-              </button>
-
-              <button>
-                Generate Report
-              </button>
+            <div className="dashboard-content">
+              <h3>{item.title}</h3>
+              <h2>{item.value}</h2>
             </div>
-
           </div>
-        </>
-      )}
+        ))}
+      </div>
+
+      <div className="dashboard-bottom">
+        <div className="recent-card">
+          <h2>Today's Summary</h2>
+
+          <ul>
+            <li>✔ 15 new bookings received</li>
+            <li>✔ 36 apartments occupied</li>
+            <li>✔ 12 apartments available</li>
+            <li>✔ Monthly revenue growing steadily</li>
+            <li>✔ Staff attendance updated</li>
+          </ul>
+        </div>
+
+        <div className="recent-card">
+          <h2>Quick Actions</h2>
+
+          <button>Add New Apartment</button>
+          <button>Create Staff</button>
+          <button>View Bookings</button>
+          <button>Generate Report</button>
+        </div>
+      </div>
     </div>
   );
 };
