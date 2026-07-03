@@ -3,14 +3,12 @@ import "./createUsers.css";
 
 const CreateUsers = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
-    staffCode: "",
-    password: "",
-    confirmPassword: "",
+    role: "RECEPTIONIST"
   });
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [createdUser, setCreatedUser] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,49 +81,57 @@ const CreateUsers = () => {
         </div>
 
         <div className="form-group">
-          <label>Staff Code</label>
-          <input
-            type="text"
-            name="staffCode"
-            placeholder="Enter staff code"
-            value={formData.staffCode}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Enter password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            name="confirmPassword"
-            placeholder="Confirm password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="show-password">
-          <input
-            type="checkbox"
-            id="showPassword"
-            onChange={() => setShowPassword(!showPassword)}
-          />
-          <label htmlFor="showPassword">Show Password</label>
+          <label>Role</label>
+          <select name="" id="">
+            <option value="">Manager</option>
+            <option value="">Receptionist</option>
+          </select>
         </div>
 
         <button type="submit">Create User</button>
       </form>
+
+      {createdUser && (
+        <div className="popup-overlay">
+
+            <div className="popup">
+
+                <h2>Staff Created Successfully</h2>
+
+                <p><strong>Name:</strong> {createdUser.fullName}</p>
+
+                <p><strong>Email:</strong> {createdUser.email}</p>
+
+                <p><strong>Role:</strong> {createdUser.role}</p>
+
+                <p><strong>Staff Code:</strong> {createdUser.staffCode}</p>
+
+                <p><strong>Password:</strong> {createdUser.password}</p>
+
+                <button
+                    onClick={() => {
+                        navigator.clipboard.writeText(
+                          `Name: ${createdUser.fullName}
+                          Email: ${createdUser.email}
+                          Role: ${createdUser.role}
+                          Staff Code: ${createdUser.staffCode}
+                          Password: ${createdUser.password}`
+                        );
+                    }}
+                >
+                    Copy Details
+                </button>
+
+                <button
+                    onClick={() => setCreatedUser(null)}
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+        )}
     </div>
   );
 };

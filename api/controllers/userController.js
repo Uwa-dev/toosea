@@ -3,11 +3,25 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import { generateStaffCode } from "../utils/generateStaffCode.js";
 
+const generatePassword = () => {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$";
+
+  let password = "";
+
+  for (let i = 0; i < 10; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return password;
+};
+
+
 export const createUser = async (req, res) => {
   try {
     const creator = req.user; // logged-in user
 
-    const { fullName, email, password, role } = req.body;
+    const { fullName, email, role } = req.body;
 
     // prevent self role escalation
     if (role === "OWNER") {
@@ -48,19 +62,26 @@ export const createUser = async (req, res) => {
 
     const staffCode = await generateStaffCode(role);
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const plainPassword = generatePassword();
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
 
     const user = await User.create({
-      fullName,
-      email,
-      password: hashedPassword,
-      role,
-      staffCode
+        fullName,
+        email,
+        password: hashedPassword,
+        role,
+        staffCode
     });
 
     res.status(201).json({
-      message: "User created successfully",
-      user
+        message: "User created successfully",
+        user: {
+            fullName: user.fullName,
+            email: user.email,
+            role: user.role,
+            staffCode: user.staffCode,
+            password: plainPassword
+        }
     });
   } catch (error) {
     res.status(500).json({

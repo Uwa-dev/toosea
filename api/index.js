@@ -13,7 +13,14 @@ dotenv.config();
 const app = express();
 connectDB();
 
-const port = process.env.PORT;
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
+const port = 2222;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,8 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRouter);
 app.use("/api/booking", bookingRouter);
-app.use('api/apartment', apartmentRouter);
-app.use("api/analytics", analyticsRouter);
+app.use('/api/apartment', apartmentRouter);
+app.use("/api/analytics", analyticsRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)

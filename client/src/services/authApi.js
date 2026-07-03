@@ -1,17 +1,19 @@
 import axios from "axios";
-import { logout } from "../util/slices/userSlice";
-import store from '../util/store'
+import { logout } from "../utils/slices/userSlice.js";
+import store from '../utils/store.js'
 
 export const authApi = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/user`
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api/users`
 })
 
 authApi.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token'); // Use persisted token
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
 });
 
 authApi.interceptors.response.use(
@@ -24,3 +26,17 @@ authApi.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+export const login = async (email, password) => {
+  const response = await authApi.post("/login", {
+    email,
+    password,
+  });
+
+  return response.data;
+};
+
+export const createUser = async (userData) => {
+    const response = await authApi.post("/register", userData);
+    return response.data;
+};

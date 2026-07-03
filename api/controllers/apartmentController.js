@@ -187,7 +187,7 @@ export const deleteApartment = async (req, res) => {
           isActive: false
         },
         { new: true }
-      );
+      );po
 
     if (!apartment) {
       return res.status(404).json({

@@ -19,9 +19,9 @@ const Gallery = lazy(() => import("../pages/Public/Gallery/gallery.jsx"));
 const RoomDetail = lazy(() => import("../pages/Public/Roomsdetail/roomdetail.jsx"));
 // const NoPage = lazy(() => import("../pages/Public/NoPage/NoPage.jsx"))
 const ReceptDashboard = lazy(() => import("../pages/Receptionist/ReceptDashboard/ReceptDashboard.jsx"));
-const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard.jsx"));
-const AllUsers = lazy(() => import('../pages/Admin/AllUsers.jsx'));
-const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers.jsx"));
+const AdminDashboard = lazy(() => import("../pages/Admin/Dashboard/AdminDashboard.jsx"));
+const AllUsers = lazy(() => import('../pages/Admin/AllUsers/AllUsers.jsx'));
+const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers/CreateUsers.jsx"));
 const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
 
 const routesConfig = [
