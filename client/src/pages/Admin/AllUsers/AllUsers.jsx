@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Eye, SquarePen,   } from "lucide-react";
 import "./viewUser.css";
 
 const ViewStaff = () => {
@@ -90,14 +91,14 @@ const ViewStaff = () => {
                       className="edit-btn"
                       onClick={() => handleEdit(item.id)}
                     >
-                      Edit
+                      <Eye/>
                     </button>
 
                     <button
                       className="delete-btn"
                       onClick={() => handleDelete(item.id)}
                     >
-                      Delete
+                      <SquarePen/>
                     </button>
                   </td>
                 </tr>

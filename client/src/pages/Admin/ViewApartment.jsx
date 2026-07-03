@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Eye, SquarePen, Camera, Trash2   } from "lucide-react";
 import "./viewApartments.css";
 
 function ViewApartments() {
@@ -79,19 +80,19 @@ function ViewApartments() {
                 <td className="actions">
 
                   <button className="view">
-                    View
+                    <Eye />
                   </button>
 
                   <button className="edit">
-                    Edit
+                    <SquarePen />
                   </button>
 
                   <button className="images">
-                    Images
+                    <Camera />
                   </button>
 
                   <button className="delete">
-                    Delete
+                    <Trash2 />
                   </button>
 
                 </td>
