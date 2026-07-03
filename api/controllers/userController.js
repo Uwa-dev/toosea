@@ -18,6 +18,7 @@ const generatePassword = () => {
 
 
 export const createUser = async (req, res) => {
+
   try {
     const creator = req.user; // logged-in user
 

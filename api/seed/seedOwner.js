@@ -46,3 +46,16 @@ const seedOwner = async () => {
 };
 
 seedOwner();
+
+
+// Name: Mensah Tony
+// Email: tony@gmail.com
+// Role: MANAGER
+// Staff Code: MGR001
+// Password: Oq8qwTJEYb
+
+// Name: Donald Muc
+// Email: donald@gmail.com
+// Role: RECEPTIONIST
+// Staff Code: REC001
+// Password: dUT5utpJFA

@@ -28,6 +28,7 @@ const AdminDashboard = lazy(() => import("../pages/Admin/Dashboard/AdminDashboar
 const AllUsers = lazy(() => import('../pages/Admin/AllUsers/AllUsers.jsx'));
 const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers/CreateUsers.jsx"));
 const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
+const ManagerDashboard = lazy(() => import("../pages/Manager/Dashboard/ManagerDashboard.jsx"));
 
 const routesConfig = [
   {
@@ -99,6 +100,15 @@ const routesConfig = [
         path: "apartmentsview",
         element: <ViewApartments />
       }
+    ]
+  }, {
+    path:"/manager",
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <ManagerDashboard />
+      }, 
     ]
   }
 ]

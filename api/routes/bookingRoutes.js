@@ -10,8 +10,7 @@ import {
   cancelBooking
 } from "../controllers/bookingController.js";
 
-import { protect } from "../middleware/authMiddleware.js";
-import { authorizeRoles } from "../middleware/authorizeRoles.js";
+import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const BookingRouter = express.Router();
 

@@ -11,8 +11,7 @@ import {
 } from "../controllers/apartmentController.js";
 
 import upload from "../middleware/upload.js";
-import { protect } from "../middleware/authMiddleware.js";
-import { authorizeRoles } from "../middleware/authorizeRoles.js";
+import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const apartmentRouter = express.Router();
 

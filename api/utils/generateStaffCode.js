@@ -11,7 +11,10 @@ export const generateStaffCode = async (role) => {
   const counter = await Counter.findOneAndUpdate(
     { name: role },
     { $inc: { value: 1 } },
-    { new: true, upsert: true }
+    {
+      returnDocument: "after",
+      upsert: true,
+    }
   );
 
   const number = String(counter.value).padStart(3, "0");
