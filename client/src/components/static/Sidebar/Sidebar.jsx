@@ -144,20 +144,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
                       }`}
                       onClick={() => setSidebarOpen(false)}
                     >
-                      View Apartments
+                      Create Apartments
                     </Link>
 
                     <Link
-                      to="/admin/apartments/create"
+                      to="/admin/apartmentsview"
                       className={`dropdown-link ${
-                        location.pathname === "/admin/create-apartments"
+                        location.pathname === "/admin/apartmentsview"
                           ? "active"
                           : ""
                       }`}
                       onClick={() => setSidebarOpen(false)}
                     >
-                      Create Apartment
+                      View Apartments
                     </Link>
+
+                  
                   </div>
                 )}
               </div>

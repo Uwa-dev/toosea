@@ -12,6 +12,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
+import "./newsletter.css";
 
 
 const  Dashboard = () => {
@@ -33,6 +34,270 @@ const  Dashboard = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // about slider
+
+  useEffect(() => {
+
+  const reveals = document.querySelectorAll(
+    ".reveal-left, .reveal-right"
+  );
+
+  const observer = new IntersectionObserver(
+
+    (entries) => {
+
+      entries.forEach((entry)=>{
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add("active");
+
+        }else{
+
+          entry.target.classList.remove("active");
+
+        }
+
+      });
+
+    },
+
+    {
+      threshold:0.25
+    }
+
+  );
+
+  reveals.forEach(item=>observer.observe(item));
+
+  return ()=>observer.disconnect();
+
+},[]);
+
+// attraction
+
+useEffect(() => {
+
+    const title=document.querySelector(".reveal-title");
+
+    const cards=document.querySelectorAll(".attraction-card");
+
+    const observer=new IntersectionObserver(
+
+        (entries)=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    if(entry.target.classList.contains("reveal-title")){
+
+                        entry.target.classList.add("active");
+
+                    }else{
+
+                        entry.target.classList.add("show");
+
+                    }
+
+                }else{
+
+                    if(entry.target.classList.contains("reveal-title")){
+
+                        entry.target.classList.remove("active");
+
+                    }else{
+
+                        entry.target.classList.remove("show");
+
+                    }
+
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold:.2
+
+        }
+
+    );
+
+    observer.observe(title);
+
+    cards.forEach(card=>observer.observe(card));
+
+    return ()=>observer.disconnect();
+
+},[]);
+
+// services
+
+useEffect(() => {
+
+    const cards=document.querySelectorAll(".service-card");
+
+    const observer=new IntersectionObserver(
+
+        (entries)=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("show");
+
+                }else{
+
+                    entry.target.classList.remove("show");
+
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold:.25
+
+        }
+
+    );
+
+    cards.forEach(card=>observer.observe(card));
+
+    return ()=>observer.disconnect();
+
+},[]);
+
+// apartment
+
+useEffect(() => {
+
+    const cards = document.querySelectorAll(".property-card");
+
+    const observer = new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("show");
+
+                }else{
+
+                    entry.target.classList.remove("show");
+
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold:.2
+
+        }
+
+    );
+
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+
+},[]);
+
+// review
+
+useEffect(() => {
+
+    const title = document.querySelector(".reviews-title");
+
+    const cards = document.querySelectorAll(".review-card");
+
+    const observer = new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach((entry) => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("show");
+
+                } else {
+
+                    entry.target.classList.remove("show");
+
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold:0.2
+
+        }
+
+    );
+
+    observer.observe(title);
+
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+
+},[]);
+
+// newsletter
+
+useEffect(() => {
+
+    const newsletter=document.querySelector(".reveal-newsletter");
+
+    const observer=new IntersectionObserver(
+
+        (entries)=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("show");
+
+                }else{
+
+                    entry.target.classList.remove("show");
+
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold:.3
+
+        }
+
+    );
+
+    observer.observe(newsletter);
+
+    return ()=>observer.disconnect();
+
+},[]);
 
   /* --- PROPERTY FILTER --- */
   const handleFilter = (filter) => {
@@ -78,220 +343,414 @@ const  Dashboard = () => {
           </p>
 
           <div className="hero-buttons">
-            <a href="/properties" className="btn">Explore Apartment</a>
-            <a href="#" className="btn">Premium services</a>
-            <a href="#" className="btn">Luxury</a>
+            <Link to="/rooms" className="btn">
+  Explore Apartments
+</Link>
+            
           </div>
 
-          <div className="trust-indicators">
+          {/* <div className="trust-indicators">
             <div>✔ Secure Payment Handling</div>
             <div>✔ CAC Certified</div>
             <div>✔ SCUML Compliant</div>
             <div>✔ Exceptional Customer Service</div>
-          </div>
+          </div> */}
+
         </div>
       </section>
 
       {/* ABOUT */}
-      <section className="about">
-        <h2>About ToOSeA Shortlet</h2>
-        <p>
-          ToOSeA Shortlet is Nigeria’s premier property management and short stay rental company,
-          delivering comfort, convenience, and exceptional service.
-        </p>
-        <p>
-          Empirean Heights Ltd. is fully registered with CAC, FIRS, and SCUML
-          and compliant with all regulatory standards in Nigeria.
-        </p>
-      </section>
+     {/* ================= ABOUT ================= */}
+
+<section className="about">
+
+  <div className="about-left reveal-left">
+    <span className="about-tag">WELCOME TO TOOSEA</span>
+
+    <h2>Luxury Living, Exceptional Hospitality</h2>
+
+    <p>
+      ToOSeA Shortlet is a premium provider of luxury apartments and short-stay
+      accommodation, offering comfort, elegance, and a home-away-from-home
+      experience for business and leisure travellers.
+    </p>
+
+     <Link to="/rooms" className="btn">
+  Explore Luxury
+    </Link>
+  </div>
+
+  <div className="about-right reveal-right">
+
+    <div className="about-box">
+      <h3>Premium Comfort</h3>
+      <p>
+        Beautifully furnished apartments designed with luxury and relaxation
+        in mind.
+      </p>
+    </div>
+
+    <div className="about-box">
+      <h3>Prime Location</h3>
+      <p>
+        Situated close to major attractions, beaches, shopping malls and
+        business districts.
+      </p>
+    </div>
+
+    <div className="about-box">
+      <h3>Trusted Service</h3>
+      <p>
+        Managed by Empirean Heights Ltd., fully compliant with CAC, FIRS and
+        SCUML regulations.
+      </p>
+    </div>
+
+  </div>
+
+</section>
 
       {/* ATTRACTIONS */}
-    <section className="attractions">
-  <h2>Nearby Attractions</h2>
+{/* ================= ATTRACTIONS ================= */}
+
+<section className="attractions">
+
+  <h2 className="reveal-title">Nearby Attractions</h2>
 
   <div className="attraction-grid">
 
     <div className="attraction-card">
       <img src="./toimages/lufasi-park.jpg" alt="LUFASI Nature Park" />
       <h3>LUFASI Nature Park</h3>
-      <p>Beautiful wildlife park with nature trails and family activities.</p>
+      <p>
+        Beautiful wildlife park with nature trails and family activities.
+      </p>
     </div>
 
     <div className="attraction-card">
-      <img src="./toimages/lekkicon.jpg" alt="Lekki Conservation Centre" />
+      <img
+        src="./toimages/lekkicon.jpg"
+        alt="Lekki Conservation Centre"
+      />
       <h3>Lekki Conservation Centre</h3>
-      <p>Experience Africa's famous canopy walkway and serene nature reserve.</p>
+      <p>
+        Experience Africa's famous canopy walkway and serene nature reserve.
+      </p>
     </div>
 
     <div className="attraction-card">
       <img src="./toimages/novare-mall.jpg" alt="Novare Lekki Mall" />
       <h3>Novare Lekki Mall</h3>
-      <p>Shopping, restaurants, cinema, and entertainment just minutes away.</p>
+      <p>
+        Shopping, restaurants, cinema, and entertainment just minutes away.
+      </p>
     </div>
 
     <div className="attraction-card">
       <img src="./toimages/atican-beach.jpg" alt="Atican Beach" />
       <h3>Atican Beach</h3>
-      <p>One of Lagos' most peaceful beaches for relaxation and fun.</p>
+      <p>
+        One of Lagos' most peaceful beaches for relaxation and fun.
+      </p>
     </div>
 
     <div className="attraction-card">
-      <img src="./toimages/lekki-art-market.jpg" alt="Lekki Arts & Crafts Market" />
+      <img
+        src="./toimages/lekki-art-market.jpg"
+        alt="Lekki Arts & Crafts Market"
+      />
       <h3>Lekki Arts & Crafts Market</h3>
-      <p>Discover authentic Nigerian art, souvenirs, and handcrafted items.</p>
+      <p>
+        Discover authentic Nigerian art, souvenirs, and handcrafted items.
+      </p>
     </div>
 
     <div className="attraction-card">
       <img src="./toimages/omu-resort.jpg" alt="Omu Resort" />
       <h3>Omu Resort</h3>
-      <p>A complete family destination featuring a zoo, amusement park, and water activities.</p>
+      <p>
+        A complete family destination featuring a zoo, amusement park, and
+        water activities.
+      </p>
     </div>
 
     <div className="attraction-card">
-      <img src="./toimages/lakowe-golf.jpg" alt="Lakowe Lakes Golf Estate" />
+      <img
+        src="./toimages/lakowe-golf.jpg"
+        alt="Lakowe Lakes Golf Estate"
+      />
       <h3>Lakowe Lakes Golf Estate</h3>
-      <p>Premium golf course with lakeside scenery and luxury ambience.</p>
+      <p>
+        Premium golf course with lakeside scenery and luxury ambience.
+      </p>
     </div>
 
     <div className="attraction-card">
       <img src="./toimages/eleko-beach.jpg" alt="Eleko Beach" />
       <h3>Eleko Beach</h3>
-      <p>Enjoy a quieter beach experience with ocean views and fresh seafood.</p>
+      <p>
+        Enjoy a quieter beach experience with ocean views and fresh seafood.
+      </p>
     </div>
 
   </div>
+
 </section>
 
-      {/* SERVICES */}
-      <section className="services">
-        <h2>Our Services</h2>
+     <section className="services">
 
-        <div className="service-grid">
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-car"></i><br />
-              Free Parking
-              <p style={{ color: "#555", lineHeight: 1.6 }}>
-                Enjoy secure and spacious parking at no extra cost throughout your stay.
-              </p>
-            </div>
-          </div>
+  <h2 className="services-title">Our Services</h2>
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-spa"></i><br />
-              Luxury Spa
-              <p style={{ color: "#555", lineHeight: 1.6 }}>
-                Rejuvenate your body and mind with our premium spa treatments designed for total relaxation.
-              </p>
-            </div>
-          </div>
+  <div className="service-grid">
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-tree"></i><br />
-              Garden Lounge
-              <p style={{ color: "#555", lineHeight: 1.6 }}>
-                Relax in our serene outdoor garden space perfect for quiet moments and social gatherings.
-              </p>
-            </div>
-          </div>
+    <div className="service-card">
+      <div className="card">
+        <i style={{ fontSize: "60px" }} className="fas fa-car"></i><br />
+        <h3>Free Parking</h3>
+        <p>
+          Enjoy secure and spacious parking at no extra cost throughout your stay.
+        </p>
+      </div>
+    </div>
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
-              Event space
-              <p style={{ color: "#555", lineHeight: 1.6 }}>
-                Host memorable events in our elegant and fully equipped event space.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="service-card">
+      <div className="card">
+        <i style={{ fontSize: "60px" }} className="fas fa-spa"></i><br />
+        <h3>Luxury Spa</h3>
+        <p>
+          Rejuvenate your body and mind with our premium spa treatments designed
+          for total relaxation.
+        </p>
+      </div>
+    </div>
 
-      {/* PROPERTIES */}
-     <section className="properties">
-  <h2>Featured Luxury Apartments</h2>
+    <div className="service-card">
+      <div className="card">
+        <i style={{ fontSize: "60px" }} className="fas fa-tree"></i><br />
+        <h3>Garden Lounge</h3>
+        <p>
+          Relax in our serene outdoor garden space perfect for quiet moments
+          and social gatherings.
+        </p>
+      </div>
+    </div>
+
+    <div className="service-card">
+      <div className="card">
+        <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
+        <h3>Event Space</h3>
+        <p>
+          Host memorable events in our elegant and fully equipped event space.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+    
+
+ {/* ================= FEATURED APARTMENTS ================= */}
+
+<section className="properties">
+
+  <h2 className="properties-title">
+    Featured Luxury Apartments
+  </h2>
 
   <div className="property-grid">
+
     {[
-  {
-    id: 1,
-    name: "Apartment 1",
-    price: "100,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=j-luxe",
-  },
-  {
-    id: 2,
-    name: "Apartment 2",
-    price: "100,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=jojo-1br",
-  },
-  {
-    id: 3,
-    name: "Block A",
-    price: "130,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=jojo-2br",
-  },
-  {
-    id: 4,
-    name: "Block B",
-    price: "255,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=ikate-4br",
-  },
-  {
-    id: 5,
-    name: "Apartment 3",
-    price: "170,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=fine-duplex",
-  },
-  {
-    id: 6,
-    name: "Block 3",
-    price: "140,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=sangotedo-2br",
-  },
-  {
-    id: 7,
-    name: "Apartment 4",
-    price: "70,000",
-    img: "./toimages/room1.jpg",
-    link: "/roomdetails?prop=sangotedo-3br",
-  },
-].map((item) => (
+      {
+        id: 1,
+        name: "Apartment 1",
+        price: "100,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=j-luxe",
+      },
+      {
+        id: 2,
+        name: "Apartment 2",
+        price: "100,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=jojo-1br",
+      },
+      {
+        id: 3,
+        name: "Block A",
+        price: "130,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=jojo-2br",
+      },
+      {
+        id: 4,
+        name: "Block B",
+        price: "255,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=ikate-4br",
+      },
+      {
+        id: 5,
+        name: "Apartment 3",
+        price: "170,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=fine-duplex",
+      },
+      {
+        id: 6,
+        name: "Block 3",
+        price: "140,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=sangotedo-2br",
+      },
+      {
+        id: 7,
+        name: "Apartment 4",
+        price: "70,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=sangotedo-3br",
+      },
+      {
+        id: 8,
+        name: "Apartment 8",
+        price: "70,000",
+        img: "./toimages/room1.jpg",
+        link: "/roomdetails?prop=sangotedo-3br",
+      },
+    ].map((item) => (
       <div key={item.id} className="property-card">
-        <img src="./toimages/room1.jpg" alt={item.name} />
 
-        {/* ✅ FIX: use object properties */}
-        <h3>ToOSeA {item.name}</h3>
-        <p>Lekki, Lagos</p>
-        <span>NGN {item.price}/night</span>
+        <img src={item.img} alt={item.name} />
 
-        {/* ✅ FIX: pass ID in URL */}
-       <Link to={item.link} className="btn">
-    View Details
-</Link>
+        <div className="property-content">
+
+          <h3>ToOSeA {item.name}</h3>
+
+          <p>
+            <i className="fas fa-map-marker-alt"></i> Lekki, Lagos
+          </p>
+
+          <span>NGN {item.price}/night</span>
+
+          <Link to={item.link} className="btn">
+            View Details
+          </Link>
+
+        </div>
+
       </div>
     ))}
+
   </div>
+
+</section>
+
+{/* ================= CUSTOMER REVIEWS ================= */}
+
+<section className="reviews">
+
+  <h2 className="reviews-title">
+    What Our Guests Say
+  </h2>
+
+  <div className="reviews-grid">
+
+    <div className="review-card">
+
+      <div className="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        "ToOSeA Apartment exceeded all our expectations. The apartment was
+        spotless, beautifully furnished, and located in a peaceful
+        environment. The staff were friendly and made our stay unforgettable.
+        We can't wait to return!"
+      </p>
+
+      <div className="review-user">
+        <h4>Sarah Johnson</h4>
+        <span>Lagos, Nigeria</span>
+      </div>
+
+    </div>
+
+    <div className="review-card">
+
+      <div className="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        "I stayed here during a business trip and absolutely loved it.
+        Reliable Wi-Fi, constant electricity, excellent security,
+        and quick customer support made my stay stress-free.
+        Highly recommended for anyone visiting Lagos."
+      </p>
+
+      <div className="review-user">
+        <h4>David Williams</h4>
+        <span>Abuja, Nigeria</span>
+      </div>
+
+    </div>
+
+    <div className="review-card">
+
+      <div className="stars">
+        ★★★★☆
+      </div>
+
+      <p>
+        "The apartment was spacious, modern, and very clean.
+        The kitchen had everything we needed and the beds were
+        extremely comfortable. My family enjoyed every moment
+        and we'll definitely book again."
+      </p>
+
+      <div className="review-user">
+        <h4>Grace Okafor</h4>
+        <span>Port Harcourt, Nigeria</span>
+      </div>
+
+    </div>
+
+    <div className="review-card">
+
+      <div className="stars">
+        ★★★★★
+      </div>
+
+      <p>
+        "This is one of the best shortlet apartments I've experienced.
+        Beautiful ambience, luxurious interiors, excellent housekeeping,
+        and great value for money. ToOSeA Apartment truly feels like
+        a home away from home."
+      </p>
+
+      <div className="review-user">
+        <h4>Michael Thompson</h4>
+        <span>Accra, Ghana</span>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
 {/* ================= NEWSLETTER ================= */}
-
 <section className="newsletter">
+
   <div className="newsletter-overlay">
 
-    <div className="newsletter-content">
+    <div className="newsletter-content reveal-newsletter">
 
-      <h2>Stay Updated</h2>
+      <h2 className="newsletter-title">
+        Stay Updated
+      </h2>
 
-      <p>
+      <p className="newsletter-text">
         Subscribe to our newsletter and be the first to receive exclusive
         discounts, luxury apartment offers, travel inspiration, and special
         holiday packages from ToOSeA Shortlet.
@@ -300,24 +759,29 @@ const  Dashboard = () => {
       <form className="newsletter-form">
 
         <input
+          className="newsletter-input"
           type="email"
           placeholder="Enter your email address"
           required
         />
 
-        <button type="submit">
-          Subscribe
-        </button>
+       <button
+  className="newsletter-btn"
+  type="submit"
+>
+  <span>Subscribe</span>
+</button>
 
       </form>
 
-      <small>
+      <small className="newsletter-small">
         We respect your privacy. No spam, only exclusive offers.
       </small>
 
     </div>
 
   </div>
+
 </section>
 
     

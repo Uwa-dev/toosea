@@ -53,24 +53,43 @@ const About = () => {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <section className="newsletter">
-        <h3>Subscribe for Updates & Premium Listings</h3>
+      
+<section className="newsletter">
+  <div className="newsletter-overlay">
 
-        <form onSubmit={handleSubscribe}>
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="newsletter-content">
 
-          <button type="submit" className="btn">
-            Subscribe
-          </button>
-        </form>
-      </section>
+      <h2>Stay Updated</h2>
+
+      <p>
+        Subscribe to our newsletter and be the first to receive exclusive
+        discounts, luxury apartment offers, travel inspiration, and special
+        holiday packages from ToOSeA Shortlet.
+      </p>
+
+      <form className="newsletter-form">
+
+        <input
+          type="email"
+          placeholder="Enter your email address"
+          required
+        />
+
+        <button type="submit">
+          Subscribe
+        </button>
+
+      </form>
+
+      <small>
+        We respect your privacy. No spam, only exclusive offers.
+      </small>
+
+    </div>
+
+  </div>
+</section>
+ 
 
    
     </>

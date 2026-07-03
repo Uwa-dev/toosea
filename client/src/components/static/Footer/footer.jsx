@@ -8,7 +8,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div className="footer-brand">
-          <h2>Radisson Blu Ikeja</h2>
+          <h2>ToOseA Garden</h2>
           <p>
             Luxury comfort, premium service, and unforgettable stays in the heart of Lagos.
           </p>
@@ -27,15 +27,15 @@ export default function Footer() {
         {/* Contact */}
         <div className="footer-contact">
           <h3>Contact</h3>
-          <p>📍 38-40 Isaac John St, Ikeja</p>
+          <p>📍 Ajayi Apataa Estate Sangotedo,Lekki, Lagos State</p>
           <p>📞 0201 466 2390</p>
-          <p>✉️ info@radissonikeja.com</p>
+          <p>✉️ info@toosea.com</p>
         </div>
 
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Radisson Blu Ikeja. All Rights Reserved.</p>
+        <p>© {new Date().getFullYear()} ToOseA Garden. All Rights Reserved.</p>
       </div>
     </footer>
   );

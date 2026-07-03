@@ -28,7 +28,15 @@ const UserNav = ({ handleLogout }) => {
 
       {/* Logo */}
       <div className="nav-logo">
-        <h3>ToOseA</h3>
+                <Link
+          to="/"
+          className={`nav-link ${
+            location.pathname.includes("/ToOseA") ? "active" : ""
+          }`}
+          onClick={closeMenu}
+        >
+          <h1>ToOseA</h1>
+        </Link>
       </div>
 
       {/* Navigation Links */}

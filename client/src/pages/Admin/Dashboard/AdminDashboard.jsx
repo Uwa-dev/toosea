@@ -78,7 +78,7 @@ const Dashboard = () => {
 
         <div className="recent-card">
           <h2>Quick Actions</h2>
-
+          
           <button>Add New Apartment</button>
           <button>Create Staff</button>
           <button>View Bookings</button>

@@ -1,0 +1,214 @@
+/* ===============================
+   CREATE APARTMENT
+================================== */
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.container h1 {
+    font-size: 2rem;
+    color: #1f2937;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Form */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Form Group */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Inputs */
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all .3s ease;
+    background: #fafafa;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(37,99,235,.15);
+}
+
+.form-header{
+    margin-bottom:35px;
+    text-align:center;
+}
+
+.form-header p{
+    color:#6b7280;
+    margin-top:10px;
+    font-size:15px;
+}
+
+/* Placeholder */
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* ===============================
+   Amenities
+================================== */
+
+.checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    font-weight: 500;
+}
+
+.checkboxes label:hover {
+    background: #eff6ff;
+    border-color: #2563eb;
+}
+
+.checkboxes input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+/* ===============================
+   Button
+================================== */
+
+button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 16px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37,99,235,.25);
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+/* Link */
+
+a {
+    align-self: flex-end;
+    text-decoration: none;
+}
+
+/* ===============================
+   Responsive
+================================== */
+
+@media (max-width:992px){
+
+.container{
+    padding:30px;
+}
+
+}
+
+@media (max-width:768px){
+
+.container{
+    margin:20px;
+    padding:25px;
+}
+
+.container h1{
+    font-size:1.7rem;
+}
+
+.checkboxes{
+    grid-template-columns:1fr;
+}
+
+button{
+    width:100%;
+}
+
+a{
+    width:100%;
+}
+
+}
+
+@media (max-width:480px){
+
+.container{
+    margin:15px;
+    padding:20px;
+}
+
+.container h1{
+    font-size:1.5rem;
+}
+
+.form-group input,
+.form-group textarea{
+    padding:14px;
+}
+
+button{
+    padding:15px;
+}
+
+}

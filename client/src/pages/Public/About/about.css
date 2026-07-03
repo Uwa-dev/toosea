@@ -2,183 +2,347 @@
    ABOUT PAGE STYLING
 ========================= */
 
-.about-page {
-  padding: 6rem 10%;
-  background: linear-gradient(to bottom, #f9fafc, #ffffff);
-  font-family: "Poppins", sans-serif;
-  color: #1a1a1a;
+/*=========================================
+            ABOUT PAGE
+==========================================*/
+
+.about-page{
+    width:100%;
+    padding:100px 8%;
+    background:#f8fafc;
 }
 
-/* Title */
-.about-page h1 {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1.2rem;
-  color: #111;
-  letter-spacing: -0.5px;
+.about-page h1{
+    text-align:center;
+    font-size:3rem;
+    color:#1a1a2e;
+    margin-bottom:30px;
+    font-weight:700;
 }
 
-/* Intro text */
-.about-page > p {
-  text-align: center;
-  max-width: 850px;
-  margin: 0 auto 4rem;
-  font-size: 1.15rem;
-  line-height: 1.9;
-  color: #555;
+.about-page > p{
+    max-width:900px;
+    margin:0 auto 70px;
+    text-align:center;
+    font-size:18px;
+    line-height:1.9;
+    color:#666;
 }
 
-/* =========================
-   ABOUT CARDS GRID
-========================= */
 
-.about-sections {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+/*=========================================
+        ABOUT GRID
+==========================================*/
+
+.about-sections{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+
+    gap:35px;
+
+    align-items:stretch;
+
 }
 
-/* Card */
-.about-section {
-  background: #ffffff;
-  padding: 2.2rem;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+
+/*=========================================
+        ABOUT CARD
+==========================================*/
+
+.about-section{
+
+    background:#fff;
+
+    padding:40px 35px;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.08);
+
+    transition:.45s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    border-top:5px solid #D4AF37;
+
 }
 
-/* Luxury hover effect */
-.about-section:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+.about-section:hover{
+
+    transform:
+        translateY(-12px);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.15);
+
 }
 
-/* Gold accent top line */
-.about-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(90deg, #c9a227, #e6c85a);
+.about-section h2{
+
+    font-size:1.6rem;
+
+    color:#1a1a2e;
+
+    margin-bottom:18px;
+
 }
 
-/* Card title */
-.about-section h2 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: #c9a227;
-  font-weight: 600;
+.about-section p{
+
+    font-size:16px;
+
+    color:#666;
+
+    line-height:1.9;
+
 }
 
-/* Card text */
-.about-section p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.7;
+
+/*=========================================
+        LARGE TABLETS
+==========================================*/
+
+@media (max-width:992px){
+
+.about-page{
+
+    padding:80px 6%;
+
 }
 
-/* =========================
-   NEWSLETTER SECTION
-========================= */
+.about-page h1{
 
-.newsletter {
-  margin-top: 5rem;
-  padding: 5rem 10%;
-  background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
-  text-align: center;
-  color: #fff;
-  border-radius: 0;
+    font-size:2.5rem;
+
 }
 
-/* Heading */
-.newsletter h3 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
+.about-page > p{
+
+    font-size:17px;
+
 }
 
-/* Form */
-.newsletter form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
-/* Input */
-.newsletter input {
-  flex: 1;
-  padding: 1rem 1.2rem;
-  border-radius: 50px;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  transition: 0.3s;
+
+/*=========================================
+            TABLETS
+==========================================*/
+
+@media (max-width:768px){
+
+.about-page{
+
+    padding:70px 25px;
+
 }
 
-/* Input focus glow */
-.newsletter input:focus {
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.5);
+.about-page h1{
+
+    font-size:2.1rem;
+
 }
 
-/* Button */
-.newsletter .btn {
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  border: none;
-  background: #c9a227;
-  color: #000;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.about-page > p{
+
+    font-size:16px;
+
+    margin-bottom:45px;
+
 }
 
-/* Hover button */
-.newsletter .btn:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-2px);
+.about-sections{
+
+    grid-template-columns:1fr;
+
+    gap:25px;
+
 }
 
-/* =========================
-   RESPONSIVE DESIGN
-========================= */
+.about-section{
 
-/* Tablet */
-@media (max-width: 992px) {
-  .about-sections {
-    grid-template-columns: 1fr 1fr;
-  }
+    padding:30px 25px;
 
-  .about-page {
-    padding: 5rem 6%;
-  }
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .about-page h1 {
-    font-size: 2.3rem;
-  }
+.about-section h2{
 
-  .about-sections {
-    grid-template-columns: 1fr;
-  }
+    font-size:1.4rem;
 
-  .newsletter form {
-    flex-direction: column;
-  }
+}
 
-  .newsletter input,
-  .newsletter .btn {
-    width: 100%;
-  }
+}
+
+
+/*=========================================
+            MOBILE
+==========================================*/
+
+@media (max-width:480px){
+
+.about-page{
+
+    padding:60px 18px;
+
+}
+
+.about-page h1{
+
+    font-size:1.8rem;
+
+    line-height:1.3;
+
+}
+
+.about-page > p{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+.about-section{
+
+    padding:25px 20px;
+
+    border-radius:16px;
+
+}
+
+.about-section h2{
+
+    font-size:1.25rem;
+
+}
+
+.about-section p{
+
+    font-size:15px;
+
+}
+
+}
+
+/* =========================================
+   NEWSLETTER
+========================================= */
+
+.newsletter{
+    margin-top:80px;
+    background:url("./toimages/background.jpg") center/cover no-repeat;
+    position:relative;
+    padding:100px 20px;
+}
+
+.newsletter-overlay{
+    background:rgba(0,0,0,.75);
+    padding:80px 20px;
+    border-radius:20px;
+}
+
+.newsletter-content{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+}
+
+.newsletter-content h2{
+    color:#fff;
+    font-size:45px;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.newsletter-content p{
+    color:#ddd;
+    line-height:1.8;
+    font-size:18px;
+    margin-bottom:35px;
+}
+
+.newsletter-form{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.newsletter-form input{
+    width:450px;
+    max-width:100%;
+    padding:18px;
+    border:none;
+    outline:none;
+    border-radius:50px;
+    font-size:16px;
+}
+
+.newsletter-form button{
+    padding:18px 40px;
+    border:none;
+    border-radius:50px;
+    background:#d4af37;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.newsletter-form button:hover{
+    background:#b8901d;
+    transform:translateY(-3px);
+}
+
+.newsletter-content small{
+    display:block;
+    color:#bbb;
+    margin-top:20px;
+    font-size:14px;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:768px){
+
+.newsletter{
+    padding:60px 15px;
+}
+
+.newsletter-overlay{
+    padding:50px 20px;
+}
+
+.newsletter-content h2{
+    font-size:32px;
+}
+
+.newsletter-content p{
+    font-size:16px;
+}
+
+.newsletter-form{
+    flex-direction:column;
+}
+
+.newsletter-form input{
+    width:100%;
+}
+
+.newsletter-form button{
+    width:100%;
+}
+
 }

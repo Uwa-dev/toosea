@@ -35,7 +35,7 @@ const Contact = () => {
           {/* CONTACT INFO */}
           <div className="contact-info">
             <p>
-              <strong>Address:</strong> No. 10 Osongama Estate Road, Uyo, Akwa Ibom State, Nigeria
+              <strong>Address:</strong> No. 10 Ajayi Apaata Estate Road, Lekki, Lagos State, Nigeria
             </p>
             <p>
               <strong>Phone:</strong> +234 802 142 9974

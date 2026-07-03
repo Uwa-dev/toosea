@@ -6,6 +6,11 @@ import Load from "../components/reuse/Load.jsx";
 // import AuthRouter from "./AuthRouter";
 import PublicLayout from "../components/Layout/PublicLayout.jsx";
 import AuthLayout from "../components/Layout/AuthLayout/AuthLayout.jsx";
+import ApartmentDetails from "../pages/Admin/ApartmentDetails.jsx";
+import ApartmentImages from "../pages/Admin/apartmentImages.jsx";
+import ViewApartments from "../pages/Admin/ViewApartment.jsx";
+
+
 
 
 // import ScrollToTop from "../components/ScrollToTop.jsx";
@@ -84,6 +89,15 @@ const routesConfig = [
       }, {
         path: "createusers",
         element: <CreateUsers />
+      }, {
+        path: "apartments",
+        element: <ApartmentDetails />
+      } , {
+        path: "apartments/images",
+        element: <ApartmentImages />
+      }  , {
+        path: "apartmentsview",
+        element: <ViewApartments />
       }
     ]
   }

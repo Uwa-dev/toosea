@@ -89,7 +89,7 @@ const Rooms = () => {
   return (
     <>
      <section className="properties">
-      <h2>Explore Our Premium Portfolio</h2>
+      <h2>Explore Our Luxury Apartments</h2>
 
       {/* PROPERTY GRID */}
       <div className="property-grid">
