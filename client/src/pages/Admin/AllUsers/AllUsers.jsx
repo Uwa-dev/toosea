@@ -1,119 +1,125 @@
-import React, { useState } from "react";
-import { Eye, SquarePen,   } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Eye, SquarePen } from "lucide-react";
 import "./viewUser.css";
+import Load from "../../../components/reuse/Load.jsx"; 
+import { allstaffs } from "../../../services/authApi.js";
+import { useNavigate } from "react-router-dom";
 
 const ViewStaff = () => {
+  const [staff, setStaff] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const [staff] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      staffCode: "STF001",
-    },
-    {
-      id: 2,
-      name: "Mary Johnson",
-      email: "mary@example.com",
-      staffCode: "STF002",
-    },
-    {
-      id: 3,
-      name: "David Wilson",
-      email: "david@example.com",
-      staffCode: "STF003",
-    },
-    {
-      id: 4,
-      name: "Grace Adams",
-      email: "grace@example.com",
-      staffCode: "STF004",
-    },
-  ]);
+  const fetchStaff = async () => {
+    try {
+      setLoading(true);
 
-  const filteredStaff = staff.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase()) ||
-    item.email.toLowerCase().includes(search.toLowerCase()) ||
-    item.staffCode.toLowerCase().includes(search.toLowerCase())
-  );
+      const response = await allstaffs();
 
-  const handleEdit = (id) => {
-    console.log("Edit Staff:", id);
-    // Navigate to edit page or open modal
-  };
+      console.log("Staff Response:", response);
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this staff?"
-    );
+      setStaff(response.users);
+    } catch (error) {
+      console.error("Fetch Staff Error:", error);
 
-    if (confirmDelete) {
-      console.log("Delete Staff:", id);
+      alert(
+        error.response?.data?.message ||
+          "Failed to fetch staff."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    fetchStaff();
+  }, []);
+
+  const filteredStaff = staff.filter((item) => {
+    return (
+      item.fullName.toLowerCase().includes(search.toLowerCase()) ||
+      item.email.toLowerCase().includes(search.toLowerCase()) ||
+      item.staffCode.toLowerCase().includes(search.toLowerCase())
+    );
+  });
+
+  const handleView = (staff) => {
+    navigate(`/admin/staff/${staff._id}`);
+  };
+
+  const handleEdit = (staff) => {
+    console.log("Edit Staff:", staff);
+  };
+
   return (
-    <div className="view-staff-container">
-      <div className="staff-header">
-        <h2>View Staff</h2>
+    <>
+      {loading && <Load />}
 
-        <input
-          type="text"
-          placeholder="Search by name, email or staff code..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+      <div className="view-staff-container">
+        <div className="staff-header">
+          <h2>View Staff</h2>
 
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>S/N</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Staff Code</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+          <input
+            type="text"
+            placeholder="Search by name, email or staff code..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
 
-          <tbody>
-            {filteredStaff.length > 0 ? (
-              filteredStaff.map((item, index) => (
-                <tr key={item.id}>
-                  <td>{index + 1}</td>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.staffCode}</td>
-                  <td>
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleEdit(item.id)}
-                    >
-                      <Eye/>
-                    </button>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Staff Code</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      <SquarePen/>
-                    </button>
+            <tbody>
+              {filteredStaff.length > 0 ? (
+                filteredStaff.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}</td>
+                    <td>{item.fullName}</td>
+                    <td>{item.email}</td>
+                    <td>{item.role}</td>
+                    <td>{item.staffCode}</td>
+
+                    <td>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleView(item)}
+                      >
+                        <Eye />
+                      </button>
+
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleEdit(item)}
+                      >
+                        <SquarePen />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="no-data">
+                    No staff found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="no-data">
-                  No staff found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

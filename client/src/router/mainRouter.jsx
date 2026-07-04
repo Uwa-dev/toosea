@@ -6,8 +6,6 @@ import Load from "../components/reuse/Load.jsx";
 // import AuthRouter from "./AuthRouter";
 import PublicLayout from "../components/Layout/PublicLayout.jsx";
 import AuthLayout from "../components/Layout/AuthLayout/AuthLayout.jsx";
-import ApartmentDetails from "../pages/Admin/ApartmentDetails.jsx";
-import ApartmentImages from "../pages/Admin/apartmentImages.jsx";
 import ViewApartments from "../pages/Admin/ViewApartment.jsx";
 
 
@@ -29,6 +27,8 @@ const AllUsers = lazy(() => import('../pages/Admin/AllUsers/AllUsers.jsx'));
 const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers/CreateUsers.jsx"));
 const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
 const ManagerDashboard = lazy(() => import("../pages/Manager/Dashboard/ManagerDashboard.jsx"));
+const ViewSingleStaff = lazy(() => import("../pages/Admin/Staff/Staff.jsx"));
+const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"))
 
 const routesConfig = [
   {
@@ -92,13 +92,13 @@ const routesConfig = [
         element: <CreateUsers />
       }, {
         path: "apartments",
-        element: <ApartmentDetails />
+        element: <CreateApartment />
       } , {
-        path: "apartments/images",
-        element: <ApartmentImages />
-      }  , {
         path: "apartmentsview",
         element: <ViewApartments />
+      }, {
+        path: "staff/:id",
+        element: <ViewSingleStaff />
       }
     ]
   }, {

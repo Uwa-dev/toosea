@@ -40,3 +40,13 @@ export const createUser = async (userData) => {
     const response = await authApi.post("/register", userData);
     return response.data;
 };
+
+export const allstaffs = async () => {
+  const response = await authApi.get("/staffs");
+  return response.data
+}
+
+export const singleStaff = async (id) => {
+  const response = await authApi.get(`/staff/${id}`);
+  return response.data
+}

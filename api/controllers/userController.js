@@ -134,6 +134,90 @@ export const loginUser = async (req, res) => {
   }
 };
 
+export const getAllUsers = async (req, res) => {
+  try {
+    let users;
+
+    if (req.user.role === "OWNER") {
+      users = await User.find()
+        .select("-password")
+        .sort({ createdAt: -1 });
+    } else if (req.user.role === "MANAGER") {
+      users = await User.find({
+        role: "RECEPTIONIST"
+      })
+        .select("-password")
+        .sort({ createdAt: -1 });
+    } else {
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to view users."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      users
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
+export const getSingleUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff not found."
+      });
+    }
+
+    // OWNER can view anyone
+    if (req.user.role === "OWNER") {
+      return res.status(200).json({
+        success: true,
+        user
+      });
+    }
+
+    // MANAGER can only view receptionists
+    if (req.user.role === "MANAGER") {
+      if (user.role !== "RECEPTIONIST") {
+        return res.status(403).json({
+          success: false,
+          message: "You are not authorized to view this staff."
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        user
+      });
+    }
+
+    return res.status(403).json({
+      success: false,
+      message: "Access denied."
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 export const deleteUser = async (req, res) => {
   try {
     const requester = req.user;
