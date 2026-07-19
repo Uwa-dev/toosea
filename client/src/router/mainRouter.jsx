@@ -6,7 +6,6 @@ import Load from "../components/reuse/Load.jsx";
 // import AuthRouter from "./AuthRouter";
 import PublicLayout from "../components/Layout/PublicLayout.jsx";
 import AuthLayout from "../components/Layout/AuthLayout/AuthLayout.jsx";
-import ViewApartments from "../pages/Admin/ViewApartment.jsx";
 
 
 
@@ -28,7 +27,8 @@ const CreateUsers = lazy(() => import("../pages/Admin/CreateUsers/CreateUsers.js
 const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
 const ManagerDashboard = lazy(() => import("../pages/Manager/Dashboard/ManagerDashboard.jsx"));
 const ViewSingleStaff = lazy(() => import("../pages/Admin/Staff/Staff.jsx"));
-const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"))
+const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"));
+const ViewApartments = lazy(() => import("../pages/Admin/ViewApartments/ViewApartment.jsx"))
 
 const routesConfig = [
   {

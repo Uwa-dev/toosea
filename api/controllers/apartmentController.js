@@ -3,48 +3,119 @@ import cloudinary from "../config/cloudinary.js";
 
 export const createApartment = async (req, res) => {
   try {
-    const apartment = await Apartment.create(req.body);
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can create apartments."
+      });
+    }
+
+    const {
+      name,
+      description,
+      apartmentType,
+      pricePerNight,
+      capacity,
+      amenities
+    } = req.body;
+
+    if (
+      !name ||
+      !description ||
+      !pricePerNight ||
+      !capacity
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Name, description, price per night and capacity are required."
+      });
+    }
+
+    const apartmentExists = await Apartment.findOne({
+      name: name.trim()
+    });
+
+    if (apartmentExists) {
+      return res.status(409).json({
+        success: false,
+        message: "Apartment name already exists."
+      });
+    }
+
+    // Generate Apartment Code
+    const lastApartment = await Apartment.findOne()
+      .sort({ createdAt: -1 });
+
+    let apartmentCode = "APT001";
+
+    if (lastApartment?.apartmentCode) {
+      const number = parseInt(
+        lastApartment.apartmentCode.replace("APT", "")
+      );
+
+      apartmentCode = `APT${String(number + 1).padStart(3, "0")}`;
+    }
+
+    const apartment = await Apartment.create({
+      apartmentCode,
+      name: name.trim(),
+      description: description.trim(),
+      apartmentType,
+      pricePerNight,
+      capacity,
+      amenities: amenities || []
+    });
 
     return res.status(201).json({
       success: true,
+      message: "Apartment created successfully.",
       apartment
     });
+
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
-      message: error.message
+      message: "Failed to create apartment."
     });
   }
 };
 
 export const uploadApartmentImages = async (req, res) => {
   try {
-    const apartment = await Apartment.findById(req.params.id);
+    const { id } = req.params;
+
+    const apartment = await Apartment.findById(id);
 
     if (!apartment) {
       return res.status(404).json({
         success: false,
-        message: "Apartment not found"
+        message: "Apartment not found."
       });
     }
 
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "No images uploaded"
+        message: "Please upload at least one image."
+      });
+    }
+
+    if (apartment.images.length + req.files.length > 15) {
+      return res.status(400).json({
+        success: false,
+        message: "An apartment can only have a maximum of 15 images."
       });
     }
 
     const uploadedImages = [];
 
     for (const file of req.files) {
-      const result =
-        await cloudinary.uploader.upload(
-          file.path,
-          {
-            folder: "apartments"
-          }
-        );
+      const result = await cloudinary.uploader.upload(file.path, {
+        folder: "apartments"
+      });
 
       uploadedImages.push({
         imageUrl: result.secure_url,
@@ -58,8 +129,8 @@ export const uploadApartmentImages = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Images uploaded successfully",
-      images: uploadedImages
+      message: `${uploadedImages.length} image(s) uploaded successfully.`,
+      images: apartment.images
     });
 
   } catch (error) {

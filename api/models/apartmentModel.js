@@ -12,14 +12,23 @@ const imageSchema = new mongoose.Schema(
       required: true
     }
   },
-  { _id: false }
+  {
+    _id: false
+  }
 );
 
 const apartmentSchema = new mongoose.Schema(
   {
+    apartmentCode: {
+      type: String,
+      unique: true,
+      immutable: true
+    },
+
     name: {
       type: String,
       required: true,
+      unique: true,
       trim: true
     },
 
@@ -29,16 +38,28 @@ const apartmentSchema = new mongoose.Schema(
       trim: true
     },
 
+    apartmentType: {
+      type: String,
+      enum: [
+        "STANDARD",
+        "DELUXE",
+        "EXECUTIVE",
+        "SUITE",
+        "PRESIDENTIAL"
+      ],
+      default: "STANDARD"
+    },
+
     pricePerNight: {
       type: Number,
       required: true,
-      min: 0
+      min: [1, "Price must be greater than zero"]
     },
 
     capacity: {
       type: Number,
       required: true,
-      min: 1
+      min: [1, "Capacity must be at least 1"]
     },
 
     amenities: [
@@ -48,7 +69,26 @@ const apartmentSchema = new mongoose.Schema(
       }
     ],
 
-    images: [imageSchema],
+    images: {
+      type: [imageSchema],
+      validate: {
+        validator: function (images) {
+          return images.length <= 15;
+        },
+        message: "Maximum of 15 images allowed."
+      },
+      default: []
+    },
+
+    status: {
+      type: String,
+      enum: [
+        "AVAILABLE",
+        "MAINTENANCE",
+        "INACTIVE"
+      ],
+      default: "AVAILABLE"
+    },
 
     isActive: {
       type: Boolean,
