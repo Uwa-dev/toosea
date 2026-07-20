@@ -9,14 +9,62 @@ function Header({ setSidebarOpen }) {
   const userFirstLetter = user?.username?.charAt(0).toUpperCase();
   const location = useLocation();
 
-  // Map route paths to page titles
-  const routeTitles = {
-    "/admin": "Dashboard",
-    "/receptionist": "Dashboard"
+  const getPageTitle = (pathname) => {
+    // ================= OWNER =================
+    if (pathname === "/admin") return "Dashboard";
+
+    if (pathname.startsWith("/admin/allusers"))
+      return "View Staff";
+
+    if (pathname.startsWith("/admin/createusers"))
+      return "Create Staff";
+
+    if (pathname.startsWith("/admin/staff/"))
+      return "Staff Details";
+
+    if (pathname.startsWith("/admin/apartmentsview"))
+      return "View Apartments";
+
+    if (pathname.startsWith("/admin/apartments"))
+      return "Create Apartment";
+
+    if (pathname.startsWith("/admin/apartment/"))
+      return "Apartment Details";
+
+    // ================= MANAGER =================
+    if (pathname === "/manager")
+      return "Dashboard";
+
+    if (pathname.startsWith("/manager/bookings"))
+      return "Bookings";
+
+    if (pathname.startsWith("/manager/apartments"))
+      return "Apartments";
+
+    // ================= RECEPTIONIST =================
+    if (pathname === "/receptionist")
+      return "Dashboard";
+
+    if (pathname.startsWith("/receptionist/bookings"))
+      return "Bookings";
+
+    if (pathname.startsWith("/receptionist/checkin"))
+      return "Check In";
+
+    if (pathname.startsWith("/receptionist/checkout"))
+      return "Check Out";
+
+    if (pathname.startsWith("/receptionist/apartments"))
+      return "Apartments";
+
+    return "Dashboard";
   };
 
   // Get the title for the current path or default to "Page"
-  const currentTitle = routeTitles[location.pathname] || "Dashboard";
+  const currentTitle = getPageTitle(location.pathname) || "Dashboard";
+
+  
+  // const currentTitle = routeTitles[location.pathname] || "Dashboard";
 
   return (
     <header className="header">

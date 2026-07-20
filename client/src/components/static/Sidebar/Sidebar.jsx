@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   HomeIcon,
   LogOutIcon,
@@ -7,35 +8,41 @@ import {
   ChevronUp,
   ChevronDownIcon,
   CalendarRange,
-  LibraryBig,
-  Users
+  Users,
 } from "lucide-react";
 import "./sidebar.css";
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
+const Sidebar = ({
+  sidebarOpen,
+  setSidebarOpen,
+  handleLogout,
+}) => {
   const location = useLocation();
+
+  // Logged-in user from Redux
+  const { user } = useSelector((state) => state.user);
+
+  // Current user's role
+  const role = user?.role;
 
   const [roomsOpen, setRoomsOpen] = useState(false);
   const [usersOpen, setUsersOpen] = useState(false);
   const [apartmentsOpen, setApartmentsOpen] = useState(false);
 
-  const getRoleFromPath = (path) => {
-    if (path.startsWith("/admin")) return "admin";
-    if (path.startsWith("/receptionist")) return "receptionist";
-    if (path.startsWith("/manager")) return "manager";
-    return "receptionist";
-  };
-
-  const role = getRoleFromPath(location.pathname);
-
   return (
-    <div className={`sidebar admin-sidebar ${sidebarOpen ? "open" : ""}`}>
+    <div
+      className={`sidebar admin-sidebar ${
+        sidebarOpen ? "open" : ""
+      }`}
+    >
       <div className="sidebar-top">
         <div className="sidebar-logo-heading">
           <button
             type="button"
             className="menu-toggle"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            onClick={() =>
+              setSidebarOpen(!sidebarOpen)
+            }
           >
             ✕
           </button>
@@ -46,86 +53,114 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
         </div>
 
         <nav className="sidebar-nav">
-
-          {/* ================= ADMIN ================= */}
-          {role === "admin" && (
+          {/* ================= OWNER ================= */}
+          {role === "OWNER" && (
             <>
-              {/* Dashboard */}
               <Link
                 to="/admin"
                 className={`sidebar-link ${
-                  location.pathname === "/admin" ? "active" : ""
+                  location.pathname === "/admin"
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => setSidebarOpen(false)}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
               >
                 <HomeIcon className="icon" />
                 Dashboard
               </Link>
 
-              {/* ================= USERS DROPDOWN ================= */}
-        <div className="dropdown">
-  <button
-    onClick={() => setUsersOpen(!usersOpen)}
-    className={`dropdown-button ${
-      location.pathname === "/admin/allusers" ||
-      location.pathname === "/admin/createusers"
-        ? "active"
-        : ""
-    }`}
-  >
-    <Users className="icon" />
-    Staff
-
-    {usersOpen ? (
-      <ChevronUp className="dropdown-icon" />
-    ) : (
-      <ChevronDownIcon className="dropdown-icon" />
-    )}
-  </button>
-
-  {usersOpen && (
-    <div className="dropdown-content">
-
-      <Link
-        to="/admin/allusers"
-        className={`dropdown-link ${
-          location.pathname === "/admin/allusers"
-            ? "active"
-            : ""
-        }`}
-        onClick={() => setSidebarOpen(false)}
-      >
-        View Staff
-      </Link>
-
-      <Link
-        to="/admin/createusers"
-        className={`dropdown-link ${
-          location.pathname === "/admin/createusers"
-            ? "active"
-            : ""
-        }`}
-        onClick={() => setSidebarOpen(false)}
-      >
-        Create User
-      </Link>
-
-    </div>
-  )}
-</div>
-
-              {/* ================= APARTMENTS DROPDOWN ================= */}
+              {/* STAFF */}
               <div className="dropdown">
                 <button
-                  onClick={() => setApartmentsOpen(!apartmentsOpen)}
+                  onClick={() =>
+                    setUsersOpen(!usersOpen)
+                  }
                   className={`dropdown-button ${
-                    location.pathname.includes("/admin/apartments")
+                    location.pathname.includes(
+                      "/admin/allusers"
+                    ) ||
+                    location.pathname.includes(
+                      "/admin/createusers"
+                    ) ||
+                    location.pathname.includes(
+                      "/admin/staff/"
+                    )
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  <Users className="icon" />
+                  Staff
+
+                  {usersOpen ? (
+                    <ChevronUp className="dropdown-icon" />
+                  ) : (
+                    <ChevronDownIcon className="dropdown-icon" />
+                  )}
+                </button>
+
+                {usersOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/admin/allusers"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/admin/allusers"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      View Staff
+                    </Link>
+
+                    <Link
+                      to="/admin/createusers"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/admin/createusers"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      Create Staff
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* APARTMENTS */}
+              <div className="dropdown">
+                <button
+                  onClick={() =>
+                    setApartmentsOpen(
+                      !apartmentsOpen
+                    )
+                  }
+                  className={`dropdown-button ${
+                    location.pathname.includes(
+                      "/admin/apartment"
+                    ) ||
+                    location.pathname.includes(
+                      "/admin/apartments"
+                    ) ||
+                    location.pathname.includes(
+                      "/admin/apartmentsview"
+                    )
                       ? "active"
                       : ""
                   }`}
                 >
                   <Box className="icon" />
                   Apartments
+
                   {apartmentsOpen ? (
                     <ChevronUp className="dropdown-icon" />
                   ) : (
@@ -138,28 +173,32 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
                     <Link
                       to="/admin/apartments"
                       className={`dropdown-link ${
-                        location.pathname === "/admin/apartments"
+                        location.pathname ===
+                        "/admin/apartments"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() => setSidebarOpen(false)}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
                     >
-                      Create Apartments
+                      Create Apartment
                     </Link>
 
                     <Link
                       to="/admin/apartmentsview"
                       className={`dropdown-link ${
-                        location.pathname === "/admin/apartmentsview"
+                        location.pathname ===
+                        "/admin/apartmentsview"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() => setSidebarOpen(false)}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
                     >
                       View Apartments
                     </Link>
-
-                  
                   </div>
                 )}
               </div>
@@ -167,31 +206,40 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
           )}
 
           {/* ================= RECEPTIONIST ================= */}
-          {role === "receptionist" && (
+          {role === "RECEPTIONIST" && (
             <>
               <Link
                 to="/receptionist"
                 className={`sidebar-link ${
-                  location.pathname === "/receptionist" ? "active" : ""
+                  location.pathname ===
+                  "/receptionist"
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => setSidebarOpen(false)}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
               >
                 <HomeIcon className="icon" />
                 Dashboard
               </Link>
 
-              {/* Rooms Dropdown */}
               <div className="dropdown">
                 <button
-                  onClick={() => setRoomsOpen(!roomsOpen)}
+                  onClick={() =>
+                    setRoomsOpen(!roomsOpen)
+                  }
                   className={`dropdown-button ${
-                    location.pathname.includes("/receptionist/products")
+                    location.pathname.includes(
+                      "/receptionist/products"
+                    )
                       ? "active"
                       : ""
                   }`}
                 >
                   <Box className="icon" />
                   Rooms
+
                   {roomsOpen ? (
                     <ChevronUp className="dropdown-icon" />
                   ) : (
@@ -204,11 +252,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
                     <Link
                       to="/receptionist/products/add"
                       className={`dropdown-link ${
-                        location.pathname === "/receptionist/products/add"
+                        location.pathname ===
+                        "/receptionist/products/add"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() => setSidebarOpen(false)}
                     >
                       Add Rooms
                     </Link>
@@ -216,11 +264,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
                     <Link
                       to="/receptionist/products"
                       className={`dropdown-link ${
-                        location.pathname === "/receptionist/products"
+                        location.pathname ===
+                        "/receptionist/products"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() => setSidebarOpen(false)}
                     >
                       Available Rooms
                     </Link>
@@ -231,14 +279,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
           )}
 
           {/* ================= MANAGER ================= */}
-          {role === "manager" && (
+          {role === "MANAGER" && (
             <>
               <Link
                 to="/manager"
                 className={`sidebar-link ${
-                  location.pathname === "/manager" ? "active" : ""
+                  location.pathname ===
+                  "/manager"
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => setSidebarOpen(false)}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
               >
                 <HomeIcon className="icon" />
                 Dashboard
@@ -247,9 +300,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
               <Link
                 to="/manager/bookings"
                 className={`sidebar-link ${
-                  location.pathname === "/manager/bookings" ? "active" : ""
+                  location.pathname ===
+                  "/manager/bookings"
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => setSidebarOpen(false)}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
               >
                 <CalendarRange className="icon" />
                 Bookings
@@ -258,9 +316,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
               <Link
                 to="/manager/apartments"
                 className={`sidebar-link ${
-                  location.pathname === "/manager/apartments" ? "active" : ""
+                  location.pathname ===
+                  "/manager/apartments"
+                    ? "active"
+                    : ""
                 }`}
-                onClick={() => setSidebarOpen(false)}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
               >
                 <Box className="icon" />
                 Apartments
@@ -270,12 +333,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, handleLogout }) => {
 
           {/* ================= LOGOUT ================= */}
           <div className="sidebar-footer">
-            <button onClick={handleLogout} className="logout-button">
+            <button
+              onClick={handleLogout}
+              className="logout-button"
+            >
               <LogOutIcon className="icon" />
               Logout
             </button>
           </div>
-
         </nav>
       </div>
     </div>
