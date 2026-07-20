@@ -39,3 +39,8 @@ export const getAllApartments = async() => {
   const response = await apartmentApi.get('/');
   return response.data
 }
+
+export const singleApartment = async(id) => {
+  const response = await apartmentApi.get(`/${id}`)
+  return response.data
+}

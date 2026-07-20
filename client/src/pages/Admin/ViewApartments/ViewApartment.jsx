@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, SquarePen, Camera, Trash2 } from "lucide-react";
+import { Eye, Camera} from "lucide-react";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 import { getAllApartments } from "../../../services/apartmentApi";
 
 import "./viewApartments.css";
@@ -10,6 +10,7 @@ import "./viewApartments.css";
 function ViewApartments() {
   const [apartments, setApartments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchApartments = async () => {
     try {
@@ -26,6 +27,10 @@ function ViewApartments() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleView = (apartment) => {
+    navigate(`/admin/apartment/${apartment._id}`);
   };
 
   useEffect(() => {
@@ -101,21 +106,14 @@ function ViewApartments() {
                   </td>
 
                   <td className="actions">
-                    <button className="view">
+                    <button className="view" onClick={() => handleView(apartment)}>
                       <Eye size={18} />
-                    </button>
-
-                    <button className="edit">
-                      <SquarePen size={18} />
                     </button>
 
                     <button className="images">
                       <Camera size={18} />
                     </button>
 
-                    <button className="delete">
-                      <Trash2 size={18} />
-                    </button>
                   </td>
                 </tr>
               ))

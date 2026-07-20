@@ -2,8 +2,8 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Layout from "../components/Layout/Layout";
 import Load from "../components/reuse/Load.jsx";
-// import ProtectedRoute from "./protectRoutes";
-// import AuthRouter from "./AuthRouter";
+import ProtectedRoute from "./protectRoutes";
+import AuthRouter from "./AuthRouter";
 import PublicLayout from "../components/Layout/PublicLayout.jsx";
 import AuthLayout from "../components/Layout/AuthLayout/AuthLayout.jsx";
 
@@ -28,7 +28,8 @@ const Login = lazy(() => import("../pages/Public/Auth/Login.jsx"));
 const ManagerDashboard = lazy(() => import("../pages/Manager/Dashboard/ManagerDashboard.jsx"));
 const ViewSingleStaff = lazy(() => import("../pages/Admin/Staff/Staff.jsx"));
 const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"));
-const ViewApartments = lazy(() => import("../pages/Admin/ViewApartments/ViewApartment.jsx"))
+const ViewApartments = lazy(() => import("../pages/Admin/ViewApartments/ViewApartment.jsx"));
+const SingleApartment = lazy(() => import("../pages/Admin/SingleApartment/SingleApartment.jsx"))
 
 const routesConfig = [
   {
@@ -67,7 +68,11 @@ const routesConfig = [
     ]
   }, {
     path: "/receptionist",
-    element: <AuthLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={["RECEPTIONIST"]}>
+        <AuthLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -79,7 +84,11 @@ const routesConfig = [
     element: <Login />,
   }, {
     path:"/admin",
-    element: <AuthLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={["OWNER"]}>
+        <AuthLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -99,11 +108,18 @@ const routesConfig = [
       }, {
         path: "staff/:id",
         element: <ViewSingleStaff />
+      }, {
+        path: "apartment/:id",
+        element: <SingleApartment />
       }
     ]
   }, {
     path:"/manager",
-    element: <AuthLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={["MANAGER"]}>
+        <AuthLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,

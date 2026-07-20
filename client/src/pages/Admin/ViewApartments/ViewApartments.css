@@ -41,7 +41,7 @@
 .table-container{
     background:#fff;
     border-radius:15px;
-    overflow:hidden;
+    overflow: scroll;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
@@ -73,7 +73,6 @@ tbody tr:hover{
 .actions{
     display:flex;
     gap:10px;
-    flex-wrap:wrap;
 }
 
 .actions button{
@@ -121,10 +120,6 @@ tbody tr:hover{
 /* Responsive */
 
 @media(max-width:992px){
-
-.table-container{
-    overflow-x:auto;
-}
 
 table{
     min-width:1000px;

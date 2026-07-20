@@ -59,3 +59,9 @@ seedOwner();
 // Role: RECEPTIONIST
 // Staff Code: REC001
 // Password: dUT5utpJFA
+
+// Name: Chizaram Madu
+// Email: chizaram@gmail.com
+// Role: RECEPTIONIST
+// Staff Code: REC002
+// Password: 8I4k8#FCdh
