@@ -238,7 +238,7 @@ const Sidebar = ({
                   }`}
                 >
                   <Box className="icon" />
-                  Rooms
+                  Apartments
 
                   {roomsOpen ? (
                     <ChevronUp className="dropdown-icon" />

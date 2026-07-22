@@ -1,20 +1,43 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../../static/Sidebar/Sidebar.jsx";
-import Header from "../../static/Header/Header.jsx"
-import './authlayout.css'
+import { Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const AdminLayout = () => {
+import Sidebar from "../../static/Sidebar/Sidebar";
+import Header from "../../static/Header/Header";
+
+import { logout } from "../../../utils/slices/userSlice";
+
+import "./authlayout.css";
+
+const AuthLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="main-body">
-      <Sidebar />
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        handleLogout={handleLogout}
+      />
+
       <main>
-        <Header />
+        <Header setSidebarOpen={setSidebarOpen} />
+
         <div>
-            <Outlet />
+          <Outlet />
         </div>
       </main>
     </div>
   );
 };
 
-export default AdminLayout;
+export default AuthLayout;
