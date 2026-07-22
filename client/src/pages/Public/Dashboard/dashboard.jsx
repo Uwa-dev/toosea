@@ -574,7 +574,7 @@ const  Dashboard = () => {
       </section>
     
 
- {/* ================= FEATURED APARTMENTS ================= */}
+      {/* ================= FEATURED APARTMENTS ================= */}
 
       <section className="properties">
 
@@ -641,7 +641,7 @@ const  Dashboard = () => {
 
       </section>
 
-{/* ================= CUSTOMER REVIEWS ================= */}
+      {/* ================= CUSTOMER REVIEWS ================= */}
 
       <section className="reviews">
 
@@ -735,7 +735,7 @@ const  Dashboard = () => {
 
       </section>
 
-{/* ================= NEWSLETTER ================= */}
+      {/* ================= NEWSLETTER ================= */}
       <section className="newsletter">
 
         <div className="newsletter-overlay">

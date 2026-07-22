@@ -29,7 +29,8 @@ const ManagerDashboard = lazy(() => import("../pages/Manager/Dashboard/ManagerDa
 const ViewSingleStaff = lazy(() => import("../pages/Admin/Staff/Staff.jsx"));
 const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"));
 const ViewApartments = lazy(() => import("../pages/Admin/ViewApartments/ViewApartment.jsx"));
-const SingleApartment = lazy(() => import("../pages/Admin/SingleApartment/SingleApartment.jsx"))
+const SingleApartment = lazy(() => import("../pages/Admin/SingleApartment/SingleApartment.jsx"));
+const PaymentVerification = lazy(() => import("../pages/Public/PaymentVerification/PaymentVerification.jsx"))
 
 const routesConfig = [
   {
@@ -55,11 +56,11 @@ const routesConfig = [
         path: "gallery",
         element: <Gallery />
       }, {
-        path: "roomdetails",
-        element: <RoomDetail />
-      }, {
         path: "roomdetails/:id",
         element: <RoomDetail />
+      }, {
+        path: "/payment/verify",
+        element: <PaymentVerification />
       },
       //  {
       //   path: "*",           // Catch-all for unknown routes

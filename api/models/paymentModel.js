@@ -24,7 +24,10 @@ const paymentSchema = new mongoose.Schema(
       default: "PENDING"
     },
 
-    transactionReference: String
+    transactionReference: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true

@@ -7,6 +7,7 @@ import bookingRouter from './routes/bookingRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import apartmentRouter from './routes/apartmentRoutes.js';
 import analyticsRouter from "./routes/analyticsRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js"
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use("/api/users", userRouter);
 app.use("/api/booking", bookingRouter);
 app.use('/api/apartment', apartmentRouter);
 app.use("/api/analytics", analyticsRouter);
+app.use("/api/payments", paymentRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
