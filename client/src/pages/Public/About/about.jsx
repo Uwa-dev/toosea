@@ -53,45 +53,6 @@ const About = () => {
         </div>
       </section>
 
-      
-<section className="newsletter">
-  <div className="newsletter-overlay">
-
-    <div className="newsletter-content">
-
-      <h2>Stay Updated</h2>
-
-      <p>
-        Subscribe to our newsletter and be the first to receive exclusive
-        discounts, luxury apartment offers, travel inspiration, and special
-        holiday packages from ToOSeA Shortlet.
-      </p>
-
-      <form className="newsletter-form">
-
-        <input
-          type="email"
-          placeholder="Enter your email address"
-          required
-        />
-
-        <button type="submit">
-          Subscribe
-        </button>
-
-      </form>
-
-      <small>
-        We respect your privacy. No spam, only exclusive offers.
-      </small>
-
-    </div>
-
-  </div>
-</section>
- 
-
-   
     </>
   );
 };

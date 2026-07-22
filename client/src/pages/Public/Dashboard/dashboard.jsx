@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllApartments } from "../../../services/apartmentApi";
 import "./dashboard.css";
-import "./newsletter.css";
 
 
 const  Dashboard = () => {
@@ -282,46 +281,6 @@ const  Dashboard = () => {
       cards.forEach(card => observer.observe(card));
 
       return () => observer.disconnect();
-
-  },[]);
-
-  // newsletter
-
-  useEffect(() => {
-
-      const newsletter=document.querySelector(".reveal-newsletter");
-
-      const observer=new IntersectionObserver(
-
-          (entries)=>{
-
-              entries.forEach(entry=>{
-
-                  if(entry.isIntersecting){
-
-                      entry.target.classList.add("show");
-
-                  }else{
-
-                      entry.target.classList.remove("show");
-
-                  }
-
-              });
-
-          },
-
-          {
-
-              threshold:.3
-
-          }
-
-      );
-
-      observer.observe(newsletter);
-
-      return ()=>observer.disconnect();
 
   },[]);
 
@@ -734,52 +693,6 @@ const  Dashboard = () => {
         </div>
 
       </section>
-
-      {/* ================= NEWSLETTER ================= */}
-      <section className="newsletter">
-
-        <div className="newsletter-overlay">
-
-          <div className="newsletter-content reveal-newsletter">
-
-            <h2 className="newsletter-title">
-              Stay Updated
-            </h2>
-
-            <p className="newsletter-text">
-              Subscribe to our newsletter and be the first to receive exclusive
-              discounts, luxury apartment offers, travel inspiration, and special
-              holiday packages from ToOSeA Shortlet.
-            </p>
-
-            <form className="newsletter-form">
-
-              <input
-                className="newsletter-input"
-                type="email"
-                placeholder="Enter your email address"
-                required
-              />
-
-            <button
-              className="newsletter-btn"
-              type="submit"
-            >
-              <span>Subscribe</span>
-            </button>
-
-            </form>
-
-            <small className="newsletter-small">
-              We respect your privacy. No spam, only exclusive offers.
-            </small>
-
-          </div>
-
-        </div>
-
-      </section>
-
     
     </>
   );
