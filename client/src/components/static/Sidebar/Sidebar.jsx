@@ -28,13 +28,14 @@ const Sidebar = ({
   // Current user's role
   const role = user?.role;
 
-  const [roomsOpen, setRoomsOpen] = useState(false);
   const [usersOpen, setUsersOpen] = useState(false);
   const [apartmentsOpen, setApartmentsOpen] = useState(false);
   const [approvalsOpen, setApprovalsOpen] = useState(false);
   const [bookingsOpen, setBookingsOpen] = useState(false);
-  const [checkInOpen, setCheckInOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [managerBookingsOpen, setManagerBookingsOpen] = useState(false);
+  const [managerApartmentsOpen, setManagerApartmentsOpen] = useState(false);
+  const [managerStaffOpen, setManagerStaffOpen] = useState(false);
 
   return (
     <div
@@ -331,57 +332,22 @@ const Sidebar = ({
                 Dashboard
               </Link>
 
-              <div className="dropdown">
-                <button
-                  onClick={() =>
-                    setRoomsOpen(!roomsOpen)
-                  }
-                  className={`dropdown-button ${
-                    location.pathname.includes(
-                      "/receptionist/products"
-                    )
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  <Box className="icon" />
-                  Apartments
-
-                  {roomsOpen ? (
-                    <ChevronUp className="dropdown-icon" />
-                  ) : (
-                    <ChevronDownIcon className="dropdown-icon" />
-                  )}
-                </button>
-
-                {roomsOpen && (
-                  <div className="dropdown-content">
-                    <Link
-                      to="/receptionist/products/add"
-                      className={`dropdown-link ${
-                        location.pathname ===
-                        "/receptionist/products/add"
-                          ? "active"
-                          : ""
-                      }`}
-                    >
-                      Add Apartments
-                    </Link>
-
-                    <Link
-                      to="/receptionist/products"
-                      className={`dropdown-link ${
-                        location.pathname ===
-                        "/receptionist/products"
-                          ? "active"
-                          : ""
-                      }`}
-                    >
-                      Available Apartments
-                    </Link>
-                  </div>
-                )}
-              </div>
+              {/* APARTMENTS  */}
+              <Link
+                to="/receptionist/products"
+                className={`sidebar-link ${
+                  location.pathname ===
+                  "/receptionist/products"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
+              >
+                <HomeIcon className="icon" />
+                Apartments
+              </Link>
 
               {/* BOOKINGS */}
               <div className="dropdown">
@@ -434,54 +400,21 @@ const Sidebar = ({
               </div>
 
               {/* CHECK-IN */}
-              <div className="dropdown">
-                <button
-                  onClick={() => setCheckInOpen(!checkInOpen)}
-                  className={`dropdown-button ${
-                    location.pathname.includes("/receptionist/checkin") ||
-                    location.pathname.includes("/receptionist/checkedinguests")
-                      ? "active"
-                      : ""
-                  }`}
-                >
-                  <LogIn className="icon" />
-                  Check-in
-
-                  {checkInOpen ? (
-                    <ChevronUp className="dropdown-icon" />
-                  ) : (
-                    <ChevronDownIcon className="dropdown-icon" />
-                  )}
-                </button>
-
-                {checkInOpen && (
-                  <div className="dropdown-content">
-                    <Link
-                      to="/receptionist/checkin"
-                      className={`dropdown-link ${
-                        location.pathname === "/receptionist/checkin"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      Today's Check-ins
-                    </Link>
-
-                    <Link
-                      to="/receptionist/checkedinguests"
-                      className={`dropdown-link ${
-                        location.pathname === "/receptionist/checkedinguests"
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      Checked-in Guests
-                    </Link>
-                  </div>
-                )}
-              </div>
+              <Link
+                to="/receptionist/checkedinguests"
+                className={`sidebar-link ${
+                  location.pathname ===
+                  "/receptionist/checkedinguests"
+                    ? "active"
+                    : ""
+                }`}
+                onClick={() =>
+                  setSidebarOpen(false)
+                }
+              >
+                <HomeIcon className="icon" />
+                Checked-in Guests
+              </Link>              
             </>
           )}
 
@@ -491,54 +424,198 @@ const Sidebar = ({
               <Link
                 to="/manager"
                 className={`sidebar-link ${
-                  location.pathname ===
-                  "/manager"
+                  location.pathname === "/manager"
                     ? "active"
                     : ""
                 }`}
-                onClick={() =>
-                  setSidebarOpen(false)
-                }
+                onClick={() => setSidebarOpen(false)}
               >
                 <HomeIcon className="icon" />
                 Dashboard
               </Link>
 
-              <Link
-                to="/manager/bookings"
-                className={`sidebar-link ${
-                  location.pathname ===
-                  "/manager/bookings"
-                    ? "active"
-                    : ""
-                }`}
-                onClick={() =>
-                  setSidebarOpen(false)
-                }
-              >
-                <CalendarRange className="icon" />
-                Bookings
-              </Link>
+              {/* BOOKINGS */}
+              <div className="dropdown">
+                <button
+                  onClick={() =>
+                    setManagerBookingsOpen(
+                      !managerBookingsOpen
+                    )
+                  }
+                  className={`dropdown-button ${
+                    location.pathname.includes(
+                      "/manager/bookings"
+                    )
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  <CalendarRange className="icon" />
+                  Bookings
 
-              <Link
-                to="/manager/apartments"
-                className={`sidebar-link ${
-                  location.pathname ===
-                  "/manager/apartments"
-                    ? "active"
-                    : ""
-                }`}
-                onClick={() =>
-                  setSidebarOpen(false)
-                }
-              >
-                <Box className="icon" />
-                Apartments
-              </Link>
+                  {managerBookingsOpen ? (
+                    <ChevronUp className="dropdown-icon" />
+                  ) : (
+                    <ChevronDownIcon className="dropdown-icon" />
+                  )}
+                </button>
 
-              <div>Staff</div>
+                {managerBookingsOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/manager/bookings/today"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/bookings/today"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      Today's Bookings
+                    </Link>
 
-              <div>Apartment</div>
+                    <Link
+                      to="/manager/bookings/month"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/bookings/month"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      Monthly Bookings
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* APARTMENTS */}
+              <div className="dropdown">
+                <button
+                  onClick={() =>
+                    setManagerApartmentsOpen(
+                      !managerApartmentsOpen
+                    )
+                  }
+                  className={`dropdown-button ${
+                    location.pathname.includes(
+                      "/manager/apartments"
+                    )
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  <Box className="icon" />
+                  Apartments
+
+                  {managerApartmentsOpen ? (
+                    <ChevronUp className="dropdown-icon" />
+                  ) : (
+                    <ChevronDownIcon className="dropdown-icon" />
+                  )}
+                </button>
+
+                {managerApartmentsOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/manager/apartments"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/apartments"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      View Apartments
+                    </Link>
+
+                    <Link
+                      to="/manager/apartments/create"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/apartments/create"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      Create Apartment
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* STAFF */}
+              <div className="dropdown">
+                <button
+                  onClick={() =>
+                    setManagerStaffOpen(
+                      !managerStaffOpen
+                    )
+                  }
+                  className={`dropdown-button ${
+                    location.pathname.includes(
+                      "/manager/staff"
+                    )
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  <Users className="icon" />
+                  Staff
+
+                  {managerStaffOpen ? (
+                    <ChevronUp className="dropdown-icon" />
+                  ) : (
+                    <ChevronDownIcon className="dropdown-icon" />
+                  )}
+                </button>
+
+                {managerStaffOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/manager/staff"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/staff"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      View Staff
+                    </Link>
+
+                    <Link
+                      to="/manager/staff/create"
+                      className={`dropdown-link ${
+                        location.pathname ===
+                        "/manager/staff/create"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSidebarOpen(false)
+                      }
+                    >
+                      Create Receptionist
+                    </Link>
+                  </div>
+                )}
+              </div>
             </>
           )}
 

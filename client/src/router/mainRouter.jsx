@@ -34,7 +34,8 @@ const PaymentVerification = lazy(() => import("../pages/Public/PaymentVerificati
 const CreateBooking = lazy(() => import("../pages/Receptionist/CreateBooking/CreateBooking.jsx"));
 const TodaysBookings = lazy(() => import("../pages/Receptionist/TodaysBookings/TodaysBookings.jsx"));
 const BookingDetails = lazy(() => import("../pages/Receptionist/BookingDetails/BookingDetails.jsx"));
-const CheckedIn = lazy(() => import("../pages/Receptionist/CheckedIn/CheckedIn.jsx"))
+const CheckedIn = lazy(() => import("../pages/Receptionist/CheckedIn/CheckedIn.jsx"));
+const AllApartments = lazy(() => import("../pages/Receptionist/AllApartments/AllApartments.jsx"))
 
 const routesConfig = [
   {
@@ -94,6 +95,9 @@ const routesConfig = [
       }, {
         path: "checkedinguests",
         element: <CheckedIn />
+      }, {
+        path: "products",
+        element: <AllApartments />
       }
     ]
   }, {
