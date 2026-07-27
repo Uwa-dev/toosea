@@ -65,3 +65,9 @@ seedOwner();
 // Role: RECEPTIONIST
 // Staff Code: REC002
 // Password: 8I4k8#FCdh
+
+
+//Name: Miracle Imade
+//Email: miracle@gmail.com
+// Role: Manager
+//Password: dIxdG2L4q9

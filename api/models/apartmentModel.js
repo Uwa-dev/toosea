@@ -84,6 +84,8 @@ const apartmentSchema = new mongoose.Schema(
       type: String,
       enum: [
         "AVAILABLE",
+        "BOOKED",
+        "OCCUPIED",
         "MAINTENANCE",
         "INACTIVE"
       ],

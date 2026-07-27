@@ -184,7 +184,6 @@ const Create = () => {
                   <option value="STANDARD">Standard</option>
                   <option value="DELUXE">Deluxe</option>
                   <option value="EXECUTIVE">Executive</option>
-                  <option value="PENTHOUSE">Penthouse</option>
                 </select>
               </div>
 

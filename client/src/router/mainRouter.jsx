@@ -30,7 +30,11 @@ const ViewSingleStaff = lazy(() => import("../pages/Admin/Staff/Staff.jsx"));
 const CreateApartment = lazy(() => import("../pages/Admin/CreateApartment/Create.jsx"));
 const ViewApartments = lazy(() => import("../pages/Admin/ViewApartments/ViewApartment.jsx"));
 const SingleApartment = lazy(() => import("../pages/Admin/SingleApartment/SingleApartment.jsx"));
-const PaymentVerification = lazy(() => import("../pages/Public/PaymentVerification/PaymentVerification.jsx"))
+const PaymentVerification = lazy(() => import("../pages/Public/PaymentVerification/PaymentVerification.jsx"));
+const CreateBooking = lazy(() => import("../pages/Receptionist/CreateBooking/CreateBooking.jsx"));
+const TodaysBookings = lazy(() => import("../pages/Receptionist/TodaysBookings/TodaysBookings.jsx"));
+const BookingDetails = lazy(() => import("../pages/Receptionist/BookingDetails/BookingDetails.jsx"));
+const CheckedIn = lazy(() => import("../pages/Receptionist/CheckedIn/CheckedIn.jsx"))
 
 const routesConfig = [
   {
@@ -78,7 +82,19 @@ const routesConfig = [
       {
         index: true,
         element: <ReceptDashboard />
-      }, 
+      }, {
+        path: "walkin",
+        element: <CreateBooking />
+      }, {
+        path: "todaybookings",
+        element: <TodaysBookings />
+      }, {
+        path: "bookings/:id",
+        element: <BookingDetails />
+      }, {
+        path: "checkedinguests",
+        element: <CheckedIn />
+      }
     ]
   }, {
     path: "/login",

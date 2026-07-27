@@ -1,0 +1,73 @@
+.today-bookings{
+    padding:30px;
+}
+
+.page-header{
+    margin-bottom:25px;
+}
+
+.booking-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.booking-table th{
+    background:#1b4332;
+    color:#fff;
+    padding:15px;
+    text-align:left;
+}
+
+.booking-table td{
+    padding:15px;
+    border-bottom:1px solid #eee;
+}
+
+.booking-table tr:hover{
+    background:#f8f8f8;
+}
+
+.online-badge,
+.walkin-badge{
+    padding:5px 10px;
+    border-radius:20px;
+    color:#fff;
+    font-size:.8rem;
+    font-weight:600;
+}
+
+.online-badge{
+    background:#0077b6;
+}
+
+.walkin-badge{
+    background:#2a9d8f;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:.8rem;
+    color:#fff;
+    font-weight:600;
+}
+
+.status.pending{
+    background:#f4a261;
+}
+
+.status.confirmed{
+    background:#2a9d8f;
+}
+
+.status.checked_in{
+    background:#4361ee;
+}
+
+.status.cancelled{
+    background:#d62828;
+}

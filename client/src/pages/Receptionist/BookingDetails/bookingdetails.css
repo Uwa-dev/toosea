@@ -1,0 +1,6 @@
+.checked-in-btn{
+    background:#28a745;
+    color:#fff;
+    cursor:not-allowed;
+    opacity:.9;
+}

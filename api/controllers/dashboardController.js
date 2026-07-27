@@ -28,9 +28,9 @@ export const getDashboardStats = async (req, res) => {
         $in: ["OWNER", "MANAGER", "RECEPTIONIST"],
       },
     });
-
-    // Today's bookings
+    // Today's paid bookings
     const todayBookings = await Booking.countDocuments({
+      paymentStatus: "PAID",
       createdAt: {
         $gte: today,
         $lt: tomorrow,

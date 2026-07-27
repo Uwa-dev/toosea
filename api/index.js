@@ -9,6 +9,7 @@ import apartmentRouter from './routes/apartmentRoutes.js';
 import analyticsRouter from "./routes/analyticsRoutes.js";
 import paymentRouter from "./routes/paymentRoutes.js";
 import dashboardRouter from "./routes/dashboardRoutes.js";
+import "./jobs/updateExpiredBookings.js";
 
 dotenv.config();
 
