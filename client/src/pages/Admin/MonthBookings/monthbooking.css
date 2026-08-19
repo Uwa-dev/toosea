@@ -1,0 +1,280 @@
+/* ================================
+   MONTHLY BOOKINGS PAGE
+================================ */
+
+.monthly-bookings {
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.monthly-bookings h2 {
+  margin: 0 0 25px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* ================================
+   FILTERS
+================================ */
+
+.booking-filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 20px;
+}
+
+.booking-filters select {
+  min-width: 170px;
+  padding: 11px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.booking-filters select:hover {
+  border-color: #9ca3af;
+}
+
+.booking-filters select:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+/* ================================
+   SUMMARY
+================================ */
+
+.booking-summary {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.booking-summary h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ================================
+   TABLE CONTAINER
+================================ */
+
+.monthly-bookings {
+  overflow-x: hidden;
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ================================
+   TABLE HEADER
+================================ */
+
+.booking-table thead {
+  background: #f3f4f6;
+}
+
+.booking-table th {
+  padding: 15px 14px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+/* ================================
+   TABLE BODY
+================================ */
+
+.booking-table td {
+  padding: 15px 14px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f0f1f3;
+  white-space: nowrap;
+}
+
+.booking-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.booking-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.booking-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ================================
+   SERIAL NUMBER
+================================ */
+
+.booking-table td:first-child {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* ================================
+   GUEST
+================================ */
+
+.booking-table td:nth-child(2) {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ================================
+   APARTMENT
+================================ */
+
+.booking-table td:nth-child(3) {
+  font-weight: 500;
+}
+
+/* ================================
+   AMOUNT
+================================ */
+
+.booking-table td:nth-child(6) {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ================================
+   STATUS BADGES
+================================ */
+
+.booking-table td:nth-child(9) {
+  font-weight: 600;
+}
+
+/* PENDING */
+
+.booking-table td:nth-child(9) {
+  color: #92400e;
+}
+
+/* ================================
+   CREATED BY
+================================ */
+
+.booking-table td:nth-child(10) {
+  color: #6b7280;
+}
+
+/* ================================
+   EMPTY / LOADING
+================================ */
+
+.monthly-bookings > h3,
+.monthly-bookings > p {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* ================================
+   TABLE SCROLL
+================================ */
+
+@media (max-width: 1200px) {
+  .monthly-bookings {
+    overflow-x: auto;
+  }
+
+  .booking-table {
+    min-width: 1100px;
+  }
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 768px) {
+  .monthly-bookings {
+    padding: 20px;
+  }
+
+  .monthly-bookings h2 {
+    font-size: 22px;
+  }
+
+  .booking-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .booking-filters select {
+    width: 100%;
+  }
+
+  .booking-summary {
+    padding: 17px 20px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+  .monthly-bookings {
+    padding: 15px;
+  }
+
+  .monthly-bookings h2 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .booking-filters {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .booking-summary h3 {
+    font-size: 15px;
+  }
+}

@@ -5,7 +5,7 @@ import {
 } from "../../../services/bookingApi";
 import { LogOut, RefreshCw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-// import "./checkedin.css";
+import "./checkedin.css";
 
 const CheckedIn = () => {
   const [bookings, setBookings] = useState([]);

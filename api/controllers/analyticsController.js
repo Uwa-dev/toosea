@@ -229,10 +229,7 @@ export const getDashboardStats = async (req, res) => {
 //  RECEPTIONIST ANALYTICS
 //******************************** */ 
 
-export const getReceptionistDashboard = async (
-  req,
-  res
-) => {
+export const getReceptionistDashboard = async (req, res) => {
   try {
     const userId = req.user.id;
 
@@ -246,41 +243,105 @@ export const getReceptionistDashboard = async (
       walkInBookingsToday,
       checkInsToday,
       pendingCheckIns,
-      checkOutsToday
+      checkOutsToday,
+      todayArrivals,
+      todayDepartures,
+      occupiedApartments,
+      availableApartments
     ] = await Promise.all([
+
+      // WALK-IN BOOKINGS CREATED BY THIS RECEPTIONIST TODAY
       Booking.countDocuments({
         bookingSource: "WALK_IN",
         createdBy: userId,
-        createdAt: { $gte: start, $lte: end }
+        createdAt: {
+          $gte: start,
+          $lte: end
+        }
       }),
 
+      // GUESTS CHECKED IN TODAY
       Booking.countDocuments({
         bookingStatus: "CHECKED_IN",
-        updatedAt: { $gte: start, $lte: end }
+        checkedInAt: {
+          $gte: start,
+          $lte: end
+        }
       }),
 
+      // TODAY'S CONFIRMED BOOKINGS THAT HAVE NOT CHECKED IN
       Booking.countDocuments({
-        bookingStatus: "CONFIRMED"
+        bookingStatus: "CONFIRMED",
+        checkInDate: {
+          $gte: start,
+          $lte: end
+        }
       }),
 
+      // GUESTS CHECKED OUT TODAY
       Booking.countDocuments({
         bookingStatus: "CHECKED_OUT",
-        updatedAt: { $gte: start, $lte: end }
+        checkedOutAt: {
+          $gte: start,
+          $lte: end
+        }
+      }),
+
+      // TODAY'S ARRIVALS
+      Booking.countDocuments({
+        checkInDate: {
+          $gte: start,
+          $lte: end
+        },
+        bookingStatus: {
+          $in: ["CONFIRMED", "CHECKED_IN"]
+        }
+      }),
+
+      // TODAY'S DEPARTURES
+      Booking.countDocuments({
+        checkOutDate: {
+          $gte: start,
+          $lte: end
+        },
+        bookingStatus: "CHECKED_IN"
+      }),
+
+      // CURRENTLY OCCUPIED
+      Apartment.countDocuments({
+        isActive: true,
+        status: "OCCUPIED"
+      }),
+
+      // CURRENTLY AVAILABLE
+      Apartment.countDocuments({
+        isActive: true,
+        status: "AVAILABLE"
       })
+
     ]);
 
-    res.json({
+    return res.status(200).json({
       success: true,
       data: {
         walkInBookingsToday,
         checkInsToday,
         pendingCheckIns,
-        checkOutsToday
+        checkOutsToday,
+        todayArrivals,
+        todayDepartures,
+        occupiedApartments,
+        availableApartments
       }
     });
 
   } catch (error) {
-    res.status(500).json({
+    console.error(
+      "Receptionist dashboard error:",
+      error
+    );
+
+    return res.status(500).json({
       success: false,
       message: error.message
     });

@@ -158,7 +158,7 @@ export const createWalkInBooking = async (
 
     const booking = await Booking.create({
       apartment: apartmentId,
-      createdBy: req.user._id,
+      createdBy: req.user.id,
       customer,
       checkInDate,
       checkOutDate,
@@ -186,31 +186,34 @@ export const createWalkInBooking = async (
   }
 };
 
-export const getTodayBookings = async (
-  req,
-  res
-) => {
+export const getTodayBookings = async (req, res) => {
   try {
     const start = new Date();
     start.setHours(0, 0, 0, 0);
+
+    // Include yesterday
+    const previousDay = new Date(start);
+    previousDay.setDate(previousDay.getDate() - 1);
 
     const end = new Date();
     end.setHours(23, 59, 59, 999);
 
     const bookings = await Booking.find({
       checkInDate: {
-        $gte: start,
+        $gte: previousDay,
         $lte: end,
+      },
+      bookingStatus: {
+        $in: ["PENDING", "CONFIRMED", "CHECKED_IN"],
       },
     })
       .populate("apartment")
       .sort({ checkInDate: 1 });
 
     res.status(200).json(bookings);
-
   } catch (error) {
     res.status(500).json({
-      message: error.message
+      message: error.message,
     });
   }
 };
@@ -275,6 +278,7 @@ export const checkInGuest = async (req, res) => {
     }
 
     booking.bookingStatus = "CHECKED_IN";
+    booking.checkedInAt = new Date();
     await booking.save();
 
     await Apartment.findByIdAndUpdate(
@@ -318,6 +322,7 @@ export const checkOutGuest = async (req, res) => {
     }
 
     booking.bookingStatus = "CHECKED_OUT";
+    booking.checkedOutAt = new Date();
     await booking.save();
 
     await Apartment.findByIdAndUpdate(
@@ -549,6 +554,133 @@ export const transferAndExtendStay = async (req, res) => {
 
   } catch (error) {
     res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const getMonthlyBookings = async (req, res) => {
+  try {
+    const { year, month } = req.query;
+
+    const selectedYear = Number(year);
+    const selectedMonth = Number(month);
+
+    if (!selectedYear || !selectedMonth) {
+      return res.status(400).json({
+        success: false,
+        message: "Year and month are required.",
+      });
+    }
+
+    if (selectedMonth < 1 || selectedMonth > 12) {
+      return res.status(400).json({
+        success: false,
+        message: "Month must be between 1 and 12.",
+      });
+    }
+
+    // Start of selected month
+    const startDate = new Date(
+      selectedYear,
+      selectedMonth - 1,
+      1,
+      0,
+      0,
+      0,
+      0
+    );
+
+    // Start of next month
+    const endDate = new Date(
+      selectedYear,
+      selectedMonth,
+      1,
+      0,
+      0,
+      0,
+      0
+    );
+
+    const bookings = await Booking.find({
+      createdAt: {
+        $gte: startDate,
+        $lt: endDate,
+      },
+    })
+      .populate("apartment")
+      .populate("createdBy", "fullName email role")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      year: selectedYear,
+      month: selectedMonth,
+      count: bookings.length,
+      bookings,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getYearlyBookings = async (req, res) => {
+  try {
+    const { year } = req.query;
+
+    const selectedYear = Number(year);
+
+    if (!selectedYear) {
+      return res.status(400).json({
+        success: false,
+        message: "Year is required.",
+      });
+    }
+
+    const startDate = new Date(
+      selectedYear,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    );
+
+    const endDate = new Date(
+      selectedYear + 1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    );
+
+    const bookings = await Booking.find({
+      createdAt: {
+        $gte: startDate,
+        $lt: endDate,
+      },
+    })
+      .populate("apartment")
+      .populate("createdBy", "fullName email role")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      year: selectedYear,
+      count: bookings.length,
+      bookings,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }

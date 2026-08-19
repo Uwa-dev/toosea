@@ -47,7 +47,11 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       // Redirect
-      navigate("/admin");
+      if (data.user.mustChangePassword) {
+        navigate("/change-password");
+      } else {
+        navigate("/admin");
+      }
     } catch (err) {
       setError(
         err.response?.data?.message || "Login failed. Please try again."

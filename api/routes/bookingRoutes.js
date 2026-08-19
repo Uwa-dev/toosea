@@ -10,7 +10,9 @@ import {
   checkOutGuest,
   cancelBooking,
   getCheckedInGuests,
-  transferAndExtendStay
+  transferAndExtendStay,
+  getMonthlyBookings,
+  getYearlyBookings
 } from "../controllers/bookingController.js";
 
 import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
@@ -22,6 +24,8 @@ BookingRouter.post("/walkin", protect, authorizeRoles("RECEPTIONIST"), createWal
 BookingRouter.get("/today", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getTodayBookings);
 BookingRouter.get("/", protect, authorizeRoles("OWNER", "MANAGER"), getAllBookings);
 BookingRouter.get("/checkedin", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getCheckedInGuests);
+BookingRouter.get("/monthly", protect, authorizeRoles("OWNER"), getMonthlyBookings);
+BookingRouter.get("/yearly", protect, authorizeRoles("OWNER"), getYearlyBookings);
 BookingRouter.get("/:id", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getBookingById)
 BookingRouter.patch("/:id/checkin", protect, authorizeRoles("RECEPTIONIST"), checkInGuest);
 BookingRouter.patch("/:id/checkout", protect, authorizeRoles("RECEPTIONIST"), checkOutGuest);

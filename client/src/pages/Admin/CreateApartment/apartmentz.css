@@ -1,214 +1,437 @@
-/* ===============================
-   CREATE APARTMENT
-================================== */
+/* =========================================
+   CREATE APARTMENT PAGE
+========================================= */
 
-.container {
-    max-width: 850px;
-    margin: 40px auto;
-    padding: 40px;
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+.create-apartment-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 35px;
+  box-sizing: border-box;
+  background: #f5f7fa;
 }
 
-.container h1 {
-    font-size: 2rem;
-    color: #1f2937;
-    margin-bottom: 30px;
-    font-weight: 700;
-    text-align: center;
+/* =========================================
+   CARD
+========================================= */
+
+.create-apartment-card {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-/* Form */
+.create-apartment-card form {
+  width: 100%;
+}
 
-form {
-    display: flex;
+/* =========================================
+   STEP
+========================================= */
+
+.apartment-step {
+  padding: 35px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.apartment-form-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.apartment-form-header h1 {
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.apartment-form-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.apartment-form-group {
+  margin-bottom: 22px;
+}
+
+.apartment-form-group > label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.apartment-form-group input[type="text"],
+.apartment-form-group input[type="number"],
+.apartment-form-group textarea,
+.apartment-form-group select {
+  width: 100%;
+  min-height: 45px;
+  padding: 11px 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #111827;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.apartment-form-group input:focus,
+.apartment-form-group textarea:focus,
+.apartment-form-group select:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+.apartment-form-group input::placeholder,
+.apartment-form-group textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.apartment-form-group textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* =========================================
+   SELECT
+========================================= */
+
+.apartment-form-group select {
+  cursor: pointer;
+}
+
+/* =========================================
+   TWO COLUMN FORM
+========================================= */
+
+.apartment-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* =========================================
+   AMENITIES
+========================================= */
+
+.apartment-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 15px;
+
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.amenity-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 45px;
+  padding: 10px 12px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+
+  color: #374151;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.amenity-option:hover {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.amenity-option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+
+  cursor: pointer;
+  accent-color: #111827;
+}
+
+.amenity-option span {
+  line-height: 1.3;
+}
+
+/* =========================================
+   FILE UPLOAD
+========================================= */
+
+.apartment-file-wrapper {
+  padding: 25px;
+
+  border: 2px dashed #d1d5db;
+  border-radius: 9px;
+
+  background: #f9fafb;
+
+  text-align: center;
+
+  transition: 0.2s ease;
+}
+
+.apartment-file-wrapper:hover {
+  border-color: #9ca3af;
+  background: #f3f4f6;
+}
+
+.apartment-file-wrapper input[type="file"] {
+  width: 100%;
+  color: #4b5563;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* =========================================
+   SELECTED IMAGES
+========================================= */
+
+.selected-images {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: -5px;
+  margin-bottom: 25px;
+
+  padding: 12px 14px;
+
+  background: #f3f4f6;
+  border-radius: 7px;
+
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.selected-images-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+
+  border-radius: 50%;
+
+  background: #111827;
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* =========================================
+   NEXT BUTTON
+========================================= */
+
+.apartment-next-btn {
+  width: 100%;
+  height: 46px;
+
+  margin-top: 5px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: #111827;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.apartment-next-btn:hover {
+  background: #000000;
+}
+
+.apartment-next-btn:active {
+  transform: translateY(1px);
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.apartment-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.apartment-buttons button {
+  height: 46px;
+  padding: 0 25px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+/* Previous */
+
+.apartment-prev-btn {
+  flex: 1;
+
+  background: #ffffff;
+  color: #374151;
+
+  border: 1px solid #d1d5db;
+}
+
+.apartment-prev-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* Submit */
+
+.apartment-submit-btn {
+  flex: 2;
+
+  background: #111827;
+  color: #ffffff;
+
+  border: 1px solid #111827;
+}
+
+.apartment-submit-btn:hover {
+  background: #000000;
+}
+
+.apartment-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+  .create-apartment-page {
+    padding: 20px;
+  }
+
+  .apartment-step {
+    padding: 25px;
+  }
+
+  .apartment-form-header h1 {
+    font-size: 22px;
+  }
+
+  .apartment-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .apartment-checkboxes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .create-apartment-page {
+    padding: 10px;
+  }
+
+  .create-apartment-card {
+    border-radius: 8px;
+  }
+
+  .apartment-step {
+    padding: 20px 16px;
+  }
+
+  .apartment-form-header {
+    margin-bottom: 22px;
+  }
+
+  .apartment-form-header h1 {
+    font-size: 20px;
+  }
+
+  .apartment-form-header p {
+    font-size: 13px;
+  }
+
+  .apartment-buttons {
     flex-direction: column;
-    gap: 25px;
-}
+  }
 
-/* Form Group */
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-group label {
-    font-size: 15px;
-    font-weight: 600;
-    color: #374151;
-}
-
-/* Inputs */
-
-.form-group input,
-.form-group textarea {
+  .apartment-buttons button {
     width: 100%;
-    padding: 15px 18px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all .3s ease;
-    background: #fafafa;
-}
+  }
 
-.form-group textarea {
-    resize: vertical;
-    min-height: 150px;
-}
+  .apartment-prev-btn,
+  .apartment-submit-btn {
+    flex: none;
+  }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #2563eb;
-    background: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(37,99,235,.15);
-}
-
-.form-header{
-    margin-bottom:35px;
-    text-align:center;
-}
-
-.form-header p{
-    color:#6b7280;
-    margin-top:10px;
-    font-size:15px;
-}
-
-/* Placeholder */
-
-input::placeholder,
-textarea::placeholder {
-    color: #9ca3af;
-}
-
-/* ===============================
-   Amenities
-================================== */
-
-.checkboxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.checkboxes label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .3s;
-    font-weight: 500;
-}
-
-.checkboxes label:hover {
-    background: #eff6ff;
-    border-color: #2563eb;
-}
-
-.checkboxes input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #2563eb;
-    cursor: pointer;
-}
-
-/* ===============================
-   Button
-================================== */
-
-button {
-    border: none;
-    background: #2563eb;
-    color: white;
-    padding: 16px 35px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .3s ease;
-}
-
-button:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(37,99,235,.25);
-}
-
-button:active {
-    transform: scale(.98);
-}
-
-/* Link */
-
-a {
-    align-self: flex-end;
-    text-decoration: none;
-}
-
-/* ===============================
-   Responsive
-================================== */
-
-@media (max-width:992px){
-
-.container{
-    padding:30px;
-}
-
-}
-
-@media (max-width:768px){
-
-.container{
-    margin:20px;
-    padding:25px;
-}
-
-.container h1{
-    font-size:1.7rem;
-}
-
-.checkboxes{
-    grid-template-columns:1fr;
-}
-
-button{
-    width:100%;
-}
-
-a{
-    width:100%;
-}
-
-}
-
-@media (max-width:480px){
-
-.container{
-    margin:15px;
-    padding:20px;
-}
-
-.container h1{
-    font-size:1.5rem;
-}
-
-.form-group input,
-.form-group textarea{
-    padding:14px;
-}
-
-button{
-    padding:15px;
-}
-
+  .apartment-file-wrapper {
+    padding: 20px 10px;
+  }
 }

@@ -285,7 +285,7 @@ const Sidebar = ({
                 {bookingsOpen && (
                   <div className="dropdown-content">
                     <Link
-                      to="/admin/monthbookings"
+                      to="/admin/monthly"
                       className={`dropdown-link ${
                         location.pathname === "/admin/monthbookings"
                           ? "active"
@@ -297,7 +297,7 @@ const Sidebar = ({
                     </Link>
 
                     <Link
-                      to="/admin/yearbookings"
+                      to="/admin/yearly"
                       className={`dropdown-link ${
                         location.pathname === "/admin/yearbookings"
                           ? "active"
@@ -600,7 +600,7 @@ const Sidebar = ({
                     </Link>
 
                     <Link
-                      to="/manager/staff/create"
+                      to="/manager/createusers"
                       className={`dropdown-link ${
                         location.pathname ===
                         "/manager/staff/create"

@@ -1,0 +1,193 @@
+/* ========================================
+   BACK BUTTON
+======================================== */
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 20px;
+  padding: 9px 14px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.back-btn:active {
+  transform: translateY(1px);
+}
+
+/* ========================================
+   STAFF DETAILS PAGE
+======================================== */
+
+.staff-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  background: #f8f9fb;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ========================================
+   STAFF CARD
+======================================== */
+
+.staff-card {
+  width: 100%;
+  max-width: 700px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+   TITLE
+======================================== */
+
+.staff-card h2 {
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e5e7eb;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ========================================
+   STAFF INFORMATION
+======================================== */
+
+.staff-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.staff-info p {
+  margin: 0;
+  padding: 17px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  font-size: 14px;
+  color: #4b5563;
+
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.staff-info p:last-child {
+  border-bottom: none;
+}
+
+.staff-info strong {
+  min-width: 130px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ========================================
+   STAFF CODE
+======================================== */
+
+.staff-info p:nth-child(3) {
+  font-family: inherit;
+}
+
+.staff-info p:nth-child(3)::first-letter {
+  color: inherit;
+}
+
+/* ========================================
+   ROLE
+======================================== */
+
+.staff-info p:nth-child(4) {
+  color: #374151;
+}
+
+/* ========================================
+   LOADING / NOT FOUND
+======================================== */
+
+.staff-page > h2 {
+  margin-top: 50px;
+  color: #6b7280;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+  .staff-page {
+    padding: 20px;
+  }
+
+  .staff-card {
+    padding: 24px;
+  }
+
+  .staff-card h2 {
+    font-size: 22px;
+  }
+
+  .staff-info p {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .staff-info strong {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-page {
+    padding: 14px;
+  }
+
+  .staff-card {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .staff-card h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .staff-info p {
+    padding: 15px 0;
+    font-size: 13px;
+  }
+}

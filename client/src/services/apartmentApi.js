@@ -44,3 +44,22 @@ export const singleApartment = async(id) => {
   const response = await apartmentApi.get(`/${id}`)
   return response.data
 }
+
+export const deleteApartmentImage = async (
+  apartmentId,
+  publicId
+) => {
+  const response = await apartmentApi.delete(
+    `/${apartmentId}/images/${encodeURIComponent(publicId)}`
+  );
+
+  return response.data;
+};
+
+export const deleteApartment = async (id) => {
+  const response = await apartmentApi.delete(
+    `/${id}`
+  );
+
+  return response.data;
+};

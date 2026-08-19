@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAllApartments } from "../../../services/apartmentApi";
 import { createWalkInBooking } from "../../../services/bookingApi";
+import "./createbooking.css";
 
 const CreateBooking = () => {
   const location = useLocation();

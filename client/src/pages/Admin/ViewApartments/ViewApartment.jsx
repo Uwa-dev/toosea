@@ -110,9 +110,17 @@ function ViewApartments() {
                       <Eye size={18} />
                     </button>
 
-                    <button className="images">
-                      <Camera size={18} />
-                    </button>
+                      <button
+                        className="images"
+                        onClick={() =>
+                          navigate(
+                            `/admin/apartment/${apartment._id}/images`
+                          )
+                        }
+                        title="Manage images"
+                      >
+                        <Camera size={18} />
+                      </button>
 
                   </td>
                 </tr>

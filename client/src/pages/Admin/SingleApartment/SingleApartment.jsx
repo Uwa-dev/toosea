@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Edit, Trash2, ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
-import {singleApartment} from "../../../services/apartmentApi";
+import {singleApartment, deleteApartment} from "../../../services/apartmentApi";
 
 import "./singleApartment.css";
 

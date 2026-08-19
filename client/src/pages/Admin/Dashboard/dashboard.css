@@ -1,245 +1,414 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* ========================================
+   ADMIN DASHBOARD
+======================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Poppins",sans-serif;
+.dashboard-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f8f9fb;
 }
 
-body{
-    background:#f4f7fc;
+/* ========================================
+   DASHBOARD HEADER
+======================================== */
+
+.dashboard-header {
+  margin-bottom: 24px;
 }
 
-/* ===========================
-   Dashboard Container
-=========================== */
-
-.dashboard-container{
-    padding:35px;
-    min-height:100vh;
+.dashboard-header h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
 }
 
-/* ===========================
-   Header
-=========================== */
-
-.dashboard-header{
-    margin-bottom:35px;
+.dashboard-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
 }
 
-.dashboard-header h1{
-    font-size:34px;
-    color:#1e293b;
-    margin-bottom:8px;
-    font-weight:700;
+/* ========================================
+   DASHBOARD CARDS
+======================================== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
 }
 
-.dashboard-header p{
-    color:#64748b;
-    font-size:16px;
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  min-height: 125px;
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  box-sizing: border-box;
 }
 
-/* ===========================
-   Dashboard Grid
-=========================== */
+.dashboard-card:hover {
+  transform: translateY(-2px);
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-    margin-bottom:40px;
+  border-color: #d1d5db;
+
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.07);
 }
 
-/* ===========================
-   Cards
-=========================== */
+/* ========================================
+   DASHBOARD ICON
+======================================== */
 
-.dashboard-card{
-    background:#fff;
-    border-radius:18px;
-    padding:25px;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.35s;
-    cursor:pointer;
-    border-left:6px solid #2563eb;
+.dashboard-icon {
+  width: 52px;
+  height: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #f3f4f6;
+
+  font-size: 25px;
 }
 
-.dashboard-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 35px rgba(0,0,0,.15);
+/* ========================================
+   DASHBOARD CONTENT
+======================================== */
+
+.dashboard-content {
+  min-width: 0;
 }
 
-.dashboard-icon{
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    background:#2563eb;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:34px;
-    color:#fff;
-    flex-shrink:0;
+.dashboard-content h3 {
+  margin: 0 0 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #6b7280;
 }
 
-.dashboard-content{
-    flex:1;
+.dashboard-content h2 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  color: #111827;
+
+  line-height: 1.2;
 }
 
-.dashboard-content h3{
-    color:#64748b;
-    font-size:16px;
-    margin-bottom:10px;
-    font-weight:500;
+/* ========================================
+   BOTTOM SECTION
+======================================== */
+
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
 }
 
-.dashboard-content h2{
-    color:#0f172a;
-    font-size:32px;
-    font-weight:700;
+/* ========================================
+   RECENT CARDS
+======================================== */
+
+.recent-card {
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  box-sizing: border-box;
 }
 
-/* ===========================
-   Bottom Section
-=========================== */
+.recent-card h2 {
+  margin: 0 0 20px;
 
-.dashboard-bottom{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:25px;
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #111827;
 }
 
-/* ===========================
-   Bottom Cards
-=========================== */
+/* ========================================
+   TODAY'S SUMMARY
+======================================== */
 
-.recent-card{
-    background:#fff;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+.recent-card ul {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
 }
 
-.recent-card h2{
-    color:#1e293b;
-    margin-bottom:20px;
-    font-size:24px;
+.recent-card li {
+  display: flex;
+  align-items: center;
+
+  min-height: 42px;
+
+  padding: 10px 0;
+
+  font-size: 14px;
+  color: #4b5563;
+
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.recent-card ul{
-    list-style:none;
+.recent-card li:last-child {
+  border-bottom: none;
 }
 
-.recent-card ul li{
-    padding:14px 0;
-    border-bottom:1px solid #edf2f7;
-    color:#475569;
-    font-size:15px;
+.recent-card li::first-letter {
+  color: #16a34a;
 }
 
-.recent-card ul li:last-child{
-    border-bottom:none;
+/* ========================================
+   QUICK ACTIONS
+======================================== */
+
+.dashboard-bottom .recent-card:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-/* ===========================
-   Buttons
-=========================== */
-
-.recent-card button{
-    width:100%;
-    padding:15px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+.dashboard-bottom .recent-card:last-child h2 {
+  margin-bottom: 16px;
 }
 
-.recent-card button:last-child{
-    margin-bottom:0;
+.dashboard-bottom .recent-card button {
+  width: 100%;
+
+  min-height: 42px;
+
+  margin-bottom: 10px;
+  padding: 10px 14px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.recent-card button:hover{
-    background:#1d4ed8;
-    transform:translateY(-3px);
+.dashboard-bottom .recent-card button:last-child {
+  margin-bottom: 0;
 }
 
-/* ===========================
-   Scrollbar
-=========================== */
+.dashboard-bottom .recent-card button:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
 
-::-webkit-scrollbar{
-    width:10px;
+  transform: translateX(2px);
+}
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#2563eb;
-    border-radius:20px;
+.quick-actions a {
+  width: 100%;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 10px 14px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #374151;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-::-webkit-scrollbar-track{
-    background:#e2e8f0;
+.quick-actions a:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+
+  transform: translateX(2px);
+}
+/* ========================================
+   LOADING STATE
+======================================== */
+
+.dashboard-container > h2 {
+  margin: 0;
+
+  padding-top: 20px;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  color: #374151;
 }
 
-/* ===========================
-   Responsive
-=========================== */
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
 
-@media(max-width:992px){
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .dashboard-bottom{
-        grid-template-columns:1fr;
-    }
-
+  .dashboard-bottom {
+    grid-template-columns: 1fr;
+  }
 }
 
-@media(max-width:768px){
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
 
-    .dashboard-container{
-        padding:20px;
-    }
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 18px;
+  }
 
-    .dashboard-header h1{
-        font-size:28px;
-    }
+  .dashboard-header {
+    margin-bottom: 20px;
+  }
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
 
-    .dashboard-card{
-        padding:20px;
-    }
+  .dashboard-header p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
 
-    .dashboard-icon{
-        width:60px;
-        height:60px;
-        font-size:28px;
-    }
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
 
-    .dashboard-content h2{
-        font-size:26px;
-    }
+  .dashboard-card {
+    min-height: 110px;
+    padding: 16px;
+    gap: 12px;
+  }
 
+  .dashboard-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+  }
+
+  .dashboard-content h3 {
+    font-size: 12px;
+  }
+
+  .dashboard-content h2 {
+    font-size: 21px;
+  }
+
+  .recent-card {
+    padding: 20px;
+  }
 }
 
-@media(max-width:500px){
+/* ========================================
+   SMALL MOBILE
+======================================== */
 
-    .dashboard-card{
-        flex-direction:column;
-        text-align:center;
-    }
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 14px;
+  }
 
-    .dashboard-content h3{
-        margin-top:10px;
-    }
+  .dashboard-header h1 {
+    font-size: 20px;
+  }
 
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .dashboard-card {
+    min-height: 95px;
+  }
+
+  .dashboard-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .dashboard-content h2 {
+    font-size: 22px;
+  }
+
+  .recent-card {
+    padding: 18px;
+  }
+
+  .recent-card h2 {
+    font-size: 17px;
+  }
+
+  .recent-card li {
+    font-size: 13px;
+  }
 }

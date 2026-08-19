@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBookingById, checkInGuest, cancelBooking } from "../../../services/bookingApi";
+import {
+  getBookingById,
+  checkInGuest,
+  cancelBooking,
+} from "../../../services/bookingApi";
 import "./bookingdetails.css";
 
 const BookingDetails = () => {
@@ -24,6 +28,7 @@ const BookingDetails = () => {
       setBooking(data);
     } catch (err) {
       console.log(err);
+
       alert(
         err.response?.data?.message ||
           "Unable to load booking."
@@ -32,14 +37,6 @@ const BookingDetails = () => {
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return <h3>Loading booking...</h3>;
-  }
-
-  if (!booking) {
-    return <h3>Booking not found.</h3>;
-  }
 
   const handleCheckIn = async () => {
     const confirmCheckIn = window.confirm(
@@ -55,15 +52,13 @@ const BookingDetails = () => {
 
       alert(response.message);
 
-      // Refresh booking details
       await fetchBooking();
-
     } catch (err) {
       console.log(err);
 
       alert(
         err.response?.data?.message ||
-        "Unable to check in guest."
+          "Unable to check in guest."
       );
     } finally {
       setActionLoading(false);
@@ -85,16 +80,37 @@ const BookingDetails = () => {
       alert(response.message);
 
       await fetchBooking();
-
     } catch (err) {
+      console.log(err);
+
       alert(
         err.response?.data?.message ||
-        "Unable to cancel booking."
+          "Unable to cancel booking."
       );
     } finally {
       setActionLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="booking-details-page">
+        <div className="booking-details-loading">
+          Loading booking...
+        </div>
+      </div>
+    );
+  }
+
+  if (!booking) {
+    return (
+      <div className="booking-details-page">
+        <div className="booking-details-not-found">
+          Booking not found.
+        </div>
+      </div>
+    );
+  }
 
   const nights = Math.ceil(
     (new Date(booking.checkOutDate) -
@@ -103,142 +119,213 @@ const BookingDetails = () => {
   );
 
   return (
-    <div>
+    <div className="booking-details-page">
 
-      <div>
+      {/* Header */}
+
+      <div className="booking-details-header">
 
         <button
+          className="booking-details-back-btn"
           onClick={() => navigate(-1)}
         >
           ← Back
         </button>
 
-        <h2>Booking Details</h2>
+        <div className="booking-details-heading">
+          <h2>Booking Details</h2>
+
+          <p>
+            View and manage booking information
+          </p>
+        </div>
 
       </div>
 
-      <div>
+      {/* Information Cards */}
+
+      <div className="booking-details-grid">
 
         {/* Apartment */}
 
-        <div>
+        <div className="booking-details-card">
 
-          <h3>Apartment</h3>
+          <div className="booking-details-card-header">
+            <h3>Apartment</h3>
+          </div>
 
           <img
+            className="booking-details-apartment-image"
             src={
               booking.apartment?.images?.[0]?.imageUrl ||
               "/toimages/room1.jpg"
             }
-            alt={booking.apartment?.name}
+            alt={booking.apartment?.name || "Apartment"}
           />
 
-          <p>
-            <strong>Name:</strong>{" "}
-            {booking.apartment?.name}
-          </p>
+          <div className="booking-details-info-list">
 
-          <p>
-            <strong>Location:</strong>{" "}
-            {booking.apartment?.location}
-          </p>
+            <p>
+              <strong>Name:</strong>
+              <span>
+                {booking.apartment?.name || "N/A"}
+              </span>
+            </p>
 
-          <p>
-            <strong>Price/Night:</strong> ₦
-            {booking.apartment?.pricePerNight?.toLocaleString()}
-          </p>
+            <p>
+              <strong>Location:</strong>
+              <span>
+                {booking.apartment?.location || "N/A"}
+              </span>
+            </p>
 
-        </div>
+            <p>
+              <strong>Price/Night:</strong>
+              <span>
+                ₦
+                {booking.apartment?.pricePerNight?.toLocaleString() ||
+                  "0"}
+              </span>
+            </p>
 
-        {/* Guest */}
-
-        <div>
-
-          <h3>Guest Information</h3>
-
-          <p>
-            <strong>Name:</strong>{" "}
-            {booking.customer.fullName}
-          </p>
-
-          <p>
-            <strong>Email:</strong>{" "}
-            {booking.customer.email || "N/A"}
-          </p>
-
-          <p>
-            <strong>Phone:</strong>{" "}
-            {booking.customer.phone}
-          </p>
+          </div>
 
         </div>
 
-        {/* Booking */}
+        {/* Guest Information */}
 
-        <div>
+        <div className="booking-details-card">
 
-          <h3>Booking Information</h3>
+          <div className="booking-details-card-header">
+            <h3>Guest Information</h3>
+          </div>
 
-          <p>
-            <strong>Check In:</strong>{" "}
-            {new Date(
-              booking.checkInDate
-            ).toLocaleDateString()}
-          </p>
+          <div className="booking-details-info-list">
 
-          <p>
-            <strong>Check Out:</strong>{" "}
-            {new Date(
-              booking.checkOutDate
-            ).toLocaleDateString()}
-          </p>
+            <p>
+              <strong>Name:</strong>
+              <span>
+                {booking.customer?.fullName || "N/A"}
+              </span>
+            </p>
 
-          <p>
-            <strong>Nights:</strong>{" "}
-            {nights}
-          </p>
+            <p>
+              <strong>Email:</strong>
+              <span>
+                {booking.customer?.email || "N/A"}
+              </span>
+            </p>
 
-          <p>
-            <strong>Booking Source:</strong>{" "}
-            {booking.bookingSource}
-          </p>
+            <p>
+              <strong>Phone:</strong>
+              <span>
+                {booking.customer?.phone || "N/A"}
+              </span>
+            </p>
+
+          </div>
 
         </div>
 
-        {/* Payment */}
+        {/* Booking Information */}
 
-        <div>
+        <div className="booking-details-card">
 
-          <h3>Payment</h3>
+          <div className="booking-details-card-header">
+            <h3>Booking Information</h3>
+          </div>
 
-          <p>
-            <strong>Total Amount:</strong> ₦
-            {booking.totalPrice.toLocaleString()}
-          </p>
+          <div className="booking-details-info-list">
 
-          <p>
-            <strong>Method:</strong>{" "}
-            {booking.paymentMethod}
-          </p>
+            <p>
+              <strong>Check In:</strong>
+              <span>
+                {new Date(
+                  booking.checkInDate
+                ).toLocaleDateString()}
+              </span>
+            </p>
 
-          <p>
-            <strong>Payment Status:</strong>{" "}
-            {booking.paymentStatus}
-          </p>
+            <p>
+              <strong>Check Out:</strong>
+              <span>
+                {new Date(
+                  booking.checkOutDate
+                ).toLocaleDateString()}
+              </span>
+            </p>
 
-          <p>
-            <strong>Booking Status:</strong>{" "}
-            {booking.bookingStatus}
-          </p>
+            <p>
+              <strong>Nights:</strong>
+              <span>{nights}</span>
+            </p>
+
+            <p>
+              <strong>Booking Source:</strong>
+              <span>
+                {booking.bookingSource || "N/A"}
+              </span>
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* Payment Information */}
+
+        <div className="booking-details-card">
+
+          <div className="booking-details-card-header">
+            <h3>Payment</h3>
+          </div>
+
+          <div className="booking-details-info-list">
+
+            <p>
+              <strong>Total Amount:</strong>
+              <span className="booking-details-total">
+                ₦{booking.totalPrice?.toLocaleString() || "0"}
+              </span>
+            </p>
+
+            <p>
+              <strong>Method:</strong>
+              <span>
+                {booking.paymentMethod || "N/A"}
+              </span>
+            </p>
+
+            <p>
+              <strong>Payment Status:</strong>
+              <span
+                className={`booking-details-status booking-details-payment-${booking.paymentStatus?.toLowerCase()}`}
+              >
+                {booking.paymentStatus || "N/A"}
+              </span>
+            </p>
+
+            <p>
+              <strong>Booking Status:</strong>
+              <span
+                className={`booking-details-status booking-details-booking-${booking.bookingStatus?.toLowerCase()}`}
+              >
+                {booking.bookingStatus || "N/A"}
+              </span>
+            </p>
+
+          </div>
 
         </div>
 
       </div>
 
-      <div className="booking-actions">
+      {/* Actions */}
+
+      <div className="booking-details-actions">
 
         {booking.bookingStatus === "CONFIRMED" && (
           <button
+            className="booking-details-checkin-btn"
             onClick={handleCheckIn}
             disabled={actionLoading}
           >
@@ -251,7 +338,7 @@ const BookingDetails = () => {
         {booking.bookingStatus === "CHECKED_IN" && (
           <button
             disabled
-            className="checked-in-btn"
+            className="booking-details-checkedin-btn"
           >
             ✓ Guest Checked In
           </button>
@@ -260,7 +347,7 @@ const BookingDetails = () => {
         {booking.bookingStatus === "EXPIRED" && (
           <button
             disabled
-            className="expired-btn"
+            className="booking-details-expired-btn"
           >
             Guest Stay Expired
           </button>
@@ -269,7 +356,7 @@ const BookingDetails = () => {
         {(booking.bookingStatus === "PENDING" ||
           booking.bookingStatus === "CONFIRMED") && (
           <button
-            className="cancel-btn"
+            className="booking-details-cancel-btn"
             disabled={actionLoading}
             onClick={handleCancelBooking}
           >
@@ -282,7 +369,7 @@ const BookingDetails = () => {
         {booking.bookingStatus === "CANCELLED" && (
           <button
             disabled
-            className="cancelled-btn"
+            className="booking-details-cancelled-btn"
           >
             Booking Cancelled
           </button>

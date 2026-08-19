@@ -145,34 +145,53 @@ export const deleteApartmentImage = async (req, res) => {
   try {
     const { id, publicId } = req.params;
 
-    const apartment =
-      await Apartment.findById(id);
+    const apartment = await Apartment.findById(id);
 
     if (!apartment) {
       return res.status(404).json({
         success: false,
-        message: "Apartment not found"
+        message: "Apartment not found.",
       });
     }
 
-    await cloudinary.uploader.destroy(publicId);
+    const imageIndex = apartment.images.findIndex(
+      (image) => image.publicId === publicId
+    );
 
-    apartment.images =
-      apartment.images.filter(
-        image => image.publicId !== publicId
-      );
+    if (imageIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        message: "Image not found.",
+      });
+    }
+
+    const image = apartment.images[imageIndex];
+
+    // Delete image from Cloudinary
+    await cloudinary.uploader.destroy(
+      image.publicId
+    );
+
+    // Remove image from MongoDB
+    apartment.images.splice(imageIndex, 1);
 
     await apartment.save();
 
     return res.status(200).json({
       success: true,
-      message: "Image deleted"
+      message: "Image deleted successfully.",
+      images: apartment.images,
     });
 
   } catch (error) {
+    console.error(
+      "Delete Apartment Image Error:",
+      error
+    );
+
     return res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
   }
 };
@@ -251,32 +270,51 @@ export const updateApartment = async (req, res) => {
 
 export const deleteApartment = async (req, res) => {
   try {
-    const apartment =
-      await Apartment.findByIdAndUpdate(
-        req.params.id,
-        {
-          isActive: false
-        },
-        { new: true }
-      );po
+    const apartment = await Apartment.findById(req.params.id);
 
     if (!apartment) {
       return res.status(404).json({
         success: false,
-        message:
-          "Apartment not found"
+        message: "Apartment not found",
       });
     }
+
+    // Delete all images from Cloudinary
+    if (apartment.images && apartment.images.length > 0) {
+      for (const image of apartment.images) {
+        if (image.publicId) {
+          try {
+            await cloudinary.uploader.destroy(
+              image.publicId
+            );
+          } catch (cloudinaryError) {
+            console.error(
+              `Failed to delete image ${image.publicId} from Cloudinary:`,
+              cloudinaryError
+            );
+          }
+        }
+      }
+    }
+
+    // Permanently delete apartment from MongoDB
+    await Apartment.findByIdAndDelete(req.params.id);
 
     return res.status(200).json({
       success: true,
       message:
-        "Apartment deactivated successfully"
+        "Apartment and all its images deleted successfully",
     });
+
   } catch (error) {
+    console.error(
+      "Delete Apartment Error:",
+      error
+    );
+
     return res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
   }
 };

@@ -1,252 +1,279 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+/* ========================================
+   VIEW STAFF
+======================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Poppins",sans-serif;
+.view-staff-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f8f9fb;
 }
 
-body{
-    background:#f4f7fc;
+/* ========================================
+   HEADER
+======================================== */
+
+.staff-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-/* ==========================
-   Main Container
-========================== */
-
-.view-staff-container{
-    width:100%;
-    min-height:100vh;
-    padding:35px;
-    background:#f4f7fc;
+.staff-header h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
 }
 
-/* ==========================
-   Header
-========================== */
+/* ========================================
+   SEARCH
+======================================== */
 
-.staff-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:20px;
-    margin-bottom:30px;
+.staff-header input {
+  width: 350px;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.staff-header h2{
-    font-size:32px;
-    font-weight:700;
-    color:#1e293b;
+.staff-header input::placeholder {
+  color: #9ca3af;
 }
 
-.staff-header input{
-    width:360px;
-    max-width:100%;
-    padding:14px 18px;
-    border:1px solid #dbe4ee;
-    border-radius:12px;
-    outline:none;
-    font-size:15px;
-    background:#fff;
-    transition:.3s;
-    box-shadow:0 3px 10px rgba(0,0,0,.05);
+.staff-header input:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
 }
 
-.staff-header input:focus{
-    border-color:#2563eb;
-    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+/* ========================================
+   TABLE CONTAINER
+======================================== */
+
+.view-staff-container .table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.staff-header input::placeholder{
-    color:#94a3b8;
+/* ========================================
+   TABLE
+======================================== */
+
+.view-staff-container table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
 }
 
-/* ==========================
-   Table Container
-========================== */
+/* ========================================
+   TABLE HEADER
+======================================== */
 
-.table-container{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
+.view-staff-container thead {
+  background: #f3f4f6;
 }
 
-/* ==========================
-   Table
-========================== */
-
-table{
-    width:100%;
-    border-collapse:collapse;
+.view-staff-container th {
+  padding: 15px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
 }
 
-thead{
-    background:#2563eb;
+/* ========================================
+   TABLE BODY
+======================================== */
+
+.view-staff-container td {
+  padding: 16px;
+  font-size: 14px;
+  color: #374151;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
 }
 
-thead th{
-    color:#fff;
-    padding:18px;
-    text-align:left;
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:.3px;
+.view-staff-container tbody tr {
+  transition: background 0.2s ease;
 }
 
-tbody tr{
-    transition:.25s;
+.view-staff-container tbody tr:hover {
+  background: #f9fafb;
 }
 
-tbody tr:nth-child(even){
-    background:#f8fafc;
+.view-staff-container tbody tr:last-child td {
+  border-bottom: none;
 }
 
-tbody tr:hover{
-    background:#eef4ff;
+/* ========================================
+   COLUMN STYLING
+======================================== */
+
+/* S/N */
+.view-staff-container th:first-child,
+.view-staff-container td:first-child {
+  width: 60px;
+  text-align: center;
 }
 
-tbody td{
-    padding:18px;
-    border-bottom:1px solid #edf2f7;
-    color:#334155;
-    font-size:15px;
+/* Full Name */
+.view-staff-container td:nth-child(2) {
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
 }
 
-/* ==========================
-   Buttons
-========================== */
+/* Email */
+.view-staff-container td:nth-child(3) {
+  color: #6b7280;
+}
+
+/* Role */
+.view-staff-container td:nth-child(4) {
+  font-weight: 500;
+}
+
+/* Staff Code */
+.view-staff-container td:nth-child(5) {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.view-staff-container td:last-child {
+  white-space: nowrap;
+}
 
 .edit-btn,
-.delete-btn{
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: all 0.2s ease;
 }
 
-.edit-btn{
-    background:#2563eb;
-    color:#fff;
-    margin-right:10px;
+/* View */
+.edit-btn {
+  background: #eef2ff;
+  color: #4f46e5;
 }
 
-.edit-btn:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
+.edit-btn:hover {
+  background: #e0e7ff;
+  transform: translateY(-1px);
 }
 
-.delete-btn{
-    background:#ef4444;
-    color:#fff;
+/* Delete */
+.delete-btn {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
-.delete-btn:hover{
-    background:#dc2626;
-    transform:translateY(-2px);
+.delete-btn:hover {
+  background: #fee2e2;
+  transform: translateY(-1px);
 }
 
-/* ==========================
-   No Data
-========================== */
+/* ========================================
+   NO DATA
+======================================== */
 
-.no-data{
-    text-align:center;
-    padding:40px;
-    color:#64748b;
-    font-size:17px;
-    font-weight:500;
+.view-staff-container .no-data {
+  padding: 50px 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
 }
 
-/* ==========================
-   Scrollbar
-========================== */
+/* ========================================
+   SCROLLBAR
+======================================== */
 
-.table-container::-webkit-scrollbar{
-    height:8px;
+.view-staff-container .table-container::-webkit-scrollbar {
+  height: 7px;
 }
 
-.table-container::-webkit-scrollbar-thumb{
-    background:#2563eb;
-    border-radius:20px;
+.view-staff-container .table-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
 }
 
-/* ==========================
-   Responsive Table
-========================== */
-
-@media(max-width:900px){
-
-    .view-staff-container{
-        padding:20px;
-    }
-
-    .staff-header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .staff-header input{
-        width:100%;
-    }
-
-    .table-container{
-        overflow-x:auto;
-    }
-
-    table{
-        min-width:750px;
-    }
-
+.view-staff-container .table-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
 }
 
-/* ==========================
-   Small Screens
-========================== */
-
-@media(max-width:600px){
-
-    .staff-header h2{
-        font-size:26px;
-    }
-
-    thead th,
-    tbody td{
-        padding:14px;
-        font-size:14px;
-    }
-
-    .edit-btn,
-    .delete-btn{
-        padding:8px 14px;
-        font-size:13px;
-    }
-
+.view-staff-container .table-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }
 
-/* ==========================
-   Card Animation
-========================== */
+/* ========================================
+   RESPONSIVE
+======================================== */
 
-.table-container{
-    animation:fadeIn .5s ease;
+@media (max-width: 768px) {
+  .view-staff-container {
+    padding: 18px;
+  }
+
+  .staff-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .staff-header h2 {
+    font-size: 22px;
+  }
+
+  .staff-header input {
+    width: 100%;
+  }
+
+  .view-staff-container th,
+  .view-staff-container td {
+    padding: 13px 14px;
+  }
 }
 
-@keyframes fadeIn{
+@media (max-width: 480px) {
+  .view-staff-container {
+    padding: 14px;
+  }
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
+  .staff-header h2 {
+    font-size: 20px;
+  }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+  .staff-header input {
+    font-size: 13px;
+    padding: 11px 13px;
+  }
 }

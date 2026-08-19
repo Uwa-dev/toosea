@@ -18,74 +18,130 @@ const generatePassword = () => {
 
 
 export const createUser = async (req, res) => {
-
   try {
-    const creator = req.user; // logged-in user
+    const creator = req.user;
 
     const { fullName, email, role } = req.body;
 
-    // prevent self role escalation
+    // ----------------------------------
+    // BASIC VALIDATION
+    // ----------------------------------
+
+    if (!fullName || !email || !role) {
+      return res.status(400).json({
+        message: "Full name, email and role are required."
+      });
+    }
+
+    // ----------------------------------
+    // ROLE PERMISSIONS
+    // ----------------------------------
+
+    // Nobody can create an OWNER
     if (role === "OWNER") {
       return res.status(403).json({
-        message: "Owner cannot be created manually"
+        message: "Owner cannot be created manually."
       });
     }
 
-    // ROLE RULES
-    if (creator.role === "MANAGER" && role === "MANAGER") {
+    // Receptionist cannot create users
+    if (creator.role === "RECEPTIONIST") {
       return res.status(403).json({
-        message: "Manager cannot create another manager"
+        message: "Receptionist cannot create users."
       });
     }
 
+    // Manager can ONLY create Receptionists
     if (
       creator.role === "MANAGER" &&
-      role === "OWNER"
+      role !== "RECEPTIONIST"
     ) {
       return res.status(403).json({
-        message: "Manager cannot create owner"
+        message: "Managers can only create Receptionists."
       });
     }
 
-    if (
-      creator.role === "RECEPTIONIST"
-    ) {
-      return res.status(403).json({
-        message: "Receptionist cannot create users"
-      });
-    }
+    // ----------------------------------
+    // CHECK EXISTING USER
+    // ----------------------------------
 
-    // check duplicate
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({
+      email: email.toLowerCase()
+    });
+
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({
+        message: "User already exists."
+      });
     }
+
+    // ----------------------------------
+    // GENERATE STAFF DETAILS
+    // ----------------------------------
 
     const staffCode = await generateStaffCode(role);
 
     const plainPassword = generatePassword();
-    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+
+    const hashedPassword = await bcrypt.hash(
+      plainPassword,
+      10
+    );
+
+    // ----------------------------------
+    // APPROVAL
+    // ----------------------------------
+
+    const approvalStatus =
+      creator.role === "MANAGER"
+        ? "PENDING"
+        : "APPROVED";
+
+    // ----------------------------------
+    // CREATE USER
+    // ----------------------------------
 
     const user = await User.create({
-        fullName,
-        email,
-        password: hashedPassword,
-        role,
-        staffCode
+      fullName,
+      email: email.toLowerCase(),
+      password: hashedPassword,
+      role,
+      staffCode,
+
+      // Newly created staff must change password
+      mustChangePassword: true,
+
+      // Manager-created receptionist needs approval
+      approvalStatus,
+
+      // Record who created the staff
+      createdBy: creator._id
     });
 
-    res.status(201).json({
-        message: "User created successfully",
-        user: {
-            fullName: user.fullName,
-            email: user.email,
-            role: user.role,
-            staffCode: user.staffCode,
-            password: plainPassword
-        }
+    // ----------------------------------
+    // RESPONSE
+    // ----------------------------------
+
+    return res.status(201).json({
+      message:
+        approvalStatus === "PENDING"
+          ? "Receptionist created and sent for admin approval."
+          : "User created successfully.",
+
+      user: {
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+        staffCode: user.staffCode,
+        password: plainPassword,
+        approvalStatus: user.approvalStatus
+      }
     });
+
   } catch (error) {
-    res.status(500).json({
+    console.error("Create user error:", error);
+
+    return res.status(500).json({
       message: error.message
     });
   }
@@ -103,6 +159,21 @@ export const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // CHECK APPROVAL
+    if (user.approvalStatus === "PENDING") {
+      return res.status(403).json({
+        message:
+          "Your account is awaiting administrator approval."
+      });
+    }
+
+    if (user.approvalStatus === "REJECTED") {
+      return res.status(403).json({
+        message:
+          "Your account has been rejected by the administrator."
+      });
     }
 
     const token = jwt.sign(
@@ -123,13 +194,94 @@ export const loginUser = async (req, res) => {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
-        staffCode: user.staffCode
+        staffCode: user.staffCode,
+        mustChangePassword: user.mustChangePassword,
       }
     });
   } catch (error) {
     res.status(500).json({
       message: "Login error",
       error: error.message
+    });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const {
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    } = req.body;
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      return res.status(400).json({
+        message: "All password fields are required.",
+      });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({
+        message: "New passwords do not match.",
+      });
+    }
+
+    if (newPassword.length < 8) {
+      return res.status(400).json({
+        message: "Password must be at least 8 characters.",
+      });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found.",
+      });
+    }
+
+    // Verify current/system-generated password
+    const isMatch = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Current password is incorrect.",
+      });
+    }
+
+    // Prevent using the same password
+    const samePassword = await bcrypt.compare(
+      newPassword,
+      user.password
+    );
+
+    if (samePassword) {
+      return res.status(400).json({
+        message: "New password must be different from your current password.",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(
+      newPassword,
+      10
+    );
+
+    user.password = hashedPassword;
+    user.mustChangePassword = false;
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Password changed successfully.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
     });
   }
 };
@@ -213,6 +365,72 @@ export const getSingleUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
+      message: error.message
+    });
+  }
+};
+
+export const approveUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found."
+      });
+    }
+
+    if (user.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        message: "This user does not require approval."
+      });
+    }
+
+    user.approvalStatus = "APPROVED";
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Staff account approved successfully."
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+};
+
+export const rejectUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found."
+      });
+    }
+
+    if (user.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        message: "This user does not require approval."
+      });
+    }
+
+    user.approvalStatus = "REJECTED";
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Staff account rejected."
+    });
+
+  } catch (error) {
+    return res.status(500).json({
       message: error.message
     });
   }

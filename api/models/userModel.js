@@ -32,6 +32,23 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["OWNER", "MANAGER", "RECEPTIONIST"],
       default: "RECEPTIONIST"
+    }, 
+
+    mustChangePassword: {
+      type: Boolean,
+      default: false,
+    },
+
+    approvalStatus: {
+      type: String,
+      enum: ["APPROVED", "PENDING", "REJECTED"],
+      default: "APPROVED"
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
     }
   },
   {

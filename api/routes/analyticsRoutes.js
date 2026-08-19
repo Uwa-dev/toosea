@@ -8,6 +8,7 @@ import {
   getManagerDashboard,
   getReceptionistDashboard
 } from "../controllers/analyticsController.js";
+import {protect, authorizeRoles} from "../middleware/authMiddleware.js";
 
 const analyticsRouter = express.Router();
 
@@ -16,7 +17,7 @@ analyticsRouter.get("/today-revenue", getTodayRevenue);
 analyticsRouter.get("/occupancy", getOccupancyRate);
 analyticsRouter.get("/booking-source", getBookingSourceStats);
 analyticsRouter.get("/dashboard", getDashboardStats);
-analyticsRouter.get("/receptionist", getReceptionistDashboard);
+analyticsRouter.get("/receptionist", protect, authorizeRoles("RECEPTIONIST"), getReceptionistDashboard);
 analyticsRouter.get("/manager", getManagerDashboard);
 
 export default analyticsRouter;

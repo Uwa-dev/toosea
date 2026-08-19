@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "../../../services/dashboardApi";
 import "./dashboard.css";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -130,16 +131,30 @@ const Dashboard = () => {
           </ul>
         </div>
 
-        <div className="recent-card">
-          <h2>Quick Actions</h2>
+          <div className="recent-card">
+            <h2>Quick Actions</h2>
 
-          <button>Add New Apartment</button>
-          <button>Create Staff</button>
-          <button>View Bookings</button>
-          <button>Generate Report</button>
+            <div className="quick-actions">
+              <Link to="/admin/apartments">
+                Add New Apartment
+              </Link>
+
+              <Link to="/admin/createusers">
+                Create Staff
+              </Link>
+
+              <Link to="/admin/monthly">
+                View Bookings
+              </Link>
+
+              <Link to="/admin/yearly">
+                Generate Report
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

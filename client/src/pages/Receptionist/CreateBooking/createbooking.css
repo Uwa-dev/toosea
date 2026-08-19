@@ -1,0 +1,200 @@
+.create-booking-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f8f9fb;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.create-booking-page h2 {
+  margin: 0 0 24px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* =========================
+   REBOOK BANNER
+========================= */
+
+.rebook-banner {
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.create-booking-page > label,
+.create-booking-page > select,
+.create-booking-page > input {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+}
+
+.create-booking-page > label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.create-booking-page > select,
+.create-booking-page > input {
+  height: 46px;
+  margin-bottom: 18px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.create-booking-page > select:focus,
+.create-booking-page > input:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+/* =========================
+   BOOKING SUMMARY
+========================= */
+
+.booking-summary {
+  width: 100%;
+  max-width: 700px;
+  margin: 8px 0 24px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.booking-summary h3 {
+  margin: 0 0 18px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.booking-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.booking-summary hr {
+  margin: 18px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+.booking-summary h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+.create-booking-page > button {
+  width: 100%;
+  max-width: 700px;
+  height: 46px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.create-booking-page > button:hover {
+  background: #000000;
+  transform: translateY(-1px);
+}
+
+.create-booking-page > button:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .create-booking-page {
+    padding: 20px;
+  }
+
+  .create-booking-page h2 {
+    font-size: 23px;
+  }
+
+  .create-booking-page > label,
+  .create-booking-page > select,
+  .create-booking-page > input,
+  .booking-summary,
+  .create-booking-page > button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-booking-page {
+    padding: 16px;
+  }
+
+  .create-booking-page h2 {
+    font-size: 21px;
+    margin-bottom: 18px;
+  }
+
+  .create-booking-page > select,
+  .create-booking-page > input {
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .booking-summary {
+    padding: 16px;
+  }
+
+  .booking-summary h2 {
+    font-size: 20px;
+  }
+
+  .rebook-banner {
+    font-size: 13px;
+  }
+}

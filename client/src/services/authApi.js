@@ -50,3 +50,18 @@ export const singleStaff = async (id) => {
   const response = await authApi.get(`/staff/${id}`);
   return response.data
 }
+
+export const deleteUser = async (userId) => {
+  const response = await authApi.delete(`/${userId}`);
+
+  return response.data;
+};
+
+export const changePassword = async (passwordData) => {
+  const response = await authApi.put(
+    "/change-password",
+    passwordData
+  );
+
+  return response.data;
+};

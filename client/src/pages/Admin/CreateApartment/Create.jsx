@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "./apartmentz.css";
-import "./imageApartments.css";
 import Load from "../../../components/reuse/Load.jsx";
 import {
   createApartment,
@@ -31,7 +30,6 @@ const Create = () => {
     "Smart TV",
   ];
 
-  // Prevent negative values from being entered
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -48,7 +46,6 @@ const Create = () => {
     }));
   };
 
-  // Prevent typing -, +, e and E
   const preventNegativeInput = (e) => {
     if (["-", "+", "e", "E"].includes(e.key)) {
       e.preventDefault();
@@ -141,155 +138,183 @@ const Create = () => {
     <>
       {loading && <Load />}
 
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          {step === 1 && (
-            <>
-              <div className="form-header">
-                <h1>Create Apartment</h1>
-              </div>
+      <div className="create-apartment-page">
+        <div className="create-apartment-card">
+          <form onSubmit={handleSubmit}>
 
-              <div className="form-group">
-                <label>Name</label>
+            {step === 1 && (
+              <div className="apartment-step">
+                <div className="apartment-form-header">
+                  <h1>Create Apartment</h1>
+                  <p>Enter the details of the new apartment.</p>
+                </div>
 
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Apartment Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="apartment-form-group">
+                  <label>Name</label>
 
-              <div className="form-group">
-                <label>Description</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Apartment Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                </div>
 
-                <textarea
-                  rows="5"
-                  name="description"
-                  placeholder="Apartment Description"
-                  value={formData.description}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="apartment-form-group">
+                  <label>Description</label>
 
-              <div className="form-group">
-                <label>Apartment Type</label>
+                  <textarea
+                    rows="5"
+                    name="description"
+                    placeholder="Apartment Description"
+                    value={formData.description}
+                    onChange={handleChange}
+                  />
+                </div>
 
-                <select
-                  name="apartmentType"
-                  value={formData.apartmentType}
-                  onChange={handleChange}
+                <div className="apartment-form-group">
+                  <label>Apartment Type</label>
+
+                  <select
+                    name="apartmentType"
+                    value={formData.apartmentType}
+                    onChange={handleChange}
+                  >
+                    <option value="STANDARD">Standard</option>
+                    <option value="DELUXE">Deluxe</option>
+                    <option value="EXECUTIVE">Executive</option>
+                  </select>
+                </div>
+
+                <div className="apartment-form-row">
+                  <div className="apartment-form-group">
+                    <label>Price Per Night (₦)</label>
+
+                    <input
+                      type="number"
+                      name="pricePerNight"
+                      placeholder="50000"
+                      value={formData.pricePerNight}
+                      onChange={handleChange}
+                      onKeyDown={preventNegativeInput}
+                      min="1"
+                    />
+                  </div>
+
+                  <div className="apartment-form-group">
+                    <label>Capacity</label>
+
+                    <input
+                      type="number"
+                      name="capacity"
+                      placeholder="4 Guests"
+                      value={formData.capacity}
+                      onChange={handleChange}
+                      onKeyDown={preventNegativeInput}
+                      min="1"
+                    />
+                  </div>
+                </div>
+
+                <div className="apartment-form-group">
+                  <label>Amenities</label>
+
+                  <div className="apartment-checkboxes">
+                    {amenitiesList.map((amenity) => (
+                      <label
+                        className="amenity-option"
+                        key={amenity}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.amenities.includes(
+                            amenity
+                          )}
+                          onChange={() =>
+                            handleAmenityChange(amenity)
+                          }
+                        />
+
+                        <span>{amenity}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  className="apartment-next-btn"
+                  type="button"
+                  onClick={handleNext}
                 >
-                  <option value="STANDARD">Standard</option>
-                  <option value="DELUXE">Deluxe</option>
-                  <option value="EXECUTIVE">Executive</option>
-                </select>
+                  Next
+                </button>
               </div>
+            )}
 
-              <div className="form-group">
-                <label>Price Per Night (₦)</label>
+            {step === 2 && (
+              <div className="apartment-step">
+                <div className="apartment-form-header">
+                  <h1>Apartment Images</h1>
 
-                <input
-                  type="number"
-                  name="pricePerNight"
-                  placeholder="50000"
-                  value={formData.pricePerNight}
-                  onChange={handleChange}
-                  onKeyDown={preventNegativeInput}
-                  min="1"
-                />
-              </div>
+                  <p>
+                    Upload at least one image of the apartment.
+                  </p>
+                </div>
 
-              <div className="form-group">
-                <label>Capacity</label>
+                <div className="apartment-form-group">
+                  <label>Upload Images</label>
 
-                <input
-                  type="number"
-                  name="capacity"
-                  placeholder="4 Guests"
-                  value={formData.capacity}
-                  onChange={handleChange}
-                  onKeyDown={preventNegativeInput}
-                  min="1"
-                />
-              </div>
+                  <div className="apartment-file-wrapper">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleImageChange}
+                    />
+                  </div>
+                </div>
 
-              <div className="form-group">
-                <label>Amenities</label>
+                {formData.images.length > 0 && (
+                  <div className="selected-images">
+                    <span className="selected-images-count">
+                      {formData.images.length}
+                    </span>
 
-                <div className="checkboxes">
-                  {amenitiesList.map((amenity) => (
-                    <label key={amenity}>
-                      <input
-                        type="checkbox"
-                        checked={formData.amenities.includes(
-                          amenity
-                        )}
-                        onChange={() =>
-                          handleAmenityChange(amenity)
-                        }
-                      />
-                      {amenity}
-                    </label>
-                  ))}
+                    <span>
+                      image
+                      {formData.images.length > 1
+                        ? "s"
+                        : ""}{" "}
+                      selected
+                    </span>
+                  </div>
+                )}
+
+                <div className="apartment-buttons">
+                  <button
+                    className="apartment-prev-btn"
+                    type="button"
+                    onClick={() => setStep(1)}
+                  >
+                    Previous
+                  </button>
+
+                  <button
+                    className="apartment-submit-btn"
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading
+                      ? "Creating..."
+                      : "Create Apartment"}
+                  </button>
                 </div>
               </div>
+            )}
 
-              <button
-                type="button"
-                onClick={handleNext}
-              >
-                Next
-              </button>
-            </>
-          )}
-
-          {step === 2 && (
-            <>
-              <div className="form-header">
-                <h1>Apartment Images</h1>
-
-                <p>
-                  Upload at least one apartment image.
-                </p>
-              </div>
-
-              <div className="form-group">
-                <label>Upload Images</label>
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageChange}
-                />
-              </div>
-
-              {formData.images.length > 0 && (
-                <p>
-                  {formData.images.length} image(s) selected.
-                </p>
-              )}
-
-              <div className="buttons">
-                <button
-                  type="button"
-                  onClick={() => setStep(1)}
-                >
-                  Previous
-                </button>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                >
-                  Create Apartment
-                </button>
-              </div>
-            </>
-          )}
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

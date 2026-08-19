@@ -35,7 +35,11 @@ const CreateBooking = lazy(() => import("../pages/Receptionist/CreateBooking/Cre
 const TodaysBookings = lazy(() => import("../pages/Receptionist/TodaysBookings/TodaysBookings.jsx"));
 const BookingDetails = lazy(() => import("../pages/Receptionist/BookingDetails/BookingDetails.jsx"));
 const CheckedIn = lazy(() => import("../pages/Receptionist/CheckedIn/CheckedIn.jsx"));
-const AllApartments = lazy(() => import("../pages/Receptionist/AllApartments/AllApartments.jsx"))
+const AllApartments = lazy(() => import("../pages/Receptionist/AllApartments/AllApartments.jsx"));
+const MonthlyBookings = lazy(() => import("../pages/Admin/MonthBookings/MonthBookings.jsx"));
+const YearlyBookings = lazy(() => import("../pages/Admin/YearlyBookings/YearlyBookings.jsx"));
+const ApartmentImages = lazy(() => import("../pages/Admin/UploadApartmentImage/ApartmentImages.jsx"));
+const ChangePassword = lazy(() => import("../pages/Public/ChangePassword/ChangePassword.jsx"))
 
 const routesConfig = [
   {
@@ -104,6 +108,19 @@ const routesConfig = [
     path: "/login",
     element: <Login />,
   }, {
+    path: "/change-password",
+    element: (
+      <ProtectedRoute
+        allowedRoles={[
+          "OWNER",
+          "MANAGER",
+          "RECEPTIONIST",
+        ]}
+      >
+        <ChangePassword />
+      </ProtectedRoute>
+    ),
+  },{
     path:"/admin",
     element: (
       <ProtectedRoute allowedRoles={["OWNER"]}>
@@ -132,6 +149,15 @@ const routesConfig = [
       }, {
         path: "apartment/:id",
         element: <SingleApartment />
+      }, {
+        path: "monthly",
+        element: <MonthlyBookings />
+      }, {
+        path: "yearly",
+        element: <YearlyBookings />
+      }, {
+        path: "apartment/:id/images",
+        element: <ApartmentImages />
       }
     ]
   }, {
@@ -145,7 +171,10 @@ const routesConfig = [
       {
         index: true,
         element: <ManagerDashboard />
-      }, 
+      }, {
+        path: "createusers",
+        element: <CreateUsers />
+      },
     ]
   }
 ]

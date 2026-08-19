@@ -63,3 +63,24 @@ export const checkOutGuest = async (id) => {
   const response = await bookingApi.patch(`/${id}/checkout`);
   return response.data;
 };
+
+export const getMonthlyBookings = async (
+  year,
+  month
+) => {
+  const response = await bookingApi.get(
+    `/monthly?year=${year}&month=${month}`
+  );
+
+  return response.data;
+};
+
+export const getYearlyBookings = async (
+  year
+) => {
+  const response = await bookingApi.get(
+    `/yearly?year=${year}`
+  );
+
+  return response.data;
+};
