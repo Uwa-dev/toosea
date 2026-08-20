@@ -370,6 +370,30 @@ export const getSingleUser = async (req, res) => {
   }
 };
 
+export const getPendingUsers = async (req, res) => {
+  try {
+    const users = await User.find({
+      approvalStatus: "PENDING"
+    })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      users
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch pending users."
+    });
+  }
+};
+
 export const approveUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -411,27 +435,32 @@ export const rejectUser = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({
+        success: false,
         message: "User not found."
       });
     }
 
     if (user.approvalStatus !== "PENDING") {
       return res.status(400).json({
-        message: "This user does not require approval."
+        success: false,
+        message: "Only pending users can be rejected."
       });
     }
 
-    user.approvalStatus = "REJECTED";
-
-    await user.save();
+    // Reject and permanently delete the account
+    await User.findByIdAndDelete(id);
 
     return res.status(200).json({
-      message: "Staff account rejected."
+      success: true,
+      message: "Staff account rejected and deleted successfully."
     });
 
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
-      message: error.message
+      success: false,
+      message: "Failed to reject staff account."
     });
   }
 };
@@ -484,5 +513,36 @@ export const deleteUser = async (req, res) => {
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getApprovedUsers = async (req, res) => {
+  try {
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can view approved users."
+      });
+    }
+
+    const users = await User.find({
+      approvalStatus: "APPROVED"
+    })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      users
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch approved users."
+    });
   }
 };

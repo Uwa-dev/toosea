@@ -14,7 +14,8 @@ const ReceptDashboard = () => {
     todayArrivals: 0,
     todayDepartures: 0,
     occupiedApartments: 0,
-    availableApartments: 0
+    availableApartments: 0,
+    upcomingCheckouts: []
   });
 
   const [loading, setLoading] = useState(true);
@@ -203,6 +204,91 @@ const ReceptDashboard = () => {
           </div>
 
         </div>
+
+      </div>
+
+      {/* Upcoming Check-outs */}
+
+      <div className="reception-dashboard-section">
+
+        <div className="reception-dashboard-section-header">
+          <div>
+            <h2>Upcoming Check-outs</h2>
+
+            <p>
+              Guests scheduled to check out soon.
+            </p>
+          </div>
+
+          <button
+            className="reception-dashboard-view-all"
+            onClick={() =>
+              navigate("/receptionist/checkedinguests")
+            }
+          >
+            View All
+          </button>
+        </div>
+
+        {stats.upcomingCheckouts?.length > 0 ? (
+
+          <div className="reception-dashboard-checkout-list">
+
+            {stats.upcomingCheckouts.map((booking) => (
+
+              <div
+                className="reception-dashboard-checkout-card"
+                key={booking._id}
+              >
+
+                <div className="reception-dashboard-checkout-icon">
+                  🛫
+                </div>
+
+                <div className="reception-dashboard-checkout-info">
+
+                  <strong>
+                    {booking.customer?.fullName || "Guest"}
+                  </strong>
+
+                  <span>
+                    {booking.apartment?.name ||
+                      booking.apartment?.apartmentCode ||
+                      "Apartment"}
+                  </span>
+
+                </div>
+
+                <div className="reception-dashboard-checkout-date">
+
+                  <span>Check-out</span>
+
+                  <strong>
+                    {new Date(
+                      booking.checkOutDate
+                    ).toLocaleDateString("en-NG", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric"
+                    })}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div className="reception-dashboard-empty">
+            <span>✓</span>
+            <p>No upcoming check-outs.</p>
+          </div>
+
+        )}
 
       </div>
 

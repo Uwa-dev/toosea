@@ -18,3 +18,9 @@ export const getDashboardStats = async () => {
   const response = await dashboardApi.get("/adminDashboard");
   return response.data;
 };
+
+export const getOwnerDashboardStats = async () => {
+  const response = await dashboardApi.get("/owner");
+
+  return response.data;
+};

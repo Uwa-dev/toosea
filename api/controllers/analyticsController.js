@@ -233,11 +233,18 @@ export const getReceptionistDashboard = async (req, res) => {
   try {
     const userId = req.user.id;
 
+    // TODAY
     const start = new Date();
     start.setHours(0, 0, 0, 0);
 
     const end = new Date();
     end.setHours(23, 59, 59, 999);
+
+    // UPCOMING CHECK-OUTS
+    // Today + the next 3 days
+    const upcomingDate = new Date(start);
+    upcomingDate.setDate(start.getDate() + 3);
+    upcomingDate.setHours(23, 59, 59, 999);
 
     const [
       walkInBookingsToday,
@@ -247,7 +254,8 @@ export const getReceptionistDashboard = async (req, res) => {
       todayArrivals,
       todayDepartures,
       occupiedApartments,
-      availableApartments
+      availableApartments,
+      upcomingCheckouts
     ] = await Promise.all([
 
       // WALK-IN BOOKINGS CREATED BY THIS RECEPTIONIST TODAY
@@ -317,7 +325,21 @@ export const getReceptionistDashboard = async (req, res) => {
       Apartment.countDocuments({
         isActive: true,
         status: "AVAILABLE"
+      }),
+
+      // UPCOMING CHECK-OUTS
+      Booking.find({
+        checkOutDate: {
+          $gte: start,
+          $lte: upcomingDate
+        },
+        bookingStatus: {
+          $in: ["CONFIRMED", "CHECKED_IN"]
+        }
       })
+        .populate("apartment", "name apartmentCode")
+        .sort({ checkOutDate: 1 })
+        .limit(10)
 
     ]);
 
@@ -331,7 +353,8 @@ export const getReceptionistDashboard = async (req, res) => {
         todayArrivals,
         todayDepartures,
         occupiedApartments,
-        availableApartments
+        availableApartments,
+        upcomingCheckouts
       }
     });
 

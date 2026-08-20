@@ -3,10 +3,13 @@ import cloudinary from "../config/cloudinary.js";
 
 export const createApartment = async (req, res) => {
   try {
-    if (req.user.role !== "OWNER") {
+    const { role, _id: userId } = req.user;
+
+    // Only OWNER and MANAGER can create apartments
+    if (!["OWNER", "MANAGER"].includes(role)) {
       return res.status(403).json({
         success: false,
-        message: "Only the owner can create apartments."
+        message: "You are not authorized to create apartments."
       });
     }
 
@@ -19,6 +22,7 @@ export const createApartment = async (req, res) => {
       amenities
     } = req.body;
 
+    // Validate required fields
     if (
       !name ||
       !description ||
@@ -32,6 +36,7 @@ export const createApartment = async (req, res) => {
       });
     }
 
+    // Check if apartment already exists
     const apartmentExists = await Apartment.findOne({
       name: name.trim()
     });
@@ -43,7 +48,7 @@ export const createApartment = async (req, res) => {
       });
     }
 
-    // Generate Apartment Code
+    // Generate apartment code
     const lastApartment = await Apartment.findOne()
       .sort({ createdAt: -1 });
 
@@ -57,19 +62,39 @@ export const createApartment = async (req, res) => {
       apartmentCode = `APT${String(number + 1).padStart(3, "0")}`;
     }
 
+    // Owner = automatically approved
+    // Manager = requires owner approval
+    const isOwner = req.user.role === "OWNER";
+
     const apartment = await Apartment.create({
       apartmentCode,
       name: name.trim(),
       description: description.trim(),
       apartmentType,
-      pricePerNight,
-      capacity,
-      amenities: amenities || []
+      pricePerNight: Number(pricePerNight),
+      capacity: Number(capacity),
+      amenities: amenities || [],
+
+      createdBy: req.user._id,
+
+      approvalStatus: isOwner
+        ? "APPROVED"
+        : "PENDING",
+
+      isActive: isOwner,
+
+      status: isOwner
+        ? "AVAILABLE"
+        : "INACTIVE"
     });
 
     return res.status(201).json({
       success: true,
-      message: "Apartment created successfully.",
+
+      message: isOwner
+        ? "Apartment created successfully."
+        : "Apartment submitted successfully and is awaiting owner approval.",
+
       apartment
     });
 
@@ -413,6 +438,165 @@ export const getAllApartmentsWithStatus = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: error.message
+    });
+  }
+};
+
+export const approveApartment = async (req, res) => {
+  try {
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can approve apartments."
+      });
+    }
+
+    const { id } = req.params;
+
+    const apartment = await Apartment.findById(id);
+
+    if (!apartment) {
+      return res.status(404).json({
+        success: false,
+        message: "Apartment not found."
+      });
+    }
+
+    if (apartment.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        success: false,
+        message: "Only pending apartments can be approved."
+      });
+    }
+
+    apartment.approvalStatus = "APPROVED";
+    apartment.isActive = true;
+    apartment.status = "AVAILABLE";
+
+    await apartment.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Apartment approved successfully.",
+      apartment
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to approve apartment."
+    });
+  }
+};
+
+export const rejectApartment = async (req, res) => {
+  try {
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can reject apartments."
+      });
+    }
+
+    const { id } = req.params;
+
+    const apartment = await Apartment.findById(id);
+
+    if (!apartment) {
+      return res.status(404).json({
+        success: false,
+        message: "Apartment not found."
+      });
+    }
+
+    if (apartment.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        success: false,
+        message: "Only pending apartments can be rejected."
+      });
+    }
+
+    // Reject and permanently remove the apartment
+    await Apartment.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Apartment rejected and deleted successfully."
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to reject apartment."
+    });
+  }
+};
+
+export const getPendingApartments = async (req, res) => {
+  try {
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can view pending apartments."
+      });
+    }
+
+    const apartments = await Apartment.find({
+      approvalStatus: "PENDING"
+    })
+      .populate(
+        "createdBy",
+        "fullName email role"
+      )
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: apartments.length,
+      apartments
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch pending apartments."
+    });
+  }
+};
+
+export const getApprovedApartments = async (req, res) => {
+  try {
+    if (req.user.role !== "OWNER") {
+      return res.status(403).json({
+        success: false,
+        message: "Only the owner can view approved apartments."
+      });
+    }
+
+    const apartments = await Apartment.find({
+      approvalStatus: "APPROVED"
+    })
+      .populate("createdBy", "fullName email role")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: apartments.length,
+      apartments
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch approved apartments."
     });
   }
 };

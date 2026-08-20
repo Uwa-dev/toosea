@@ -92,6 +92,18 @@ const apartmentSchema = new mongoose.Schema(
       default: "AVAILABLE"
     },
 
+    approvalStatus: {
+      type: String,
+      enum: ["APPROVED", "PENDING", "REJECTED"],
+      default: "APPROVED"
+    },
+
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
+    },
+
     isActive: {
       type: Boolean,
       default: true

@@ -22,9 +22,9 @@ const BookingRouter = express.Router();
 BookingRouter.post("/online", createOnlineBooking);
 BookingRouter.post("/walkin", protect, authorizeRoles("RECEPTIONIST"), createWalkInBooking);
 BookingRouter.get("/today", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getTodayBookings);
-BookingRouter.get("/", protect, authorizeRoles("OWNER", "MANAGER"), getAllBookings);
+BookingRouter.get("/", protect, authorizeRoles("OWNER"), getAllBookings);
 BookingRouter.get("/checkedin", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getCheckedInGuests);
-BookingRouter.get("/monthly", protect, authorizeRoles("OWNER"), getMonthlyBookings);
+BookingRouter.get("/monthly", protect, authorizeRoles("OWNER", "MANAGER"), getMonthlyBookings);
 BookingRouter.get("/yearly", protect, authorizeRoles("OWNER"), getYearlyBookings);
 BookingRouter.get("/:id", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getBookingById)
 BookingRouter.patch("/:id/checkin", protect, authorizeRoles("RECEPTIONIST"), checkInGuest);
@@ -33,20 +33,3 @@ BookingRouter.patch("/:id/cancel", protect, authorizeRoles("OWNER", "MANAGER"), 
 BookingRouter.patch("/:id/transfer",  protect, authorizeRoles("RECEPTIONIST"), transferAndExtendStay);
 
 export default BookingRouter
-
-
-
-// router.post(
-//   "/:id/images",
-//   protect,
-//   authorizeRoles("OWNER"),
-//   upload.array("images", 15),
-//   uploadApartmentImages
-// );
-
-// router.delete(
-//   "/:id/images/:publicId",
-//   protect,
-//   authorizeRoles("OWNER"),
-//   deleteApartmentImage
-// );

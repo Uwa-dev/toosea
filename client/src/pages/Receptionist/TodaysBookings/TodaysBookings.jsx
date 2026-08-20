@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { getTodayBookings } from "../../../services/bookingApi";
 import "./todays.css";
 
 const TodaysBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user.user);
+
+  const isManager = user?.role === "MANAGER";
 
   useEffect(() => {
     fetchBookings();
@@ -21,6 +27,7 @@ const TodaysBookings = () => {
       setBookings(data);
     } catch (err) {
       console.log(err);
+
       alert(
         err.response?.data?.message ||
           "Unable to load bookings."
@@ -28,6 +35,15 @@ const TodaysBookings = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRowClick = (bookingId) => {
+    // Managers cannot open booking details
+    if (isManager) {
+      return;
+    }
+
+    navigate(`/receptionist/bookings/${bookingId}`);
   };
 
   return (
@@ -66,11 +82,17 @@ const TodaysBookings = () => {
               );
 
               return (
-                <tr key={booking._id} onClick={() =>
-                    navigate(
-                    `/receptionist/bookings/${booking._id}`
-                    )
-                }>
+                <tr
+                  key={booking._id}
+                  onClick={() =>
+                    handleRowClick(booking._id)
+                  }
+                  className={
+                    isManager
+                      ? "booking-row manager-row"
+                      : "booking-row clickable-row"
+                  }
+                >
                   <td>{index + 1}</td>
 
                   <td>
@@ -95,7 +117,7 @@ const TodaysBookings = () => {
 
                   <td>
                     ₦
-                    {booking.totalPrice.toLocaleString()}
+                    {booking.totalPrice?.toLocaleString()}
                   </td>
 
                   <td>

@@ -235,6 +235,261 @@
   font-weight: 700;
 }
 
+/* =========================================
+   UPCOMING CHECK-OUTS
+========================================= */
+
+.reception-dashboard-view-all {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #374151;
+  padding: 9px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reception-dashboard-view-all:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+
+/* Checkout list */
+
+.reception-dashboard-checkout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* Individual checkout card */
+
+.reception-dashboard-checkout-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.reception-dashboard-checkout-card:hover {
+  transform: translateY(-1px);
+  border-color: #d1d5db;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Icon */
+
+.reception-dashboard-checkout-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f3f4f6;
+  border-radius: 9px;
+
+  font-size: 20px;
+
+  flex-shrink: 0;
+}
+
+
+/* Guest information */
+
+.reception-dashboard-checkout-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  min-width: 0;
+}
+
+.reception-dashboard-checkout-info strong {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reception-dashboard-checkout-info span {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* Checkout date */
+
+.reception-dashboard-checkout-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+
+  min-width: 120px;
+}
+
+.reception-dashboard-checkout-date span {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.reception-dashboard-checkout-date strong {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* Empty state */
+
+.reception-dashboard-empty {
+  min-height: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  color: #6b7280;
+}
+
+.reception-dashboard-empty span {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  background: #f3f4f6;
+  border-radius: 50%;
+
+  color: #4b5563;
+  font-size: 18px;
+}
+
+.reception-dashboard-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+
+  .reception-dashboard-checkout-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .reception-dashboard-checkout-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .reception-dashboard-checkout-info strong {
+    font-size: 13px;
+  }
+
+  .reception-dashboard-checkout-info span {
+    font-size: 12px;
+  }
+
+  .reception-dashboard-checkout-date {
+    min-width: 100px;
+  }
+
+  .reception-dashboard-checkout-date strong {
+    font-size: 12px;
+  }
+
+  .reception-dashboard-view-all {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .reception-dashboard-section-header {
+    gap: 10px;
+  }
+
+  .reception-dashboard-checkout-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .reception-dashboard-checkout-icon {
+    grid-row: span 2;
+  }
+
+  .reception-dashboard-checkout-info {
+    min-width: 0;
+  }
+
+  .reception-dashboard-checkout-date {
+    grid-column: 2;
+    align-items: flex-start;
+    min-width: auto;
+  }
+
+  .reception-dashboard-checkout-date {
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .reception-dashboard-checkout-date span {
+    font-size: 11px;
+  }
+
+  .reception-dashboard-checkout-date strong {
+    font-size: 12px;
+  }
+
+  .reception-dashboard-view-all {
+    padding: 7px 10px;
+  }
+}
+
 /* ============================= */
 /* QUICK ACTIONS */
 /* ============================= */

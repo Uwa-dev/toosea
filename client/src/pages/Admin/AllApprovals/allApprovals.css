@@ -1,0 +1,274 @@
+.all-approvals {
+  padding: 30px;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.all-approvals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.all-approvals-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #111827;
+}
+
+.all-approvals-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.refresh-btn {
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* SUMMARY */
+
+.approval-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.summary-card span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.summary-card strong {
+  font-size: 28px;
+  color: #111827;
+}
+
+/* CONTROLS */
+
+.approval-controls {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.approval-tabs {
+  display: flex;
+  gap: 5px;
+}
+
+.approval-tabs button {
+  border: none;
+  background: transparent;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #6b7280;
+  font-weight: 600;
+  border-radius: 7px;
+}
+
+.approval-tabs button:hover {
+  background: #f3f4f6;
+}
+
+.approval-tabs .active-tab {
+  background: #111827;
+  color: white;
+}
+
+.approval-controls select {
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: white;
+  cursor: pointer;
+}
+
+/* TABLE */
+
+.approval-table-section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.section-title {
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-title h2 {
+  margin: 0 0 5px;
+  color: #111827;
+  font-size: 19px;
+}
+
+.section-title p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.section-title > span {
+  background: #f3f4f6;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.approval-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.approval-table th {
+  text-align: left;
+  padding: 14px 24px;
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.approval-table td {
+  padding: 17px 24px;
+  border-top: 1px solid #f0f0f0;
+  color: #374151;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* BADGES */
+
+.role-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-badge.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* EMPTY */
+
+.empty-approvals {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-approvals h3 {
+  margin: 0 0 8px;
+  color: #374151;
+}
+
+.empty-approvals p {
+  margin: 0;
+  color: #9ca3af;
+}
+
+/* LOADING */
+
+.approval-loading {
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6b7280;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .approval-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .approval-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 600px) {
+  .all-approvals {
+    padding: 20px 15px;
+  }
+
+  .all-approvals-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .refresh-btn {
+    width: 100%;
+  }
+
+  .approval-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .approval-tabs {
+    flex-direction: column;
+  }
+
+  .approval-tabs button {
+    width: 100%;
+  }
+}
