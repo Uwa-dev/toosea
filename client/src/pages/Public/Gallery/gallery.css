@@ -1,94 +1,344 @@
+
+/* =========================================================
+   ToOSeA GALLERY
+   Green & White Premium Theme
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+/* .her {
+  width: 100%;
+  min-height: 55vh;
+
+  background: #0b6b3a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+} */
+
+/* Optional hero title */
+
+.her h1 {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
 /* =========================
    GALLERY SECTION
 ========================= */
+
 .gallery {
-  padding: 80px 8%;
+  width: 100%;
+
+  padding: 80px 6%;
+
+  background: #f7faf8;
+
   display: flex;
   flex-direction: column;
-  gap: 60px;
-  background: #0f0f0f;
+
+  gap: 50px;
 }
 
 /* =========================
-   GALLERY ITEM BASE STYLE
+   GALLERY ITEM
 ========================= */
+
 .gallery-item {
   width: 100%;
-  max-width: 1100px;
-  margin: auto;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  padding: 15px;
+
+  border-radius: 18px;
+
   overflow: hidden;
-  border-radius: 20px;
 
-  /* initial state for animation */
+  box-shadow: 0 10px 30px rgba(11, 107, 58, 0.10);
+
+  border: 1px solid #e2eee7;
+
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 1.2s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
 
-/* IMAGE STYLE */
-.gallery-item img {
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  border-radius: 20px;
-  transition: transform 0.5s ease, filter 0.5s ease;
-}
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease,
+    box-shadow 0.3s ease;
 
-/* HOVER EFFECT */
-.gallery-item img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+  position: relative;
 }
 
 /* =========================
-   ANIMATION DIRECTIONS
+   SCROLL REVEAL
 ========================= */
-.from-left {
-  transform: translateX(-150px);
+
+.gallery-item.from-left {
+  transform: translateX(-80px);
 }
 
-.from-right {
-  transform: translateX(150px);
+.gallery-item.from-right {
+  transform: translateX(80px);
 }
 
-/* ACTIVE / VISIBLE STATE */
 .gallery-item.show {
   opacity: 1;
   transform: translateX(0);
 }
 
 /* =========================
-   RESPONSIVE DESIGN
+   IMAGE
 ========================= */
-@media (max-width: 768px) {
+
+.gallery-item img {
+  display: block;
+
+  width: 100%;
+
+  /*
+     IMPORTANT:
+     contain keeps the FULL image visible.
+     Nothing will be cropped.
+  */
+
+  height: auto;
+
+  max-height: 750px;
+
+  object-fit: contain;
+
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  transition: transform 0.5s ease;
+}
+
+/* =========================
+   HOVER EFFECT
+========================= */
+
+.gallery-item:hover {
+  box-shadow: 0 20px 50px rgba(11, 107, 58, 0.18);
+
+  transform: translateY(-5px);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.02);
+}
+
+/* =========================
+   IMAGE SHINE EFFECT
+========================= */
+
+.gallery-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 50%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+
+  transition: 0.7s;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.gallery-item:hover::before {
+  left: 120%;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 992px) {
+
+  .her {
+    min-height: 45vh;
+  }
+
+  .her h1 {
+    font-size: 2.4rem;
+  }
+
   .gallery {
-    padding: 50px 5%;
-    gap: 40px;
+    padding: 60px 5%;
+
+    gap: 35px;
+  }
+
+  .gallery-item {
+    padding: 12px;
+
+    border-radius: 15px;
   }
 
   .gallery-item img {
-    height: 250px;
-  }
+    max-height: 600px;
 
-  .from-left,
-  .from-right {
-    transform: translateX(0); /* disable side animation on mobile */
+    border-radius: 10px;
   }
 }
 
 /* =========================
-   EXTRA POLISH (OPTIONAL LUXURY FEEL)
+   MOBILE
 ========================= */
-.gallery-item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.35)
-  );
-  pointer-events: none;
+
+@media (max-width: 768px) {
+
+  .her {
+    min-height: 38vh;
+  }
+
+  .her h1 {
+    font-size: 2rem;
+  }
+
+  .gallery {
+    padding: 45px 4%;
+
+    gap: 25px;
+  }
+
+  .gallery-item {
+    padding: 8px;
+
+    border-radius: 12px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+  }
+
+  .gallery-item.from-left {
+    transform: translateX(-40px);
+  }
+
+  .gallery-item.from-right {
+    transform: translateX(40px);
+  }
+
+  .gallery-item.show {
+    transform: translateX(0);
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .her {
+    min-height: 30vh;
+  }
+
+  .her h1 {
+    font-size: 1.6rem;
+  }
+
+  .gallery {
+    padding: 35px 3%;
+
+    gap: 20px;
+  }
+
+  .gallery-item {
+    padding: 6px;
+
+    border-radius: 10px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 7px;
+  }
+}
+
+/* =========================
+   LARGE SCREENS
+========================= */
+
+@media (min-width: 1400px) {
+
+  .gallery {
+    padding: 100px 10%;
+
+    gap: 60px;
+  }
+
+  .gallery-item {
+    max-width: 1400px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+  }
+
+  .gallery-item img {
+    max-height: 850px;
+
+    border-radius: 14px;
+  }
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .gallery-item,
+  .gallery-item img,
+  .gallery-item::before {
+    transition: none;
+  }
+
+  .gallery-item.from-left,
+  .gallery-item.from-right {
+    transform: none;
+  }
 }

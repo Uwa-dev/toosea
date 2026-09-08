@@ -52,7 +52,7 @@ export default function Gallery() {
   
 
       {/* HERO */}
-      <section className="her">
+      <section className="hero">
         {/* <h1>Luxury Experience Gallery</h1> */}
       </section>
 

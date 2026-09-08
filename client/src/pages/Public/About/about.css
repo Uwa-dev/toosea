@@ -1,233 +1,464 @@
-/* =========================
-   ABOUT PAGE STYLING
-========================= */
 
-/*=========================================
-            ABOUT PAGE
-==========================================*/
+/* =========================================================
+   TOoSeA SHORTLET — ABOUT PAGE
+   Premium Green + White + Red Accent
+========================================================= */
 
-.about-page{
-    width:100%;
-    padding:100px 8%;
-    background:#f8fafc;
-}
+:root {
+  --toosea-dark-green: #063b2a;
+  --toosea-green: #0b6b45;
+  --toosea-light-green: #eaf5ef;
 
-.about-page h1{
-    text-align:center;
-    font-size:3rem;
-    color:#1a1a2e;
-    margin-bottom:30px;
-    font-weight:700;
-}
+  --toosea-white: #ffffff;
+  --toosea-off-white: #f7faf8;
 
-.about-page > p{
-    max-width:900px;
-    margin:0 auto 70px;
-    text-align:center;
-    font-size:18px;
-    line-height:1.9;
-    color:#666;
+  --toosea-red: #b3262e;
+
+  --toosea-text: #3f4c45;
+  --toosea-muted: #68736d;
+
+  --toosea-border: #dce7e1;
+
+  --toosea-shadow:
+    0 10px 35px rgba(6, 59, 42, 0.09);
+
+  --toosea-shadow-hover:
+    0 18px 45px rgba(6, 59, 42, 0.14);
 }
 
 
-/*=========================================
-        ABOUT GRID
-==========================================*/
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
 
-.about-sections{
+.about-page {
+  width: 100%;
 
-    display:grid;
+  padding: 100px 6% 110px;
 
-    grid-template-columns:
-    repeat(auto-fit, minmax(320px, 1fr));
+  background: var(--toosea-white);
 
-    gap:35px;
+  position: relative;
 
-    align-items:stretch;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+========================================================= */
+
+.about-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 360px;
+  height: 360px;
+
+  top: -180px;
+  right: -120px;
+
+  background: var(--toosea-light-green);
+
+  border-radius: 50%;
+
+  opacity: 0.65;
+
+  pointer-events: none;
+}
+
+
+.about-page::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  bottom: -110px;
+  left: -80px;
+
+  background: rgba(179, 38, 46, 0.035);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.about-page > h1 {
+  position: relative;
+  z-index: 2;
+
+  max-width: 900px;
+
+  margin: 0 auto 25px;
+
+  text-align: center;
+
+  color: var(--toosea-dark-green);
+
+  font-family: "Montserrat", "Poppins", sans-serif;
+
+  font-size: clamp(36px, 5vw, 56px);
+
+  font-weight: 800;
+
+  line-height: 1.15;
+
+  letter-spacing: -1px;
+}
+
+
+/* Red accent underneath title */
+
+.about-page > h1::after {
+  content: "";
+
+  display: block;
+
+  width: 60px;
+  height: 4px;
+
+  margin: 18px auto 0;
+
+  background: var(--toosea-red);
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.about-page > p {
+  position: relative;
+  z-index: 2;
+
+  width: min(850px, 100%);
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  color: var(--toosea-text);
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   VISION / MISSION CONTAINER
+========================================================= */
+
+.about-sections {
+  position: relative;
+  z-index: 2;
+
+  width: min(1100px, 100%);
+
+  margin: 65px auto 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 28px;
+}
+
+
+/* =========================================================
+   VISION / MISSION CARD
+========================================================= */
+
+.about-section {
+  position: relative;
+
+  padding: 40px 35px;
+
+  background: var(--toosea-off-white);
+
+  border: 1px solid var(--toosea-border);
+
+  border-radius: 18px;
+
+  box-shadow: var(--toosea-shadow);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+
+/* Green top line */
+
+.about-section::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: var(--toosea-dark-green);
+
+  transition: background 0.3s ease;
+}
+
+
+/* Small red side accent */
+
+.about-section::after {
+  content: "";
+
+  position: absolute;
+
+  top: 32px;
+  right: 0;
+
+  width: 4px;
+  height: 45px;
+
+  background: var(--toosea-red);
+
+  border-radius: 5px 0 0 5px;
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.about-section:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--toosea-green);
+
+  box-shadow: var(--toosea-shadow-hover);
+}
+
+.about-section:hover::before {
+  background: var(--toosea-red);
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.about-section h2 {
+  margin: 0 0 15px;
+
+  color: var(--toosea-dark-green);
+
+  font-family: "Montserrat", "Poppins", sans-serif;
+
+  font-size: 25px;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   CARD PARAGRAPH
+========================================================= */
+
+.about-section p {
+  margin: 0;
+
+  color: var(--toosea-text);
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.85;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .about-page {
+    padding: 85px 6% 90px;
+  }
+
+  .about-page > h1 {
+    font-size: 44px;
+  }
+
+  .about-sections {
+    gap: 22px;
+
+    margin-top: 55px;
+  }
+
+  .about-section {
+    padding: 32px 27px;
+  }
 
 }
 
 
-/*=========================================
-        ABOUT CARD
-==========================================*/
+/* =========================================================
+   TABLET / SMALL SCREEN
+========================================================= */
 
-.about-section{
+@media (max-width: 700px) {
 
-    background:#fff;
+  .about-page {
+    padding: 75px 6% 80px;
+  }
 
-    padding:40px 35px;
+  .about-page > h1 {
+    font-size: 38px;
 
-    border-radius:20px;
+    letter-spacing: -0.5px;
+  }
 
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.08);
+  .about-page > p {
+    font-size: 14px;
 
-    transition:.45s;
+    line-height: 1.8;
+  }
 
-    display:flex;
+  .about-sections {
+    grid-template-columns: 1fr;
 
-    flex-direction:column;
+    margin-top: 45px;
 
-    justify-content:flex-start;
+    gap: 20px;
+  }
 
-    border-top:5px solid #D4AF37;
+  .about-section {
+    padding: 32px 27px;
+  }
 
-}
-
-.about-section:hover{
-
-    transform:
-        translateY(-12px);
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.15);
-
-}
-
-.about-section h2{
-
-    font-size:1.6rem;
-
-    color:#1a1a2e;
-
-    margin-bottom:18px;
-
-}
-
-.about-section p{
-
-    font-size:16px;
-
-    color:#666;
-
-    line-height:1.9;
+  .about-section h2 {
+    font-size: 23px;
+  }
 
 }
 
 
-/*=========================================
-        LARGE TABLETS
-==========================================*/
+/* =========================================================
+   MOBILE
+========================================================= */
 
-@media (max-width:992px){
+@media (max-width: 500px) {
 
-.about-page{
+  .about-page {
+    padding: 65px 5% 70px;
+  }
 
-    padding:80px 6%;
+  .about-page > h1 {
+    font-size: 32px;
 
-}
+    line-height: 1.2;
+  }
 
-.about-page h1{
+  .about-page > h1::after {
+    width: 45px;
 
-    font-size:2.5rem;
+    height: 3px;
 
-}
+    margin-top: 13px;
+  }
 
-.about-page > p{
+  .about-page > p {
+    font-size: 13px;
 
-    font-size:17px;
+    line-height: 1.8;
+  }
 
-}
+  .about-sections {
+    margin-top: 40px;
 
-}
+    gap: 18px;
+  }
 
+  .about-section {
+    padding: 30px 23px;
 
-/*=========================================
-            TABLETS
-==========================================*/
+    border-radius: 14px;
+  }
 
-@media (max-width:768px){
+  .about-section::after {
+    top: 27px;
 
-.about-page{
+    height: 38px;
+  }
 
-    padding:70px 25px;
+  .about-section h2 {
+    font-size: 21px;
 
-}
+    margin-bottom: 12px;
+  }
 
-.about-page h1{
+  .about-section p {
+    font-size: 13px;
 
-    font-size:2.1rem;
-
-}
-
-.about-page > p{
-
-    font-size:16px;
-
-    margin-bottom:45px;
-
-}
-
-.about-sections{
-
-    grid-template-columns:1fr;
-
-    gap:25px;
-
-}
-
-.about-section{
-
-    padding:30px 25px;
-
-}
-
-.about-section h2{
-
-    font-size:1.4rem;
-
-}
+    line-height: 1.8;
+  }
 
 }
 
 
-/*=========================================
-            MOBILE
-==========================================*/
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
-@media (max-width:480px){
+@media (max-width: 380px) {
 
-.about-page{
+  .about-page {
+    padding: 55px 5% 65px;
+  }
 
-    padding:60px 18px;
+  .about-page > h1 {
+    font-size: 29px;
+  }
 
-}
+  .about-page > p {
+    font-size: 12.5px;
+  }
 
-.about-page h1{
+  .about-section {
+    padding: 27px 20px;
+  }
 
-    font-size:1.8rem;
+  .about-section h2 {
+    font-size: 20px;
+  }
 
-    line-height:1.3;
-
-}
-
-.about-page > p{
-
-    font-size:15px;
-
-    line-height:1.8;
-
-}
-
-.about-section{
-
-    padding:25px 20px;
-
-    border-radius:16px;
+  .about-section p {
+    font-size: 12.5px;
+  }
 
 }
 
-.about-section h2{
-
-    font-size:1.25rem;
-
-}
-
-.about-section p{
-
-    font-size:15px;
-
-}
-
-}

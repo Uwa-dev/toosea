@@ -1,13 +1,16 @@
+
 /* =========================
    SECTION WRAPPER
 ========================= */
+
 .section {
   padding: 80px 8%;
-  background: #0f0f0f;
+  background: #0b6b3a;
   text-align: center;
 }
 
 /* SECTION TITLE */
+
 .section h2 {
   font-size: 2.5rem;
   margin-bottom: 10px;
@@ -17,12 +20,16 @@
 }
 
 /* UNDERLINE EFFECT */
+
 .section h2::after {
   content: "";
+
   display: block;
   width: 60%;
   height: 3px;
-  background: #4da3ff;
+
+  background: #ffffff;
+
   margin: 10px auto 0;
   border-radius: 2px;
 }
@@ -30,50 +37,73 @@
 /* =========================
    GRID LAYOUT
 ========================= */
+
 .grid {
   margin-top: 50px;
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
   gap: 30px;
 }
 
 /* =========================
    CARD DESIGN
 ========================= */
+
 .card {
-  background: linear-gradient(145deg, #1a1a1a, #111);
+  background: #ffffff;
+
   padding: 35px 25px;
+
   border-radius: 18px;
+
   text-align: center;
-  color: #e6ecff;
+
+  color: #0b6b3a;
+
   font-size: 1.1rem;
   font-weight: 500;
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+  border: 1px solid #ffffff;
+
   transition: all 0.4s ease;
+
   position: relative;
   overflow: hidden;
 }
 
 /* HOVER EFFECT */
+
 .card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(77, 163, 255, 0.2);
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+  border-color: #ffffff;
 }
 
 /* LIGHT GLOW EFFECT */
+
 .card::before {
   content: "";
+
   position: absolute;
   inset: 0;
+
   border-radius: 18px;
+
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(77, 163, 255, 0.15),
+    rgba(11, 107, 58, 0.08),
     transparent
   );
+
   opacity: 0;
+
   transition: 0.4s;
 }
 
@@ -82,10 +112,25 @@
 }
 
 /* =========================
+   CARD CONTENT
+========================= */
+
+.card h3 {
+  color: #0b6b3a;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #667085;
+  line-height: 1.7;
+}
+
+/* =========================
    RESPONSIVENESS
 ========================= */
 
 /* TABLETS */
+
 @media (max-width: 992px) {
   .section {
     padding: 60px 6%;
@@ -97,6 +142,7 @@
 }
 
 /* MOBILE */
+
 @media (max-width: 576px) {
   .section {
     padding: 50px 5%;
@@ -116,7 +162,10 @@
   }
 }
 
-/* LARGE SCREENS */
+/* =========================
+   LARGE SCREENS
+========================= */
+
 @media (min-width: 1400px) {
   .section {
     padding: 100px 12%;
@@ -130,6 +179,7 @@
 /* =========================
    RESPONSIVE
 ========================= */
+
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 2rem;
@@ -139,3 +189,4 @@
     font-size: 0.95rem;
   }
 }
+

@@ -41,10 +41,10 @@ const Contact = () => {
               <strong>Phone:</strong> +2348081557777
             </p>
             <p>
-              <strong>Email:</strong> shortlet@tosae.com
+              <strong>Email:</strong> tooseagarden@gmail.com
             </p>
             <p>
-              <strong>Support:</strong> support@toosea.com
+              <strong>Support:</strong> tooseagarden@gmail.com
             </p>
           </div>
 

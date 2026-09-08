@@ -14,6 +14,15 @@ import lekkiArtMarket from "../../../images/lekkiarts.jpg";
 import omuResort from "../../../images/OmuResort.jpg";
 import lakoweGolf from "../../../images/lokowe.jpg";
 import elekoBeach from "../../../images/Elekobeach.jpg";
+import {
+  Car,
+  Wifi,
+  Zap,
+  BedDouble,
+  ShieldCheck
+} from "lucide-react";
+
+
 
 
 const  Dashboard = () => {
@@ -486,66 +495,130 @@ const  Dashboard = () => {
 
       </section>
 
-      <section className="services">
+  {/* services */}
 
-        <h2 className="services-title">Our Services</h2>
 
-        <div className="service-grid">
+<section className="toosea-services">
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-car"></i><br />
-              <h3>Free Parking</h3>
-              <p>
-                Enjoy secure and spacious parking at no extra cost throughout your stay.
-              </p>
-            </div>
-          </div>
+  <h2 className="toosea-services-heading">
+    Our Services
+  </h2>
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-spa"></i><br />
-              <h3>Wi-Fi & DSTV</h3>
-              <p>
-                Stay connected and entertained throughout your stay with complimentary high-speed Wi-Fi and DSTV access, available in all ToOSeA shortlet apartments.
-              </p>
-            </div>
-          </div>
+  <div className="toosea-services-grid">
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-tree"></i><br />
-              <h3>Generator</h3>
-              <p>
-                Enjoy uninterrupted comfort with a reliable standby generator, ensuring your stay remains comfortable even during power outages.
-              </p>
-            </div>
-          </div>
+    {/* Free Parking */}
+    <div className="toosea-service-item">
 
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
-              <h3>3 bedrooms</h3>
-              <p>
-                Host memorable events in our elegant and fully equipped event space.
-              </p>
-            </div>
-          </div>
+      <div className="toosea-service-content">
 
-          
-          <div className="service-card">
-            <div className="card">
-              <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
-              <h3>Secure Enviroment</h3>
-              <p>
-                Host memorable events in our elegant and fully equipped event space.
-              </p>
-            </div>
-          </div>
-
+        <div className="toosea-service-icon">
+          <Car size={52} strokeWidth={1.7} />
         </div>
 
-      </section>
+        <h3>Free Parking</h3>
+
+        <p>
+          Enjoy secure and spacious parking at no extra cost
+          throughout your stay.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* Wi-Fi & DSTV */}
+    <div className="toosea-service-item">
+
+      <div className="toosea-service-content">
+
+        <div className="toosea-service-icon">
+          <Wifi size={52} strokeWidth={1.7} />
+        </div>
+
+        <h3>Wi-Fi & DSTV</h3>
+
+        <p>
+          Stay connected and entertained throughout your stay
+          with complimentary high-speed Wi-Fi and DSTV access,
+          available in all ToOSeA shortlet apartments.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* Generator */}
+    <div className="toosea-service-item">
+
+      <div className="toosea-service-content">
+
+        <div className="toosea-service-icon">
+          <Zap size={52} strokeWidth={1.7} />
+        </div>
+
+        <h3>Generator</h3>
+
+        <p>
+          Enjoy uninterrupted comfort with a reliable standby
+          generator, ensuring your stay remains comfortable
+          even during power outages.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* 3 Bedrooms */}
+    <div className="toosea-service-item">
+
+      <div className="toosea-service-content">
+
+        <div className="toosea-service-icon">
+          <BedDouble size={52} strokeWidth={1.7} />
+        </div>
+
+        <h3>3 Bedrooms</h3>
+
+        <p>
+          Relax in our spacious three-bedroom apartment,
+          thoughtfully designed to provide comfort, privacy,
+          and a memorable stay.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* Secure Environment */}
+    <div className="toosea-service-item">
+
+      <div className="toosea-service-content">
+
+        <div className="toosea-service-icon">
+          <ShieldCheck size={52} strokeWidth={1.7} />
+        </div>
+
+        <h3>Secure Environment</h3>
+
+        <p>
+          Enjoy peace of mind in a safe and secure environment,
+          giving you the freedom to relax and enjoy your stay.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
     
 
       {/* ================= FEATURED APARTMENTS ================= */}

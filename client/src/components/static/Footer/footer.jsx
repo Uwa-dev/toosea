@@ -29,7 +29,7 @@ export default function Footer() {
           <h3>Contact</h3>
           <p>📍 Ajayi Apata Estate, beside Fara Park Estate, Sangotedo, Ajah, Lagos</p>
           <p>📞 +2348081557777</p>
-          <p>✉️ info@toosea.com</p>
+          <p>✉️ tooseagarden@gmail.com</p>
         </div>
 
       </div>
