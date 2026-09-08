@@ -35,10 +35,10 @@ const Contact = () => {
           {/* CONTACT INFO */}
           <div className="contact-info">
             <p>
-              <strong>Address:</strong> No. 10 Ajayi Apaata Estate Road, Lekki, Lagos State, Nigeria
+              <strong>Address:</strong> Ayayi Apata Estate, beside fara park Estate, Sangotedo, Ajah, Lagos
             </p>
             <p>
-              <strong>Phone:</strong> +234 802 142 9974
+              <strong>Phone:</strong> +2348081557777
             </p>
             <p>
               <strong>Email:</strong> shortlet@tosae.com

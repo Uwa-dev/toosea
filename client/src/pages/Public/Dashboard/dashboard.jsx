@@ -2,6 +2,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllApartments } from "../../../services/apartmentApi";
 import "./dashboard.css";
+import pubone from "../../../images/hote15.jpg";
+import pubtwo from "../../../images/pubtwo.jpg";
+import pubthree from "../../../images/pubthree.jpg";
+import publicfour from "../../../images/publicfour.jpg";
+import lufasiPark from "../../../images/lufasipark.jpg";
+import lekkiConservation from "../../../images/lekkicon.jpg";
+import novareMall from "../../../images/Novare.jpg";
+import aticanBeach from "../../../images/Atican.jpg";
+import lekkiArtMarket from "../../../images/lekkiarts.jpg";
+import omuResort from "../../../images/OmuResort.jpg";
+import lakoweGolf from "../../../images/lokowe.jpg";
+import elekoBeach from "../../../images/Elekobeach.jpg";
 
 
 const  Dashboard = () => {
@@ -11,10 +23,10 @@ const  Dashboard = () => {
   const [loadingApartments, setLoadingApartments] = useState(true);
 
   const slides = [
-    "./toimages/background.jpg",
-    "./toimages/backgrountwo.jpg",
-    "./toimages/jarmoluk-bathroom-2094716_1920.jpg",
-    "./toimages/jarmoluk-kitchen-2094723_1920 (1).jpg"
+ pubone,
+  pubtwo,
+  pubthree,
+  publicfour
   ];
 
   /* --- HERO SLIDER --- */
@@ -382,13 +394,7 @@ const  Dashboard = () => {
             </p>
           </div>
 
-          <div className="about-box">
-            <h3>Trusted Service</h3>
-            <p>
-              Managed by Empirean Heights Ltd., fully compliant with CAC, FIRS and
-              SCUML regulations.
-            </p>
-          </div>
+         
 
         </div>
 
@@ -403,7 +409,7 @@ const  Dashboard = () => {
         <div className="attraction-grid">
 
           <div className="attraction-card">
-            <img src="./toimages/lufasi-park.jpg" alt="LUFASI Nature Park" />
+            <img src={lufasiPark}  alt="LUFASI Nature Park" />
             <h3>LUFASI Nature Park</h3>
             <p>
               Beautiful wildlife park with nature trails and family activities.
@@ -412,7 +418,7 @@ const  Dashboard = () => {
 
           <div className="attraction-card">
             <img
-              src="./toimages/lekkicon.jpg"
+              src={lekkiConservation} 
               alt="Lekki Conservation Centre"
             />
             <h3>Lekki Conservation Centre</h3>
@@ -422,7 +428,7 @@ const  Dashboard = () => {
           </div>
 
           <div className="attraction-card">
-            <img src="./toimages/novare-mall.jpg" alt="Novare Lekki Mall" />
+            <img src={novareMall}  alt="Novare Lekki Mall" />
             <h3>Novare Lekki Mall</h3>
             <p>
               Shopping, restaurants, cinema, and entertainment just minutes away.
@@ -430,7 +436,7 @@ const  Dashboard = () => {
           </div>
 
           <div className="attraction-card">
-            <img src="./toimages/atican-beach.jpg" alt="Atican Beach" />
+            <img src={aticanBeach} alt="Atican Beach" />
             <h3>Atican Beach</h3>
             <p>
               One of Lagos' most peaceful beaches for relaxation and fun.
@@ -439,7 +445,7 @@ const  Dashboard = () => {
 
           <div className="attraction-card">
             <img
-              src="./toimages/lekki-art-market.jpg"
+              src={lekkiArtMarket}
               alt="Lekki Arts & Crafts Market"
             />
             <h3>Lekki Arts & Crafts Market</h3>
@@ -449,7 +455,7 @@ const  Dashboard = () => {
           </div>
 
           <div className="attraction-card">
-            <img src="./toimages/omu-resort.jpg" alt="Omu Resort" />
+            <img src={omuResort} alt="Omu Resort" />
             <h3>Omu Resort</h3>
             <p>
               A complete family destination featuring a zoo, amusement park, and
@@ -459,7 +465,7 @@ const  Dashboard = () => {
 
           <div className="attraction-card">
             <img
-              src="./toimages/lakowe-golf.jpg"
+              src={lakoweGolf}
               alt="Lakowe Lakes Golf Estate"
             />
             <h3>Lakowe Lakes Golf Estate</h3>
@@ -469,7 +475,7 @@ const  Dashboard = () => {
           </div>
 
           <div className="attraction-card">
-            <img src="./toimages/eleko-beach.jpg" alt="Eleko Beach" />
+            <img src={elekoBeach} alt="Eleko Beach" />
             <h3>Eleko Beach</h3>
             <p>
               Enjoy a quieter beach experience with ocean views and fresh seafood.
@@ -499,10 +505,9 @@ const  Dashboard = () => {
           <div className="service-card">
             <div className="card">
               <i style={{ fontSize: "60px" }} className="fas fa-spa"></i><br />
-              <h3>Luxury Spa</h3>
+              <h3>Wi-Fi & DSTV</h3>
               <p>
-                Rejuvenate your body and mind with our premium spa treatments designed
-                for total relaxation.
+                Stay connected and entertained throughout your stay with complimentary high-speed Wi-Fi and DSTV access, available in all ToOSeA shortlet apartments.
               </p>
             </div>
           </div>
@@ -510,10 +515,9 @@ const  Dashboard = () => {
           <div className="service-card">
             <div className="card">
               <i style={{ fontSize: "60px" }} className="fas fa-tree"></i><br />
-              <h3>Garden Lounge</h3>
+              <h3>Generator</h3>
               <p>
-                Relax in our serene outdoor garden space perfect for quiet moments
-                and social gatherings.
+                Enjoy uninterrupted comfort with a reliable standby generator, ensuring your stay remains comfortable even during power outages.
               </p>
             </div>
           </div>
@@ -521,7 +525,18 @@ const  Dashboard = () => {
           <div className="service-card">
             <div className="card">
               <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
-              <h3>Event Space</h3>
+              <h3>3 bedrooms</h3>
+              <p>
+                Host memorable events in our elegant and fully equipped event space.
+              </p>
+            </div>
+          </div>
+
+          
+          <div className="service-card">
+            <div className="card">
+              <i style={{ fontSize: "60px" }} className="fas fa-champagne-glasses"></i><br />
+              <h3>Secure Enviroment</h3>
               <p>
                 Host memorable events in our elegant and fully equipped event space.
               </p>

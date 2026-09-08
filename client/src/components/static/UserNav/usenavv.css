@@ -1,141 +1,484 @@
-/* =========================
-   NAVBAR BASE
-========================= */
+```css
+/* =========================================================
+   ToOseA USER NAVBAR
+   Fully Responsive
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
 .user-top-nav {
   width: 100%;
+  height: 72px;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 15px 8%;
-  background: rgba(10, 25, 60, 0.95);
-  backdrop-filter: blur(10px);
+
+  padding: 0 4%;
+
+  background: #ffffff;
+
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 9999;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* LOGO */
-.nav-logo h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #4da3ff;
-}
 
-/* =========================
-   NAV LINKS
-========================= */
-.navigation {
+/* =========================================================
+   LOGO
+========================================================= */
+
+.nav-logo {
   display: flex;
   align-items: center;
-  gap: 28px;
+
+  flex-shrink: 0;
 }
+
+.nav-logo a {
+  text-decoration: none;
+  color: #0b3d2e;
+}
+
+.nav-logo h1 {
+  margin: 0;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
+
+.navigation {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
 
 .nav-link {
-  display: flex;
+  height: 42px;
+
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 12px;
+
+  border-radius: 7px;
+
   text-decoration: none;
-  color: #e6ecff;
-  font-size: 0.95rem;
+
+  color: #333333;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  position: relative;
-  transition: 0.3s;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
 }
 
-/* ❌ HIDE ICONS ON LARGE SCREENS */
+
+/* =========================================================
+   ICONS
+========================================================= */
+
 .topnav-icons {
-  display: none;
+  width: 17px;
+  height: 17px;
+
+  min-width: 17px;
+  min-height: 17px;
+
+  stroke-width: 2;
+
+  flex-shrink: 0;
 }
 
-/* HOVER */
+
+/* =========================================================
+   HOVER
+========================================================= */
+
 .nav-link:hover {
-  color: #4da3ff;
+  background: #eef5f2;
+  color: #0b3d2e;
 }
 
-/* ACTIVE */
+
+/* =========================================================
+   ACTIVE LINK
+========================================================= */
+
 .nav-link.active {
-  color: #4da3ff;
+  background: #0b3d2e;
+  color: #ffffff;
 }
 
-.nav-link.active::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: #4da3ff;
+.nav-link.active:hover {
+  background: #0b3d2e;
+  color: #ffffff;
 }
 
-/* =========================
-   MENU TOGGLE
-========================= */
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
+
 .menu-toggle {
   display: none;
-  background: transparent;
+
   border: none;
-  color: #fff;
+  outline: none;
+
+  background: transparent;
+
+  color: #0b3d2e;
+
   cursor: pointer;
+
+  padding: 5px;
+
+  align-items: center;
+  justify-content: center;
 }
 
-/* =========================
-   MOBILE STYLES
-========================= */
-@media (max-width: 992px) {
-  /* SHOW MENU ICON */
-  .menu-toggle {
-    display: block;
+
+/* =========================================================
+   LARGE SCREENS
+========================================================= */
+
+@media screen and (min-width: 1200px) {
+
+  .user-top-nav {
+    padding: 0 5%;
   }
 
-  /* SHOW NAV AS SIDEBAR */
   .navigation {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 320px;
-    height: 100vh;
-    background: #0a193c;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 100px 25px;
-    gap: 25px;
-    transition: right 0.4s ease;
-  }
-
-  .navigation.active {
-    right: 0;
-  }
-
-  /* ✅ SHOW ICONS ONLY ON SMALL SCREEN */
-  .topnav-icons {
-    display: inline-flex;
-    font-size: 18px;
+    gap: 6px;
   }
 
   .nav-link {
-    width: 100%;
-    font-size: 1.1rem;
+    padding: 0 13px;
+    font-size: 13px;
   }
 
-  .nav-link.active::after {
-    display: none;
+  .topnav-icons {
+    width: 17px;
+    height: 17px;
   }
 }
 
-/* =========================
-   SMALL DEVICES
-========================= */
-@media (max-width: 576px) {
+
+/* =========================================================
+   LAPTOPS
+========================================================= */
+
+@media screen and (max-width: 1100px) {
+
   .user-top-nav {
-    padding: 12px 5%;
+    padding: 0 3%;
   }
 
   .navigation {
-    width: 85%;
+    gap: 2px;
   }
 
-  .nav-logo h3 {
-    font-size: 1.3rem;
+  .nav-link {
+    padding: 0 9px;
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .topnav-icons {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-logo h1 {
+    font-size: 25px;
   }
 }
+
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media screen and (max-width: 850px) {
+
+  .user-top-nav {
+    height: 64px;
+
+    padding: 0 20px;
+
+    justify-content: space-between;
+  }
+
+
+  /* -----------------------------------------
+     LOGO
+  ----------------------------------------- */
+
+  .nav-logo {
+    order: 1;
+  }
+
+  .nav-logo h1 {
+    font-size: 24px;
+  }
+
+
+  /* -----------------------------------------
+     MENU BUTTON
+  ----------------------------------------- */
+
+  .menu-toggle {
+    order: 2;
+
+    display: flex;
+
+    margin-left: auto;
+
+    width: 42px;
+    height: 42px;
+  }
+
+
+  /* -----------------------------------------
+     MOBILE MENU
+  ----------------------------------------- */
+
+  .navigation {
+
+    position: fixed;
+
+    top: 64px;
+    left: 0;
+
+    width: 100%;
+
+    height: calc(100vh - 64px);
+
+    margin: 0;
+
+    padding: 12px 18px 25px;
+
+    background: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    justify-content: flex-start;
+
+    gap: 5px;
+
+    overflow-y: auto;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+    transform: translateX(100%);
+
+    transition: transform 0.3s ease;
+  }
+
+
+  /* -----------------------------------------
+     OPEN MENU
+  ----------------------------------------- */
+
+  .navigation.active {
+    transform: translateX(0);
+  }
+
+
+  /* -----------------------------------------
+     MOBILE LINKS
+  ----------------------------------------- */
+
+  .nav-link {
+
+    width: 100%;
+
+    height: 48px;
+
+    min-height: 48px;
+
+    justify-content: flex-start;
+
+    padding: 0 15px;
+
+    gap: 10px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+  }
+
+
+  /* -----------------------------------------
+     MOBILE ICONS
+  ----------------------------------------- */
+
+  .topnav-icons {
+
+    width: 19px;
+    height: 19px;
+
+    min-width: 19px;
+    min-height: 19px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+  .user-top-nav {
+    height: 60px;
+
+    padding: 0 16px;
+  }
+
+
+  .nav-logo h1 {
+    font-size: 22px;
+  }
+
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .navigation {
+
+    top: 60px;
+
+    height: calc(100vh - 60px);
+
+    padding: 10px 14px 20px;
+
+    gap: 4px;
+  }
+
+
+  .nav-link {
+
+    height: 46px;
+
+    min-height: 46px;
+
+    padding: 0 14px;
+
+    font-size: 14px;
+
+    gap: 9px;
+  }
+
+
+  .topnav-icons {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+  .user-top-nav {
+    padding: 0 13px;
+  }
+
+
+  .nav-logo h1 {
+    font-size: 21px;
+  }
+
+
+  .navigation {
+    padding: 8px 12px 15px;
+
+    gap: 3px;
+  }
+
+
+  .nav-link {
+
+    height: 44px;
+
+    min-height: 44px;
+
+    font-size: 13px;
+
+    padding: 0 12px;
+  }
+
+
+  .topnav-icons {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.nav-link:focus-visible,
+.menu-toggle:focus-visible {
+
+  outline: 2px solid #0b3d2e;
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navigation,
+  .nav-link {
+    transition: none;
+  }
+}
+```

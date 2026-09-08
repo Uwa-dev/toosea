@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="footer-brand">
           <h2>ToOseA Garden</h2>
           <p>
-            Luxury comfort, premium service, and unforgettable stays in the heart of Lagos.
+            Your comfort, our priority.
           </p>
         </div>
 
@@ -27,8 +27,8 @@ export default function Footer() {
         {/* Contact */}
         <div className="footer-contact">
           <h3>Contact</h3>
-          <p>📍 Ajayi Apataa Estate Sangotedo,Lekki, Lagos State</p>
-          <p>📞 0201 466 2390</p>
+          <p>📍 Ajayi Apata Estate, beside Fara Park Estate, Sangotedo, Ajah, Lagos</p>
+          <p>📞 +2348081557777</p>
           <p>✉️ info@toosea.com</p>
         </div>
 

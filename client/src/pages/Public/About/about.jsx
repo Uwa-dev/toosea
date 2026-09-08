@@ -43,13 +43,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="about-section">
-            <h2>Regulatory Compliance</h2>
-            <p>
-              Empirean Heights Ltd. is fully registered with CAC, FIRS, and
-              SCUML, compliant with all regulatory standards in Nigeria.
-            </p>
-          </div>
+          
         </div>
       </section>
 
