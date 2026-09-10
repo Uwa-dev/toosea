@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./gallery.css";
+
 
 import hotel1 from "../../../images/hote1.jpg";
 import hotel2 from "../../../images/hote2.jpg";
@@ -18,6 +18,8 @@ import hotel14 from "../../../images/hote15.jpg";
 import hotel15 from "../../../images/hote16.jpg";
 import hotel16 from "../../../images/hote17.jpg";
 import hotel17 from "../../../images/hote18.jpg";
+
+import "./gallery.css";
 
 
 export default function Gallery() {
@@ -52,7 +54,7 @@ export default function Gallery() {
   
 
       {/* HERO */}
-      <section className="hero">
+      <section className="heroooo">
         {/* <h1>Luxury Experience Gallery</h1> */}
       </section>
 

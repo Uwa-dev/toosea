@@ -2,38 +2,11 @@
 /* =========================================================
    ToOSeA GALLERY
    Green & White Premium Theme
+   Images visible immediately after page load
 ========================================================= */
 
 * {
   box-sizing: border-box;
-}
-
-/* =========================
-   HERO SECTION
-========================= */
-
-/* .her {
-  width: 100%;
-  min-height: 55vh;
-
-  background: #0b6b3a;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-  overflow: hidden;
-} */
-
-/* Optional hero title */
-
-.her h1 {
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 0;
 }
 
 /* =========================
@@ -75,31 +48,10 @@
 
   border: 1px solid #e2eee7;
 
-  opacity: 0;
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease,
-    box-shadow 0.3s ease;
-
   position: relative;
-}
 
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-.gallery-item.from-left {
-  transform: translateX(-80px);
-}
-
-.gallery-item.from-right {
-  transform: translateX(80px);
-}
-
-.gallery-item.show {
-  opacity: 1;
-  transform: translateX(0);
+  /* No opacity: 0
+     No scroll hiding */
 }
 
 /* =========================
@@ -110,12 +62,6 @@
   display: block;
 
   width: 100%;
-
-  /*
-     IMPORTANT:
-     contain keeps the FULL image visible.
-     Nothing will be cropped.
-  */
 
   height: auto;
 
@@ -183,14 +129,6 @@
 
 @media (max-width: 992px) {
 
-  .her {
-    min-height: 45vh;
-  }
-
-  .her h1 {
-    font-size: 2.4rem;
-  }
-
   .gallery {
     padding: 60px 5%;
 
@@ -216,14 +154,6 @@
 
 @media (max-width: 768px) {
 
-  .her {
-    min-height: 38vh;
-  }
-
-  .her h1 {
-    font-size: 2rem;
-  }
-
   .gallery {
     padding: 45px 4%;
 
@@ -247,18 +177,6 @@
 
     border-radius: 8px;
   }
-
-  .gallery-item.from-left {
-    transform: translateX(-40px);
-  }
-
-  .gallery-item.from-right {
-    transform: translateX(40px);
-  }
-
-  .gallery-item.show {
-    transform: translateX(0);
-  }
 }
 
 /* =========================
@@ -266,14 +184,6 @@
 ========================= */
 
 @media (max-width: 480px) {
-
-  .her {
-    min-height: 30vh;
-  }
-
-  .her h1 {
-    font-size: 1.6rem;
-  }
 
   .gallery {
     padding: 35px 3%;
@@ -336,9 +246,5 @@
   .gallery-item::before {
     transition: none;
   }
-
-  .gallery-item.from-left,
-  .gallery-item.from-right {
-    transform: none;
-  }
 }
+

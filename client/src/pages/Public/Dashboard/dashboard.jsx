@@ -348,12 +348,28 @@ const  Dashboard = () => {
             which is perfect for business trips,weekend getaways, and unforgettable stays.
           </p>
 
-          <div className="hero-buttons">
-            <Link to="/rooms" className="btn">
-              Explore Apartments
-            </Link>
-            
-          </div>
+        
+
+<div className="toosea-hero-actions">
+
+  <Link to="/rooms" className="toosea-explore-link">
+    Explore Apartments
+  </Link>
+
+  <a
+    href="https://wa.me/2348081557777"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="toosea-whatsapp-link"
+  >
+    Chat on WhatsApp
+  </a>
+
+</div>
+
+
+
+
 
           {/* <div className="trust-indicators">
             <div>✔ Secure Payment Handling</div>
