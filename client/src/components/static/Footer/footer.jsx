@@ -51,17 +51,7 @@ export default function Footer() {
 
 
         {/* Social Media */}
-        <div className="footer-social">
-          <h3>Follow Us</h3>
-
-          <a href="#" target="_blank" rel="noopener noreferrer">
-             Instagram: ToOseA Gardens
-          </a>
-
-          <a href="#" target="_blank" rel="noopener noreferrer">
-             Facebook: Toosea Garden
-          </a>
-        </div>
+        <div className="footer-social"> <h3>Follow Us</h3> <a href="https://www.instagram.com/toosea_shortlet?stkn=bnR1cDIzZGxsdWQ5" target="_blank" rel="noopener noreferrer" > Instagram <span>ToOseA Gardens</span> </a> <a href="https://www.facebook.com/share/1CQQJZPU54/" target="_blank" rel="noopener noreferrer" > Facebook <span>Toosea Garden</span> </a> </div>
 
       </div>
 
