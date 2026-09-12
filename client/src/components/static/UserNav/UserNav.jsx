@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import "./usenavv.css";
 
-const UserNav = ({ handleLogout }) => {
+const UserNav = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,21 +44,22 @@ const UserNav = ({ handleLogout }) => {
           </Link>
         </div>
 
-        {/* HAMBURGER BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
-          className="menu-toggle"
+          className="user-nav-toggle"
           onClick={toggleMenu}
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isOpen}
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={27} /> : <Menu size={27} />}
         </button>
 
-        {/* NAVIGATION LINKS */}
+        {/* NAVIGATION */}
         <div className={`navigation ${isOpen ? "active" : ""}`}>
 
-          {/* HOME */}
           <Link
             to="/"
             className={`nav-link ${isActive("/") ? "active" : ""}`}
@@ -68,7 +69,6 @@ const UserNav = ({ handleLogout }) => {
             <span>Home</span>
           </Link>
 
-          {/* ABOUT */}
           <Link
             to="/about"
             className={`nav-link ${isActive("/about") ? "active" : ""}`}
@@ -78,7 +78,6 @@ const UserNav = ({ handleLogout }) => {
             <span>About Us</span>
           </Link>
 
-          {/* APARTMENTS */}
           <Link
             to="/rooms"
             className={`nav-link ${isActive("/rooms") ? "active" : ""}`}
@@ -88,7 +87,6 @@ const UserNav = ({ handleLogout }) => {
             <span>Apartments</span>
           </Link>
 
-          {/* SERVICES */}
           <Link
             to="/services"
             className={`nav-link ${isActive("/services") ? "active" : ""}`}
@@ -98,7 +96,6 @@ const UserNav = ({ handleLogout }) => {
             <span>Services</span>
           </Link>
 
-          {/* GALLERY */}
           <Link
             to="/gallery"
             className={`nav-link ${isActive("/gallery") ? "active" : ""}`}
@@ -108,7 +105,6 @@ const UserNav = ({ handleLogout }) => {
             <span>Gallery</span>
           </Link>
 
-          {/* CONTACT */}
           <Link
             to="/contact"
             className={`nav-link ${isActive("/contact") ? "active" : ""}`}

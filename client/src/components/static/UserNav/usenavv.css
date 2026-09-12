@@ -1,71 +1,69 @@
 
-/* =========================================================
-   ToOseA USER NAVBAR
-   Fully Responsive
-   Mobile + Tablet + Laptop + Desktop
-========================================================= */
-
-/* ---------- RESET ---------- */
-
-* {
-  box-sizing: border-box;
-}
-
-.user-top-nav,
-.user-top-nav * {
-  box-sizing: border-box;
-}
+/* =========================================
+   USER TOP NAVIGATION
+========================================= */
 
 .user-top-nav {
   width: 100%;
-  height: 72px;
-  background: #ffffff;
+  max-width: 100%;
+  min-width: 0;
+
   position: relative;
-  z-index: 1000;
-  border-bottom: 1px solid #e5e5e5;
+  z-index: 9999;
+
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+
+  box-sizing: border-box;
 }
 
-/* ---------- MAIN CONTAINER ---------- */
+
+/* =========================================
+   NAV CONTAINER
+========================================= */
 
 .nav-container {
   width: 100%;
-  max-width: 1400px;
-  height: 100%;
+  max-width: 1600px;
+  min-height: 70px;
+
   margin: 0 auto;
+  padding: 0 24px;
 
   display: flex;
   align-items: center;
 
-  padding: 0 4%;
+  box-sizing: border-box;
 }
 
-/* ---------- LOGO ---------- */
+
+/* =========================================
+   LOGO
+========================================= */
 
 .nav-logo {
-  display: flex;
-  align-items: center;
   flex-shrink: 0;
 }
 
 .nav-logo a {
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  color: #064d32;
 }
 
 .nav-logo h1 {
   margin: 0;
 
-  font-size: 30px;
+  font-size: clamp(24px, 2.5vw, 34px);
   font-weight: 800;
-  letter-spacing: -0.5px;
 
-  color: #064e3b;
-
-  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 
-/* ---------- NAVIGATION ---------- */
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
 
 .navigation {
   margin-left: auto;
@@ -74,354 +72,203 @@
   align-items: center;
   justify-content: flex-end;
 
-  gap: 6px;
+  gap: clamp(5px, 1vw, 20px);
+
+  min-width: 0;
 }
 
-/* ---------- NAV LINKS ---------- */
+
+/* =========================================
+   NAV LINKS
+========================================= */
 
 .nav-link {
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 7px;
+  gap: 6px;
 
-  min-height: 44px;
-  padding: 8px 13px;
+  padding: 10px 8px;
 
   color: #333333;
-  background: transparent;
-
   text-decoration: none;
 
-  font-size: 15px;
+  font-size: clamp(13px, 1vw, 16px);
   font-weight: 600;
 
   white-space: nowrap;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   transition:
-    color 0.25s ease,
-    background 0.25s ease,
-    transform 0.25s ease;
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-/* ---------- ICONS ---------- */
+.nav-link:hover,
+.nav-link.active {
+  color: #064d32;
+  background-color: #f1f8f4;
+}
+
+
+/* =========================================
+   NAVIGATION ICONS
+========================================= */
 
 .topnav-icons {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
+
   flex-shrink: 0;
-
-  stroke-width: 2;
 }
 
-/* ---------- HOVER ---------- */
 
-.nav-link:hover {
-  color: #064e3b;
-  background: #f0f7f4;
-}
+/* =========================================
+   USER NAV HAMBURGER
+========================================= */
 
-/* ---------- ACTIVE LINK ---------- */
-
-.nav-link.active {
-  color: #064e3b;
-  background: #edf7f3;
-}
-
-.nav-link.active::after {
-  content: "";
-
-  position: absolute;
-
-  left: 12px;
-  right: 12px;
-  bottom: 3px;
-
-  height: 2px;
-
-  background: #b91c1c;
-
-  border-radius: 10px;
-}
-
-/* ---------- HAMBURGER BUTTON ---------- */
-
-.menu-toggle {
+.user-nav-toggle {
   display: none;
 
-  margin-left: auto;
+  width: 44px;
+  height: 44px;
 
-  width: 46px;
-  height: 46px;
+  margin-left: auto;
+  padding: 0;
 
   align-items: center;
   justify-content: center;
 
   border: none;
-  outline: none;
+  border-radius: 6px;
 
-  background: transparent;
-
-  color: #064e3b;
+  background-color: transparent;
+  color: #064d32;
 
   cursor: pointer;
 
-  border-radius: 8px;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease;
+  flex-shrink: 0;
 }
 
-.menu-toggle:hover {
-  background: #f0f7f4;
-  color: #b91c1c;
-}
-
-.menu-toggle:focus-visible {
-  outline: 2px solid #064e3b;
-  outline-offset: 2px;
+.user-nav-toggle:hover {
+  background-color: #f1f8f4;
 }
 
 
-/* =========================================================
-   LARGE LAPTOP
-========================================================= */
-
-@media (max-width: 1200px) {
-
-  .nav-container {
-    padding: 0 3%;
-  }
-
-  .navigation {
-    gap: 2px;
-  }
-
-  .nav-link {
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-
-  .topnav-icons {
-    width: 17px;
-    height: 17px;
-  }
-}
-
-
-/* =========================================================
+/* =========================================
    TABLET
-   Hamburger menu appears
-========================================================= */
+========================================= */
 
-@media (max-width: 1024px) {
-
-  .user-top-nav {
-    height: 70px;
-  }
+@media (max-width: 950px) {
 
   .nav-container {
-    padding: 0 4%;
+    min-height: 68px;
+    padding: 0 18px;
   }
 
-  /* Show hamburger */
-  .menu-toggle {
+  .user-nav-toggle {
     display: flex;
   }
 
-  /* Hide navigation by default */
   .navigation {
-    display: none;
-
     position: absolute;
 
-    top: 70px;
+    top: 100%;
     right: 0;
 
-    width: 320px;
-    max-width: 85vw;
+    width: min(360px, 85vw);
+    height: calc(100vh - 68px);
 
-    min-height: calc(100vh - 70px);
+    margin: 0;
+    padding: 20px 15px;
 
-    padding: 25px 18px;
-
-    background: #ffffff;
-
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
 
-    gap: 8px;
+    gap: 7px;
 
-    border-left: 1px solid #e5e5e5;
+    background-color: #ffffff;
 
-    box-shadow: -8px 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: -5px 8px 25px rgba(0, 0, 0, 0.12);
 
     overflow-y: auto;
+
+    transform: translateX(100%);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+
+    box-sizing: border-box;
   }
 
-  /* Open navigation */
   .navigation.active {
-    display: flex;
+    transform: translateX(0);
+
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav-link {
     width: 100%;
-
-    min-height: 52px;
+    min-height: 50px;
 
     justify-content: flex-start;
 
-    padding: 12px 16px;
+    padding: 12px 14px;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .topnav-icons {
     width: 20px;
     height: 20px;
   }
-
-  .nav-link.active::after {
-    left: auto;
-    right: 10px;
-
-    top: 10px;
-    bottom: 10px;
-
-    width: 3px;
-    height: auto;
-  }
 }
 
 
-/* =========================================================
-   SMALL TABLET
-========================================================= */
-
-@media (max-width: 768px) {
-
-  .user-top-nav {
-    height: 68px;
-  }
-
-  .nav-container {
-    padding: 0 20px;
-  }
-
-  .nav-logo h1 {
-    font-size: 27px;
-  }
-
-  .menu-toggle {
-    width: 44px;
-    height: 44px;
-  }
-
-  .navigation {
-    top: 68px;
-
-    width: 300px;
-    max-width: 82vw;
-
-    min-height: calc(100vh - 68px);
-
-    padding: 22px 15px;
-  }
-
-  .nav-link {
-    min-height: 50px;
-
-    font-size: 15px;
-
-    padding: 11px 15px;
-  }
-}
-
-
-/* =========================================================
+/* =========================================
    MOBILE
-========================================================= */
+========================================= */
 
-@media (max-width: 480px) {
-
-  .user-top-nav {
-    height: 64px;
-  }
+@media (max-width: 600px) {
 
   .nav-container {
-    padding: 0 16px;
+    min-height: 64px;
+    padding: 0 14px;
   }
 
   .nav-logo h1 {
-    font-size: 25px;
+    font-size: 26px;
   }
 
-  .menu-toggle {
+  .user-nav-toggle {
     width: 42px;
     height: 42px;
   }
 
   .navigation {
-    top: 64px;
+    width: 82vw;
+    max-width: 340px;
 
-    width: 280px;
-    max-width: 82vw;
+    height: calc(100vh - 64px);
 
-    min-height: calc(100vh - 64px);
-
-    padding: 20px 13px;
+    padding: 18px 12px;
   }
 
   .nav-link {
     min-height: 48px;
-
     font-size: 15px;
-
-    padding: 10px 13px;
-  }
-
-  .topnav-icons {
-    width: 19px;
-    height: 19px;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 360px) {
-
-  .nav-container {
-    padding: 0 12px;
-  }
-
-  .nav-logo h1 {
-    font-size: 23px;
-  }
-
-  .menu-toggle {
-    width: 40px;
-    height: 40px;
-  }
-
-  .navigation {
-    width: 260px;
-    max-width: 84vw;
-  }
-
-  .nav-link {
-    font-size: 14px;
   }
 }
 
