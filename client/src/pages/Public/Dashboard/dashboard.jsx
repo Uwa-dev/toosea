@@ -341,7 +341,7 @@ const  Dashboard = () => {
         </div>
 
         <div className="hero-content">
-          <h1>Luxury comfort in the heart of Lagos Island</h1>
+          <h1>ToOseA-Garden Luxury comfort in the heart of Lagos Island</h1>
           <p>
             ToOseA provides a stylish Airbnd experience with modern amenities,
             exceptional hospitality, and easy access to the city's top destinations
