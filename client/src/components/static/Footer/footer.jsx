@@ -44,7 +44,7 @@ export default function Footer() {
 
   <p>
     <Mail size={18} />
-    tooseagarden@gmail.com
+    Tooseagardens@gmail.com
   </p>
 </div>
 

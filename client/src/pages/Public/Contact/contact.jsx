@@ -41,11 +41,9 @@ const Contact = () => {
               <strong>Phone:</strong> +2348081557777
             </p>
             <p>
-              <strong>Email:</strong> tooseagarden@gmail.com
+              <strong>Email:</strong> Tooseagardens@gmail.com
             </p>
-            <p>
-              <strong>Support:</strong> Tooseagardens@gmail.com
-            </p>
+  
           </div>
 
           {/* FORM */}

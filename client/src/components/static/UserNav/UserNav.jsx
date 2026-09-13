@@ -40,7 +40,7 @@ const UserNav = () => {
         {/* LOGO */}
         <div className="nav-logo">
           <Link to="/" onClick={closeMenu}>
-            <h1>ToOseA</h1>
+            <img src="/tose.jpg" alt="ToOseA" className="nav-logo-image" />
           </Link>
         </div>
 

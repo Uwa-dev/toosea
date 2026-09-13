@@ -156,6 +156,7 @@
   background-color: #f1f8f4;
 }
 
+.nav-logo-image { width: 55px; height: 55px; object-fit: contain; display: block; }
 
 /* =========================================
    TABLET
