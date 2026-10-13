@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 
 
-import hotel1 from "../../../images/hote1.jpg";
-import hotel2 from "../../../images/hote2.jpg";
-import hotel3 from "../../../images/hote3.jpg";
-import hotel4 from "../../../images/hote4.jpg";
-import hotel5 from "../../../images/hote5.jpg";
-import hotel6 from "../../../images/hote6.jpg";
-import hotel7 from "../../../images/hote7.jpg";
-import hotel8 from "../../../images/hote8.jpg";
-import hotel9 from "../../../images/hote9.jpg";
-import hotel10 from "../../../images/hote11.jpg";
-import hotel11 from "../../../images/hote12.jpg";
-import hotel12 from "../../../images/hote13.jpg";
-import hotel13 from "../../../images/hote14.jpg";
-import hotel14 from "../../../images/hote15.jpg";
-import hotel15 from "../../../images/hote16.jpg";
+import hotel1 from "../../../images/gal31.jpg";
+import hotel2 from "../../../images/gal2.jpg";
+import hotel3 from "../../../images/gal3.jpg";
+import hotel4 from "../../../images/gal4.jpg";
+import hotel5 from "../../../images/gal5.jpg";
+import hotel6 from "../../../images/gal6.jpg";
+import hotel7 from "../../../images/gal7.jpg";
+import hotel8 from "../../../images/gal8.jpg";
+import hotel9 from "../../../images/gal9.jpg";
+import hotel10 from "../../../images/gal10.jpg";
+import hotel11 from "../../../images/gal11.jpg";
+import hotel12 from "../../../images/gal12.jpg";
+import hotel13 from "../../../images/gal.jpg";
+import hotel14 from "../../../images/gal14.jpg";
+import hotel15 from "../../../images/gal15.jpg";
 import hotel16 from "../../../images/hote17.jpg";
 import hotel17 from "../../../images/hote18.jpg";
 
