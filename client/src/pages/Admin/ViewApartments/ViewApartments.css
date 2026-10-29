@@ -7,8 +7,15 @@
   min-height: 100vh;
   padding: 24px;
   box-sizing: border-box;
-  background: #f8f9fb;
+  background:
+    linear-gradient(
+      135deg,
+      var(--off-white) 0%,
+      #f1f8f4 50%,
+      #eaf5ef 100%
+    );
 }
+
 
 /* ========================================
    HEADER
@@ -26,14 +33,15 @@
   margin: 0 0 5px;
   font-size: 26px;
   font-weight: 700;
-  color: #111827;
+  color: var(--green-dark);
 }
 
 .view-apartment-container .page-header p {
   margin: 0;
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-light);
 }
+
 
 /* ========================================
    CREATE BUTTON
@@ -42,29 +50,35 @@
 .view-apartment-container .add-btn {
   height: 42px;
   padding: 0 18px;
-
   border: none;
-  border-radius: 8px;
-
-  background: #111827;
-  color: #ffffff;
-
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    135deg,
+    var(--green-dark),
+    var(--green)
+  );
+  color: var(--white);
   font-size: 14px;
   font-weight: 600;
-
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .view-apartment-container .add-btn:hover {
-  background: #000000;
-  transform: translateY(-1px);
+  background: linear-gradient(
+    135deg,
+    var(--green),
+    var(--green-deep)
+  );
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .view-apartment-container .add-btn:active {
   transform: translateY(0);
 }
+
 
 /* ========================================
    TABLE CONTAINER
@@ -73,14 +87,12 @@
 .view-apartment-container .table-container {
   width: 100%;
   overflow-x: auto;
-
-  background: #ffffff;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
 }
+
 
 /* ========================================
    TABLE
@@ -89,35 +101,34 @@
 .view-apartment-container table {
   width: 100%;
   min-width: 1000px;
-
   border-collapse: collapse;
 }
+
 
 /* ========================================
    TABLE HEADER
 ======================================== */
 
 .view-apartment-container thead {
-  background: #f3f4f6;
+  background: linear-gradient(
+    135deg,
+    var(--green-dark),
+    var(--green-deep)
+  );
 }
 
 .view-apartment-container th {
   padding: 15px 16px;
-
   text-align: left;
-
   font-size: 12px;
   font-weight: 700;
-
-  color: #4b5563;
-
+  color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.03em;
-
-  border-bottom: 1px solid #e5e7eb;
-
+  border-bottom: 1px solid var(--green-dark);
   white-space: nowrap;
 }
+
 
 /* ========================================
    TABLE BODY
@@ -125,26 +136,24 @@
 
 .view-apartment-container td {
   padding: 16px;
-
   font-size: 14px;
-  color: #374151;
-
-  border-bottom: 1px solid #f0f0f0;
-
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
 .view-apartment-container tbody tr {
-  transition: background 0.2s ease;
+  transition: var(--transition);
 }
 
 .view-apartment-container tbody tr:hover {
-  background: #f9fafb;
+  background: var(--green-light);
 }
 
 .view-apartment-container tbody tr:last-child td {
   border-bottom: none;
 }
+
 
 /* ========================================
    COLUMN STYLING
@@ -156,53 +165,56 @@
 .view-apartment-container td:first-child {
   width: 55px;
   text-align: center;
+  color: var(--green);
+  font-weight: 600;
 }
+
 
 /* Apartment Name */
 
 .view-apartment-container td:nth-child(2) {
   min-width: 150px;
-
-  font-weight: 600;
-  color: #111827;
-
+  font-weight: 700;
+  color: var(--green-dark);
   white-space: nowrap;
 }
+
 
 /* Description */
 
 .view-apartment-container td:nth-child(3) {
   max-width: 280px;
-
-  color: #6b7280;
-
+  color: var(--text-light);
   line-height: 1.5;
 }
+
 
 /* Price */
 
 .view-apartment-container td:nth-child(4) {
-  font-weight: 600;
-  color: #111827;
-
+  font-weight: 700;
+  color: var(--green);
   white-space: nowrap;
 }
+
 
 /* Capacity */
 
 .view-apartment-container td:nth-child(5) {
   white-space: nowrap;
+  color: var(--green-dark);
+  font-weight: 600;
 }
+
 
 /* Amenities */
 
 .view-apartment-container td:nth-child(6) {
   max-width: 220px;
-
-  color: #6b7280;
-
+  color: var(--text-light);
   line-height: 1.5;
 }
+
 
 /* Actions */
 
@@ -210,6 +222,7 @@
   width: 110px;
   white-space: nowrap;
 }
+
 
 /* ========================================
    ACTION BUTTONS
@@ -222,46 +235,49 @@
 .view-apartment-container .actions button {
   width: 36px;
   height: 36px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
-
   border: none;
-  border-radius: 7px;
-
+  border-radius: var(--radius-sm);
   cursor: pointer;
-
   margin-right: 8px;
-
-  transition: all 0.2s ease;
+  transition: var(--transition);
 }
+
 
 /* View */
 
 .view-apartment-container .actions .view {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border: 1px solid #c7dfd2;
 }
 
 .view-apartment-container .actions .view:hover {
-  background: #e0e7ff;
-  transform: translateY(-1px);
+  background: var(--green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
+
 
 /* Images */
 
 .view-apartment-container .actions .images {
-  background: #ecfdf5;
-  color: #059669;
+  background: #fff4d8;
+  color: #a66a00;
+  border: 1px solid #f0d58c;
 }
 
 .view-apartment-container .actions .images:hover {
-  background: #d1fae5;
-  transform: translateY(-1px);
+  background: #e3a21a;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
+
 
 /* ========================================
    LOADING / EMPTY STATE
@@ -269,13 +285,12 @@
 
 .view-apartment-container tbody td[colspan] {
   padding: 50px 20px;
-
   text-align: center;
-
-  color: #6b7280;
-
+  color: var(--text-light);
   font-size: 14px;
+  background: var(--off-white);
 }
+
 
 /* ========================================
    SCROLLBAR
@@ -283,24 +298,26 @@
 
 .view-apartment-container
   .table-container::-webkit-scrollbar {
-  height: 7px;
+  height: 8px;
 }
 
 .view-apartment-container
   .table-container::-webkit-scrollbar-track {
-  background: #f3f4f6;
+  background: var(--green-light);
+  border-radius: 10px;
 }
 
 .view-apartment-container
   .table-container::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: var(--green);
   border-radius: 10px;
 }
 
 .view-apartment-container
   .table-container::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: var(--green-dark);
 }
+
 
 /* ========================================
    RESPONSIVE
@@ -330,6 +347,7 @@
   }
 }
 
+
 /* ========================================
    SMALL MOBILE
 ======================================== */
@@ -350,5 +368,9 @@
   .view-apartment-container .add-btn {
     height: 40px;
     font-size: 13px;
+  }
+
+  .view-apartment-container .table-container {
+    border-radius: var(--radius-sm);
   }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import {
   getPendingUsers,
   approveUser,
@@ -30,7 +31,7 @@ const PendingApprovals = () => {
     } catch (error) {
       console.error("Failed to fetch pending approvals:", error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to load pending approvals."
       );
@@ -55,7 +56,7 @@ const PendingApprovals = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to approve user."
       );
@@ -76,7 +77,7 @@ const PendingApprovals = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to reject user."
       );
@@ -97,7 +98,7 @@ const PendingApprovals = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to approve apartment."
       );
@@ -118,7 +119,7 @@ const PendingApprovals = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to reject apartment."
       );

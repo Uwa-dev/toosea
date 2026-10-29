@@ -1,73 +1,213 @@
-.today-bookings{
-    padding:30px;
+/* =========================================
+   TODAY BOOKINGS
+========================================= */
+
+.today-bookings {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  background: var(--off-white);
 }
 
-.page-header{
-    margin-bottom:25px;
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-header {
+  margin-bottom: 25px;
 }
 
-.booking-table{
-    width:100%;
-    border-collapse:collapse;
-    background:#fff;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
+.page-header h2 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 26px;
+  font-weight: 700;
 }
 
-.booking-table th{
-    background:#1b4332;
-    color:#fff;
-    padding:15px;
-    text-align:left;
+.page-header p {
+  margin: 6px 0 0;
+  color: var(--text-light);
+  font-size: 14px;
 }
 
-.booking-table td{
-    padding:15px;
-    border-bottom:1px solid #eee;
+
+/* =========================================
+   BOOKING TABLE
+========================================= */
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-.booking-table tr:hover{
-    background:#f8f8f8;
+.booking-table th {
+  padding: 15px;
+  background: linear-gradient(
+    90deg,
+    var(--green-dark),
+    var(--green-deep)
+  );
+  color: var(--white);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
+
+.booking-table td {
+  padding: 15px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.booking-table tbody tr {
+  transition: var(--transition);
+}
+
+.booking-table tbody tr:hover {
+  background: var(--green-light);
+}
+
+.booking-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   BOOKING SOURCE BADGES
+========================================= */
 
 .online-badge,
-.walkin-badge{
-    padding:5px 10px;
-    border-radius:20px;
-    color:#fff;
-    font-size:.8rem;
-    font-weight:600;
+.walkin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 11px;
+  border-radius: 999px;
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.online-badge{
-    background:#0077b6;
+
+/* Online */
+
+.online-badge {
+  background: var(--green);
+  box-shadow: 0 3px 8px rgba(11, 107, 69, 0.18);
 }
 
-.walkin-badge{
-    background:#2a9d8f;
+
+/* Walk-in */
+
+.walkin-badge {
+  background: var(--red);
+  box-shadow: 0 3px 8px rgba(179, 38, 46, 0.18);
 }
 
-.status{
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:.8rem;
-    color:#fff;
-    font-weight:600;
+
+/* =========================================
+   BOOKING STATUS
+========================================= */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.status.pending{
-    background:#f4a261;
+
+/* Pending */
+
+.status.pending {
+  background: #fff4d9;
+  color: #9a6700;
+  border: 1px solid #f0dfb5;
 }
 
-.status.confirmed{
-    background:#2a9d8f;
+
+/* Confirmed */
+
+.status.confirmed {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid #c7e5d5;
 }
 
-.status.checked_in{
-    background:#4361ee;
+
+/* Checked In */
+
+.status.checked_in {
+  background: #e4f0ec;
+  color: var(--green-dark);
+  border: 1px solid #b8d8ca;
 }
 
-.status.cancelled{
-    background:#d62828;
+
+/* Cancelled */
+
+.status.cancelled {
+  background: #fcebed;
+  color: var(--red);
+  border: 1px solid #f0c7ca;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .today-bookings {
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .booking-table {
+    min-width: 850px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .today-bookings {
+    padding: 15px;
+  }
+
+  .page-header h2 {
+    font-size: 21px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .booking-table th,
+  .booking-table td {
+    padding: 12px;
+  }
+
+  .booking-table th {
+    font-size: 11px;
+  }
+
+  .booking-table td {
+    font-size: 13px;
+  }
 }

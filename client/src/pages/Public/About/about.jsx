@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import "./about.css";
 
 const About = () => {
@@ -6,7 +7,7 @@ const About = () => {
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    alert(`Thank you for subscribing: ${email}`);
+    toast.success(`Thank you for subscribing: ${email}`);
     setEmail("");
   };
 

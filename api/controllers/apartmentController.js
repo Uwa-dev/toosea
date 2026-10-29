@@ -1,5 +1,6 @@
 import Apartment from "../models/apartmentModel.js";
 import cloudinary from "../config/cloudinary.js";
+import Booking from "../models/bookingModel.js"
 
 export const createApartment = async (req, res) => {
   try {
@@ -344,97 +345,165 @@ export const deleteApartment = async (req, res) => {
   }
 };
 
-export const getAvailableApartments = async (req, res) => {
-  try {
-    const { checkIn, checkOut } = req.query;
+// export const getAvailableApartments = async (req, res) => {
+//   try {
+//     const { checkIn, checkOut } = req.query;
 
-    if (!checkIn || !checkOut) {
-      return res.status(400).json({
-        success: false,
-        message: "checkIn and checkOut are required"
-      });
-    }
+//     if (!checkIn || !checkOut) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "checkIn and checkOut are required"
+//       });
+//     }
 
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
+//     const checkInDate = new Date(checkIn);
+//     const checkOutDate = new Date(checkOut);
 
-    if (checkInDate >= checkOutDate) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid date range"
-      });
-    }
+//     if (checkInDate >= checkOutDate) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid date range"
+//       });
+//     }
 
-    // 1. find all conflicting bookings
-    const bookedApartmentIds = await Booking.find({
-      bookingStatus: {
-        $nin: ["CANCELLED", "CHECKED_OUT"]
-      },
-      checkInDate: {
-        $lt: checkOutDate
-      },
-      checkOutDate: {
-        $gt: checkInDate
-      }
-    }).distinct("apartment");
+//     // 1. find all conflicting bookings
+//     const bookedApartmentIds = await Booking.find({
+//       bookingStatus: {
+//         $nin: ["CANCELLED", "CHECKED_OUT"]
+//       },
+//       checkInDate: {
+//         $lt: checkOutDate
+//       },
+//       checkOutDate: {
+//         $gt: checkInDate
+//       }
+//     }).distinct("apartment");
 
-    // 2. get available apartments
-    const availableApartments = await Apartment.find({
-      isActive: true,
-      _id: { $nin: bookedApartmentIds }
-    });
+//     // 2. get available apartments
+//     const availableApartments = await Apartment.find({
+//       isActive: true,
+//       _id: { $nin: bookedApartmentIds }
+//     });
 
-    return res.status(200).json({
-      success: true,
-      count: availableApartments.length,
-      data: availableApartments
-    });
+//     return res.status(200).json({
+//       success: true,
+//       count: availableApartments.length,
+//       data: availableApartments
+//     });
 
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: error.message
+//     });
+//   }
+// };
 
 //usefull for UI calendar
 export const getAllApartmentsWithStatus = async (req, res) => {
   try {
     const { checkIn, checkOut } = req.query;
 
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
+    if (!checkIn || !checkOut) {
+      return res.status(400).json({
+        success: false,
+        message: "Check-in and check-out dates are required."
+      });
+    }
+
+    const checkInDate = new Date(`${checkIn}T00:00:00.000Z`);
+    const checkOutDate = new Date(`${checkOut}T00:00:00.000Z`);
+
+    if (
+      Number.isNaN(checkInDate.getTime()) ||
+      Number.isNaN(checkOutDate.getTime())
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid dates."
+      });
+    }
+
+    if (checkOutDate <= checkInDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Check-out date must be after check-in date."
+      });
+    }
+
+    /*
+      IMPORTANT:
+
+      Booking intervals are treated as:
+
+      [checkIn, checkOut)
+
+      Therefore:
+
+      Existing: 22 -> 23
+
+      New:      21 -> 22   ✅ AVAILABLE
+      New:      23 -> 24   ✅ AVAILABLE
+
+      New:      22 -> 23   ❌ BOOKED
+      New:      21 -> 23   ❌ BOOKED
+      New:      22 -> 24   ❌ BOOKED
+    */
 
     const bookings = await Booking.find({
       bookingStatus: {
-        $nin: ["CANCELLED", "CHECKED_OUT"]
+        $nin: [
+          "CANCELLED",
+          "CHECKED_OUT",
+          "EXPIRED"
+        ]
       },
-      checkInDate: { $lt: checkOutDate },
-      checkOutDate: { $gt: checkInDate }
-    });
 
-    const bookedMap = new Set(
-      bookings.map(b => b.apartment.toString())
+      checkInDate: {
+        $lt: checkOutDate
+      },
+
+      checkOutDate: {
+        $gt: checkInDate
+      }
+    }).select("apartment");
+
+    const bookedApartmentIds = new Set(
+      bookings.map(
+        (booking) => booking.apartment.toString()
+      )
     );
 
     const apartments = await Apartment.find({
-      isActive: true
+      isActive: true,
+      approvalStatus: "APPROVED",
+      status: {
+        $nin: [
+          "MAINTENANCE",
+          "INACTIVE"
+        ]
+      }
     });
 
-    const result = apartments.map(apartment => ({
+    const result = apartments.map((apartment) => ({
       ...apartment.toObject(),
-      isAvailable: !bookedMap.has(
+
+      isAvailable: !bookedApartmentIds.has(
         apartment._id.toString()
       )
     }));
 
-    return res.json({
+    return res.status(200).json({
       success: true,
       data: result
     });
 
   } catch (error) {
+    console.error(
+      "Get apartments with status error:",
+      error
+    );
+
     return res.status(500).json({
       success: false,
       message: error.message

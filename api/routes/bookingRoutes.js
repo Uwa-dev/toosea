@@ -12,7 +12,9 @@ import {
   getCheckedInGuests,
   transferAndExtendStay,
   getMonthlyBookings,
-  getYearlyBookings
+  getYearlyBookings,
+  getAvailableApartments,
+  getApartmentBookedDates
 } from "../controllers/bookingController.js";
 
 import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
@@ -20,6 +22,8 @@ import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 const BookingRouter = express.Router();
 
 BookingRouter.post("/online", createOnlineBooking);
+BookingRouter.get("/:id/booked-dates", getApartmentBookedDates);
+BookingRouter.get("/available-apartments", getAvailableApartments);
 BookingRouter.post("/walkin", protect, authorizeRoles("RECEPTIONIST"), createWalkInBooking);
 BookingRouter.get("/today", protect, authorizeRoles("OWNER", "MANAGER", "RECEPTIONIST"), getTodayBookings);
 BookingRouter.get("/", protect, authorizeRoles("OWNER"), getAllBookings);

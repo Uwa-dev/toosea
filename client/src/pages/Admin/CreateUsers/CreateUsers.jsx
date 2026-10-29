@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import "./createUsers.css";
 import Load from "../../../../src/components/reuse/Load.jsx";
 import { createUser } from "../../../services/authApi.js";
+import { toast } from "react-toastify";
 
 const CreateUsers = () => {
   const { user } = useSelector((state) => state.user);
@@ -32,7 +33,7 @@ const CreateUsers = () => {
     e.preventDefault();
 
     if (!formData.fullName.trim() || !formData.email.trim()) {
-      alert("Please fill in all fields.");
+      toast.warning("Please fill in all fields.");
       return;
     }
 
@@ -59,7 +60,7 @@ const CreateUsers = () => {
     } catch (error) {
       console.error("Create User Error:", error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to create staff."
       );
@@ -80,10 +81,10 @@ Staff Code: ${createdUser.staffCode}
 Password: ${createdUser.password}`
       );
 
-      alert("Staff details copied successfully!");
+      toast.success("Staff details copied successfully!");
     } catch (error) {
       console.error(error);
-      alert("Failed to copy details.");
+      toast.error("Failed to copy details.");
     }
   };
 

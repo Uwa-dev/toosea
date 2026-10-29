@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAllApartments } from "../../../services/apartmentApi";
-import { createWalkInBooking } from "../../../services/bookingApi";
+
+import {
+  getAvailableApartments,
+  createWalkInBooking,
+} from "../../../services/bookingApi";
+
 import "./createbooking.css";
 
 const CreateBooking = () => {
@@ -11,8 +16,7 @@ const CreateBooking = () => {
   const rebookCustomer = location.state?.customer || null;
 
   const [apartments, setApartments] = useState([]);
-  const [selectedApartment, setSelectedApartment] =
-    useState(null);
+  const [selectedApartment, setSelectedApartment] = useState(null);
 
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -23,81 +27,123 @@ const CreateBooking = () => {
     phone: rebookCustomer?.phone || "",
   });
 
-  const [paymentMethod, setPaymentMethod] =
-    useState("CASH");
+  const [paymentMethod, setPaymentMethod] = useState("CASH");
+
+  /* =========================================
+     FETCH AVAILABLE APARTMENTS
+  ========================================= */
 
   useEffect(() => {
-    fetchApartments();
-  }, []);
+    fetchAvailableApartments();
+  }, [checkIn, checkOut]);
 
-  const fetchApartments = async () => {
+  const fetchAvailableApartments = async () => {
+    // No dates selected
+    if (!checkIn || !checkOut) {
+      setApartments([]);
+      setSelectedApartment(null);
+      return;
+    }
+
+    // Invalid date range
+    if (new Date(checkOut) <= new Date(checkIn)) {
+      setApartments([]);
+      setSelectedApartment(null);
+      return;
+    }
+
     try {
-      const data = await getAllApartments();
-
-      const available = data.apartments.filter(
-        (item) =>
-          item.isActive &&
-          item.status === "AVAILABLE"
+      const data = await getAvailableApartments(
+        checkIn,
+        checkOut
       );
 
-      setApartments(available);
+      setApartments(data.apartments || []);
+      setSelectedApartment(null);
     } catch (err) {
-      console.log(err);
+      console.error(
+        "Error fetching available apartments:",
+        err
+      );
+
+      setApartments([]);
+      setSelectedApartment(null);
+
+      toast.error(
+        err.response?.data?.message ||
+          "Unable to find available apartments."
+      );
     }
   };
+
+  /* =========================================
+     CALCULATE NIGHTS
+  ========================================= */
 
   const nights =
     checkIn && checkOut
       ? Math.ceil(
-          (new Date(checkOut) -
-            new Date(checkIn)) /
+          (new Date(checkOut) - new Date(checkIn)) /
             (1000 * 60 * 60 * 24)
         )
       : 0;
 
+  /* =========================================
+     CALCULATE TOTAL
+  ========================================= */
+
   const total =
     selectedApartment && nights > 0
-      ? nights *
-        selectedApartment.pricePerNight
+      ? nights * selectedApartment.pricePerNight
       : 0;
+
+  /* =========================================
+     SUBMIT BOOKING
+  ========================================= */
 
   const handleSubmit = async () => {
     try {
-      if (!selectedApartment) {
-        return alert("Select an apartment.");
-      }
-
       if (!checkIn || !checkOut) {
-        return alert(
+        return toast.error(
           "Select check-in and check-out dates."
         );
       }
 
       if (new Date(checkOut) <= new Date(checkIn)) {
-        return alert(
+        return toast.error(
           "Check-out must be after check-in."
         );
+      }
+
+      if (!selectedApartment) {
+        return toast.error("Select an apartment.");
       }
 
       if (
         !customer.fullName.trim() ||
         !customer.phone.trim()
       ) {
-        return alert(
+        return toast.error(
           "Customer name and phone are required."
         );
       }
 
-      const response =
-        await createWalkInBooking({
-          apartmentId: selectedApartment._id,
-          customer,
-          checkInDate: checkIn,
-          checkOutDate: checkOut,
-          paymentMethod,
-        });
+      const response = await createWalkInBooking({
+        apartmentId: selectedApartment._id,
 
-      alert(
+        customer: {
+          fullName: customer.fullName.trim(),
+          email: customer.email.trim(),
+          phone: customer.phone.trim(),
+        },
+
+        checkInDate: checkIn,
+        checkOutDate: checkOut,
+
+        paymentMethod,
+      });
+
+      toast.success(
         response.message ||
           "Booking created successfully."
       );
@@ -114,26 +160,38 @@ const CreateBooking = () => {
         phone: "",
       });
 
-      // If we came from the Rebook button,
-      // return to Checked In page.
+      // If this was a rebooking, return to today's bookings
       if (rebookCustomer) {
         navigate("/receptionist/todaybookings");
       }
     } catch (err) {
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to create booking."
       );
     }
   };
 
+  /* =========================================
+     TODAY
+  ========================================= */
+
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
+
   return (
     <div className="create-booking-page">
+
       <h2>
         {rebookCustomer
           ? "Rebook Guest"
           : "Create Walk-in Booking"}
       </h2>
+
+      {/* =====================================
+          REBOOK BANNER
+      ===================================== */}
 
       {rebookCustomer && (
         <div className="rebook-banner">
@@ -141,6 +199,54 @@ const CreateBooking = () => {
           been pre-filled.
         </div>
       )}
+
+      {/* =====================================
+          DATES
+      ===================================== */}
+
+      <div className="booking-date-fields">
+
+        <div>
+          <label>Check In</label>
+
+          <input
+            type="date"
+            value={checkIn}
+            min={today}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              setCheckIn(value);
+
+              // Clear checkout if it is now invalid
+              if (
+                checkOut &&
+                new Date(checkOut) <= new Date(value)
+              ) {
+                setCheckOut("");
+              }
+            }}
+          />
+        </div>
+
+        <div>
+          <label>Check Out</label>
+
+          <input
+            type="date"
+            value={checkOut}
+            min={checkIn || today}
+            onChange={(e) =>
+              setCheckOut(e.target.value)
+            }
+          />
+        </div>
+
+      </div>
+
+      {/* =====================================
+          APARTMENT
+      ===================================== */}
 
       <label>Apartment</label>
 
@@ -152,11 +258,18 @@ const CreateBooking = () => {
               item._id === e.target.value
           );
 
-          setSelectedApartment(apartment);
+          setSelectedApartment(
+            apartment || null
+          );
         }}
+        disabled={!checkIn || !checkOut}
       >
         <option value="">
-          Select Apartment
+          {!checkIn || !checkOut
+            ? "Select dates first"
+            : apartments.length === 0
+            ? "No apartments available"
+            : "Select Apartment"}
         </option>
 
         {apartments.map((item) => (
@@ -165,42 +278,17 @@ const CreateBooking = () => {
             value={item._id}
           >
             {item.name} - ₦
-            {item.pricePerNight.toLocaleString()}
+            {Number(
+              item.pricePerNight
+            ).toLocaleString()}
             /night
           </option>
         ))}
       </select>
 
-      <label>Check In</label>
-
-      <input
-        type="date"
-        value={checkIn}
-        min={
-          new Date()
-            .toISOString()
-            .split("T")[0]
-        }
-        onChange={(e) =>
-          setCheckIn(e.target.value)
-        }
-      />
-
-      <label>Check Out</label>
-
-      <input
-        type="date"
-        value={checkOut}
-        min={
-          checkIn ||
-          new Date()
-            .toISOString()
-            .split("T")[0]
-        }
-        onChange={(e) =>
-          setCheckOut(e.target.value)
-        }
-      />
+      {/* =====================================
+          CUSTOMER DETAILS
+      ===================================== */}
 
       <label>Full Name</label>
 
@@ -213,6 +301,7 @@ const CreateBooking = () => {
             fullName: e.target.value,
           }))
         }
+        placeholder="Customer full name"
       />
 
       <label>Email</label>
@@ -226,6 +315,7 @@ const CreateBooking = () => {
             email: e.target.value,
           }))
         }
+        placeholder="Customer email"
       />
 
       <label>Phone</label>
@@ -239,7 +329,12 @@ const CreateBooking = () => {
             phone: e.target.value,
           }))
         }
+        placeholder="Customer phone number"
       />
+
+      {/* =====================================
+          PAYMENT METHOD
+      ===================================== */}
 
       <label>Payment Method</label>
 
@@ -249,41 +344,76 @@ const CreateBooking = () => {
           setPaymentMethod(e.target.value)
         }
       >
-        <option value="CASH">
-          Cash
-        </option>
+        <option value="CASH">Cash</option>
         <option value="TRANSFER">
           Bank Transfer
         </option>
-        <option value="POS">
-          POS
-        </option>
+        <option value="POS">POS</option>
       </select>
 
-      {selectedApartment &&
-        nights > 0 && (
-          <div className="booking-summary">
-            <h3>Booking Summary</h3>
+      {/* =====================================
+          BOOKING SUMMARY
+      ===================================== */}
 
-            <p>Nights: {nights}</p>
+      {selectedApartment && nights > 0 && (
+        <div className="booking-summary">
 
-            <p>
-              Price/Night: ₦
-              {selectedApartment.pricePerNight.toLocaleString()}
-            </p>
+          <h3>Booking Summary</h3>
 
-            <hr />
+          <p>
+            Apartment:{" "}
+            <strong>
+              {selectedApartment.name}
+            </strong>
+          </p>
 
-            <h2>
-              Total: ₦
-              {total.toLocaleString()}
-            </h2>
-          </div>
-        )}
+          <p>
+            Check In:{" "}
+            <strong>{checkIn}</strong>
+          </p>
 
-      <button onClick={handleSubmit}>
+          <p>
+            Check Out:{" "}
+            <strong>{checkOut}</strong>
+          </p>
+
+          <p>
+            Nights:{" "}
+            <strong>{nights}</strong>
+          </p>
+
+          <p>
+            Price/Night: ₦
+            {Number(
+              selectedApartment.pricePerNight
+            ).toLocaleString()}
+          </p>
+
+          <hr />
+
+          <h2>
+            Total: ₦
+            {total.toLocaleString()}
+          </h2>
+
+        </div>
+      )}
+
+      {/* =====================================
+          CREATE BOOKING
+      ===================================== */}
+
+      <button
+        onClick={handleSubmit}
+        disabled={
+          !checkIn ||
+          !checkOut ||
+          !selectedApartment
+        }
+      >
         Create Booking
       </button>
+
     </div>
   );
 };

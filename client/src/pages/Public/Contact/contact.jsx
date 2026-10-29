@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import "./contacts.css";
 
 const Contact = () => {
@@ -18,7 +19,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Submitted:", formData);
-    alert("Message sent successfully!");
+    toast.success("Message sent successfully!");
   };
 
   return (

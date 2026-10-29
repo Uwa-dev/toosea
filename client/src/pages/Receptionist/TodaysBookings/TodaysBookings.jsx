@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getTodayBookings } from "../../../services/bookingApi";
@@ -28,7 +29,7 @@ const TodaysBookings = () => {
     } catch (err) {
       console.log(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to load bookings."
       );

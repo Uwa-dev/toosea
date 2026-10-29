@@ -22,12 +22,12 @@ const Create = ({ role }) => {
   });
 
   const amenitiesList = [
-    "WiFi",
-    "Swimming Pool",
-    "Air Conditioning",
+    "Wifi & DSTV",
+    "3 Bedrooms",
+    "Generator",
     "Kitchen",
     "Parking",
-    "Smart TV",
+    "Secure environment",
   ];
 
   const isManager = role === "MANAGER";

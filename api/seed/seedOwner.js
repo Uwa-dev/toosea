@@ -28,8 +28,8 @@ const seedOwner = async () => {
     );
 
     const owner = await User.create({
-      fullName: "System Owner",
-      email: "owner@system.com",
+      fullName: "Tobi Agene",
+      email: "tooseagarden@gmail.com",
       password: hashedPassword,
       role: "OWNER",
       staffCode: "OWN001"
@@ -47,28 +47,20 @@ const seedOwner = async () => {
 
 seedOwner();
 
-
-
-// Name: Donald Muc
-// Email: donald@gmail.com
+// Name: James Hudson
+// Email: james@gmail.com
 // Role: RECEPTIONIST
-// Staff Code: REC001
-// Password: dUT5utpJFA
+// Staff Code: REC005
+// Password: 6egR3evepF
 
-// Name: Chizaram Madu
-// Email: chizaram@gmail.com
+// Name: Dara Mcdonald
+// Email: dara@gmail.com
+// Role: MANAGER
+// Staff Code: MGR005
+// Password: 0oKRqgV@VU
+
+// Name: Tonia Ibrahim
+// Email: tonia@gmail.com
 // Role: RECEPTIONIST
-// Staff Code: REC002
-// Password: 8I4k8#FCdh
-
-
-//Name: Miracle Imade
-//Email: miracle@gmail.com
-// Role: Manager
-//Password: dIxdG2L4q9
-
-// Name: Chidi Dalu
-// Email: chidi@gmail.com
-//Role: RECEPTIONIST
-// Staff Code: REC003
-//Password: FI6ai4pgkr
+// Staff Code: REC007
+// Password: XMQw21RGk@

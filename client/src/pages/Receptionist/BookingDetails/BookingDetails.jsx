@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   getBookingById,
@@ -29,7 +30,7 @@ const BookingDetails = () => {
     } catch (err) {
       console.log(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to load booking."
       );
@@ -50,13 +51,13 @@ const BookingDetails = () => {
 
       const response = await checkInGuest(booking._id);
 
-      alert(response.message);
+      toast.info(response.message);
 
       await fetchBooking();
     } catch (err) {
       console.log(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to check in guest."
       );
@@ -77,13 +78,13 @@ const BookingDetails = () => {
 
       const response = await cancelBooking(booking._id);
 
-      alert(response.message);
+      toast.info(response.message);
 
       await fetchBooking();
     } catch (err) {
       console.log(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to cancel booking."
       );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Eye, UserRoundX } from "lucide-react";
 import "./viewUser.css";
 import Load from "../../../components/reuse/Load.jsx";
@@ -27,7 +28,7 @@ const ViewStaff = () => {
     } catch (error) {
       console.error("Fetch Staff Error:", error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to fetch staff."
       );
@@ -78,7 +79,7 @@ const ViewStaff = () => {
 
       await deleteUser(staff._id);
 
-      alert(
+      toast.info(
         `${staff.fullName} has been removed successfully.`
       );
 
@@ -95,7 +96,7 @@ const ViewStaff = () => {
         error
       );
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Failed to remove user."
       );

@@ -84,3 +84,20 @@ export const getYearlyBookings = async (
 
   return response.data;
 };
+
+export const getAvailableApartments = async (
+  checkInDate,
+  checkOutDate
+) => {
+  const response = await bookingApi.get(
+    "/available-apartments",
+    {
+      params: {
+        checkInDate,
+        checkOutDate,
+      },
+    }
+  );
+
+  return response.data;
+};

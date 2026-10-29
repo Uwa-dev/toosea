@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import {
   getApprovedUsers,
   getApprovedApartments,
@@ -29,10 +30,10 @@ const AllApprovals = () => {
     } catch (error) {
       console.error("Failed to fetch approvals:", error);
 
-      alert(
-        error.response?.data?.message ||
-          "Failed to load approvals."
-      );
+      toast.error(
+      error.response?.data?.message ||
+        "Failed to load approvals."
+    );
     } finally {
       setLoading(false);
     }

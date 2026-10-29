@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { getAllApartments } from "../../../services/apartmentApi";
 import "./allApartments.css";
 
@@ -20,7 +21,7 @@ const AllApartments = () => {
     } catch (error) {
       console.error("Failed to fetch apartments:", error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Unable to load apartments."
       );

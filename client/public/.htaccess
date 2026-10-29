@@ -1,0 +1,9 @@
+# Always serve index.html for React/Vite routes
+RewriteEngine On
+RewriteBase /
+
+# If a requested file or folder does not exist,
+# redirect all requests to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

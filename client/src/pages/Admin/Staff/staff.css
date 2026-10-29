@@ -6,32 +6,30 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   margin-bottom: 20px;
   padding: 9px 14px;
-
-  border: 1px solid #e5e7eb;
-  border-radius: 7px;
-
-  background: #ffffff;
-  color: #374151;
-
+  border: 1px solid #c9dfd3;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-dark);
   font-size: 14px;
-  font-weight: 500;
-
+  font-weight: 600;
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .back-btn:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: var(--green-light);
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateX(-2px);
 }
 
 .back-btn:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
+
 
 /* ========================================
    STAFF DETAILS PAGE
@@ -42,12 +40,18 @@
   min-height: 100vh;
   padding: 30px;
   box-sizing: border-box;
-  background: #f8f9fb;
-
+  background:
+    linear-gradient(
+      135deg,
+      var(--off-white) 0%,
+      #f2f8f5 50%,
+      #edf6f1 100%
+    );
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
+
 
 /* ========================================
    STAFF CARD
@@ -56,13 +60,31 @@
 .staff-card {
   width: 100%;
   max-width: 700px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   padding: 30px;
   box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
 }
+
+.staff-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    var(--green-dark),
+    var(--green),
+    var(--red)
+  );
+}
+
 
 /* ========================================
    TITLE
@@ -71,12 +93,12 @@
 .staff-card h2 {
   margin: 0 0 28px;
   padding-bottom: 18px;
-  border-bottom: 1px solid #e5e7eb;
-
+  border-bottom: 1px solid var(--border);
   font-size: 24px;
   font-weight: 700;
-  color: #111827;
+  color: var(--green-dark);
 }
+
 
 /* ========================================
    STAFF INFORMATION
@@ -89,17 +111,20 @@
 
 .staff-info p {
   margin: 0;
-  padding: 17px 0;
-
+  padding: 17px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-
   font-size: 14px;
-  color: #4b5563;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
 
-  border-bottom: 1px solid #f0f0f0;
+.staff-info p:hover {
+  background: var(--green-light);
 }
 
 .staff-info p:last-child {
@@ -109,8 +134,9 @@
 .staff-info strong {
   min-width: 130px;
   font-weight: 600;
-  color: #111827;
+  color: var(--green-dark);
 }
+
 
 /* ========================================
    STAFF CODE
@@ -118,19 +144,64 @@
 
 .staff-info p:nth-child(3) {
   font-family: inherit;
+  color: var(--green);
+  font-weight: 600;
 }
 
-.staff-info p:nth-child(3)::first-letter {
-  color: inherit;
+.staff-info p:nth-child(3) strong {
+  color: var(--green-dark);
 }
+
 
 /* ========================================
    ROLE
 ======================================== */
 
 .staff-info p:nth-child(4) {
-  color: #374151;
+  color: var(--green);
+  font-weight: 600;
 }
+
+.staff-info p:nth-child(4) strong {
+  color: var(--green-dark);
+}
+
+
+/* ========================================
+   ADDITIONAL COLOUR ACCENTS
+======================================== */
+
+.staff-info p:nth-child(1)::before,
+.staff-info p:nth-child(2)::before {
+  content: "";
+  width: 4px;
+  height: 25px;
+  margin-right: 2px;
+  border-radius: 4px;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.staff-info p:nth-child(3)::before {
+  content: "";
+  width: 4px;
+  height: 25px;
+  margin-right: 2px;
+  border-radius: 4px;
+  background: #d99a24;
+  flex-shrink: 0;
+}
+
+.staff-info p:nth-child(4)::before {
+  content: "";
+  width: 4px;
+  height: 25px;
+  margin-right: 2px;
+  border-radius: 4px;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
 
 /* ========================================
    LOADING / NOT FOUND
@@ -138,10 +209,16 @@
 
 .staff-page > h2 {
   margin-top: 50px;
-  color: #6b7280;
+  color: var(--green-dark);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 20px 25px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
+
 
 /* ========================================
    RESPONSIVE
@@ -154,6 +231,7 @@
 
   .staff-card {
     padding: 24px;
+    border-radius: var(--radius-md);
   }
 
   .staff-card h2 {
@@ -164,12 +242,18 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 7px;
+    padding: 15px 12px;
   }
 
   .staff-info strong {
     min-width: auto;
   }
+
+  .staff-info p::before {
+    display: none;
+  }
 }
+
 
 @media (max-width: 480px) {
   .staff-page {
@@ -178,7 +262,7 @@
 
   .staff-card {
     padding: 20px;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
   }
 
   .staff-card h2 {
@@ -187,7 +271,12 @@
   }
 
   .staff-info p {
-    padding: 15px 0;
+    padding: 15px 10px;
     font-size: 13px;
+  }
+
+  .staff-page > h2 {
+    font-size: 16px;
+    padding: 18px;
   }
 }

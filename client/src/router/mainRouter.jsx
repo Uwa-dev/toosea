@@ -19,7 +19,7 @@ const Contact = lazy(() => import("../pages/Public/Contact/contact.jsx"));
 const Services = lazy(() => import("../pages/Public/Services/services.jsx"));
 const Gallery = lazy(() => import("../pages/Public/Gallery/gallery.jsx"));
 const RoomDetail = lazy(() => import("../pages/Public/Roomsdetail/roomdetail.jsx"));
-// const NoPage = lazy(() => import("../pages/Public/NoPage/NoPage.jsx"))
+const NoPage = lazy(() => import("../pages/Public/NoPage/NoPage.jsx"));
 const ReceptDashboard = lazy(() => import("../pages/Receptionist/ReceptDashboard/ReceptDashboard.jsx"));
 const AdminDashboard = lazy(() => import("../pages/Admin/Dashboard/AdminDashboard.jsx"));
 const AllUsers = lazy(() => import('../pages/Admin/AllUsers/AllUsers.jsx'));
@@ -72,11 +72,7 @@ const routesConfig = [
       }, {
         path: "/payment/verify",
         element: <PaymentVerification />
-      },
-      //  {
-      //   path: "*",           // Catch-all for unknown routes
-      //   element: <NoPage />,
-      // },
+      }
     ]
   }, {
     path: "/receptionist",
@@ -199,6 +195,10 @@ const routesConfig = [
         element: <MonthlyBookings />
       }, 
     ]
+  },
+  {
+    path: "*",
+    element: <NoPage />,
   }
 ]
 

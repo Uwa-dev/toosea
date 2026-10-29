@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import {
   getCheckedInGuests,
   checkOutGuest,
@@ -25,7 +26,7 @@ const CheckedIn = () => {
 
       setBookings(data.bookings);
     } catch (err) {
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to load guests."
       );
@@ -44,11 +45,11 @@ const CheckedIn = () => {
     try {
       const response = await checkOutGuest(id);
 
-      alert(response.message);
+      toast.info(response.message);
 
       fetchGuests();
     } catch (err) {
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to check out guest."
       );
@@ -72,7 +73,7 @@ const CheckedIn = () => {
         },
       });
     } catch (err) {
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Unable to rebook guest."
       );

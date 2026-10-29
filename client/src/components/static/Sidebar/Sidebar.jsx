@@ -56,7 +56,7 @@ const Sidebar = ({
           </button>
 
           <div className="sidebar-header">
-            <h3>ToOseA</h3>
+            <img src="/tose.jpg" alt="ToOseA Logo" />
           </div>
         </div>
 

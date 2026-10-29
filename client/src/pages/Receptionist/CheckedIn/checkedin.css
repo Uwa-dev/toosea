@@ -1,47 +1,55 @@
+/* =========================================
+   CHECKED-IN PAGE
+========================================= */
+
 .checkedin-page {
   width: 100%;
   min-height: 100vh;
   padding: 24px;
   box-sizing: border-box;
-  background: #f8f9fb;
+  background: var(--off-white);
+  overflow-x: auto;
 }
 
-/* =========================
+
+/* =========================================
    PAGE HEADER
-========================= */
+========================================= */
 
 .checkedin-page h2 {
   margin: 0 0 24px;
   font-size: 26px;
   font-weight: 700;
-  color: #111827;
+  color: var(--green-dark);
 }
 
-/* =========================
+
+/* =========================================
    TABLE CONTAINER
-========================= */
-
-.checkedin-page {
-  overflow-x: auto;
-}
+========================================= */
 
 .booking-table {
   width: 100%;
   min-width: 900px;
   border-collapse: collapse;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
-/* =========================
+
+/* =========================================
    TABLE HEADER
-========================= */
+========================================= */
 
 .booking-table thead {
-  background: #f3f4f6;
+  background: linear-gradient(
+    90deg,
+    var(--green-dark),
+    var(--green-deep)
+  );
 }
 
 .booking-table th {
@@ -49,103 +57,128 @@
   text-align: left;
   font-size: 12px;
   font-weight: 700;
-  color: #4b5563;
+  color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--green-dark);
   white-space: nowrap;
 }
 
-/* =========================
+
+/* =========================================
    TABLE BODY
-========================= */
+========================================= */
 
 .booking-table td {
   padding: 16px;
   font-size: 14px;
-  color: #374151;
-  border-bottom: 1px solid #f0f0f0;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
 .booking-table tbody tr {
-  transition: background 0.2s ease;
+  transition: var(--transition);
 }
 
 .booking-table tbody tr:hover {
-  background: #f9fafb;
+  background: var(--green-light);
 }
 
 .booking-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Number column */
+
+/* =========================================
+   NUMBER COLUMN
+========================================= */
 
 .booking-table th:first-child,
 .booking-table td:first-child {
   width: 50px;
   text-align: center;
+  color: var(--text-light);
 }
 
-/* Apartment */
+
+/* =========================================
+   APARTMENT
+========================================= */
 
 .booking-table td:nth-child(2) {
-  font-weight: 600;
-  color: #111827;
+  font-weight: 700;
+  color: var(--green-dark);
   white-space: nowrap;
 }
 
-/* Guest */
+
+/* =========================================
+   GUEST
+========================================= */
 
 .booking-table td:nth-child(3) {
   font-weight: 600;
-  color: #111827;
+  color: var(--text-dark);
 }
 
-/* Phone */
+
+/* =========================================
+   PHONE
+========================================= */
 
 .booking-table td:nth-child(4) {
   white-space: nowrap;
+  color: var(--green-deep);
+  font-weight: 500;
 }
 
-/* Dates */
+
+/* =========================================
+   DATES
+========================================= */
 
 .booking-table td:nth-child(5),
 .booking-table td:nth-child(6) {
   white-space: nowrap;
-  color: #6b7280;
+  color: var(--text-light);
 }
 
-/* =========================
+
+/* =========================================
    STATUS
-========================= */
+========================================= */
 
 .checkedin {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
+  justify-content: center;
+  padding: 6px 11px;
   border-radius: 999px;
-  background: #ecfdf5;
-  color: #059669;
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid #c7e5d5;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .expired {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
+  justify-content: center;
+  padding: 6px 11px;
   border-radius: 999px;
-  background: #fef2f2;
-  color: #dc2626;
+  background: #fcebed;
+  color: var(--red);
+  border: 1px solid #f0c7ca;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-/* =========================
+
+/* =========================================
    ACTIONS
-========================= */
+========================================= */
 
 .table-actions {
   display: flex;
@@ -160,55 +193,83 @@
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
 }
 
-/* Check out */
+
+/* =========================================
+   CHECK OUT
+========================================= */
 
 .checkout-btn {
-  background: #fef2f2;
-  color: #dc2626;
+  background: #fcebed;
+  color: var(--red);
+  border: 1px solid #f0c7ca;
 }
 
 .checkout-btn:hover {
-  background: #fee2e2;
-  transform: translateY(-1px);
+  background: var(--red);
+  color: var(--white);
+  transform: translateY(-2px);
 }
 
-/* Rebook */
+
+/* =========================================
+   REBOOK
+========================================= */
 
 .rebook-btn {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--green-light);
+  color: var(--green-deep);
+  border: 1px solid #c7e5d5;
 }
 
 .rebook-btn:hover {
-  background: #e0e7ff;
-  transform: translateY(-1px);
+  background: var(--green);
+  color: var(--white);
+  transform: translateY(-2px);
 }
 
-/* =========================
+
+/* =========================================
    EMPTY STATE
-========================= */
+========================================= */
 
 .empty-state {
   width: 100%;
   padding: 60px 20px;
   box-sizing: border-box;
   text-align: center;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  color: #6b7280;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--green);
+  border-radius: var(--radius-md);
+  color: var(--text-light);
   font-size: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
-/* =========================
+.empty-state::before {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  background: var(--green-light);
+  border-radius: 50%;
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media (max-width: 768px) {
   .checkedin-page {
@@ -229,6 +290,11 @@
     padding: 13px 12px;
   }
 }
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
 
 @media (max-width: 480px) {
   .checkedin-page {

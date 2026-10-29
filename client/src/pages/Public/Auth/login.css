@@ -11,10 +11,24 @@
   justify-content: center;
 
   padding: 24px;
-
   box-sizing: border-box;
 
-  background: #f8f9fb;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(11, 107, 69, 0.14),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(179, 38, 46, 0.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      var(--off-white),
+      var(--green-light)
+    );
 }
 
 /* ========================================
@@ -22,19 +36,43 @@
 ======================================== */
 
 .login-form {
+  position: relative;
+
   width: 100%;
   max-width: 420px;
 
-  padding: 35px;
+  padding: 38px 35px;
 
   box-sizing: border-box;
 
-  background: #ffffff;
+  background: var(--white);
 
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-lg);
+
+  overflow: hidden;
+}
+
+/* Top brand accent */
+.login-form::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 6px;
+
+  background: linear-gradient(
+    90deg,
+    var(--green-dark),
+    var(--green),
+    var(--red)
+  );
 }
 
 /* ========================================
@@ -47,9 +85,30 @@
   text-align: center;
 
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 800;
 
-  color: #111827;
+  color: var(--green-dark);
+
+  letter-spacing: -0.4px;
+}
+
+.login-form h1::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 4px;
+
+  margin: 10px auto 0;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    var(--green),
+    var(--red)
+  );
 }
 
 /* ========================================
@@ -59,14 +118,16 @@
 .login-form .error {
   margin: 0 0 20px;
 
-  padding: 11px 13px;
+  padding: 12px 14px;
 
-  border: 1px solid #fecaca;
-  border-radius: 7px;
+  border: 1px solid #f3b8bd;
+  border-left: 4px solid var(--red);
 
-  background: #fef2f2;
+  border-radius: var(--radius-sm);
 
-  color: #dc2626;
+  background: #fff1f2;
+
+  color: var(--red-dark);
 
   font-size: 13px;
   line-height: 1.5;
@@ -87,12 +148,12 @@
 .login-form label {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 
-  color: #374151;
+  color: var(--text-dark);
 }
 
 /* ========================================
@@ -102,36 +163,43 @@
 .login-form input {
   width: 100%;
 
-  height: 44px;
+  height: 46px;
 
-  padding: 0 13px;
+  padding: 0 14px;
 
   box-sizing: border-box;
 
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
 
   outline: none;
 
-  background: #ffffff;
+  background: var(--off-white);
 
-  color: #111827;
+  color: var(--text-dark);
 
   font-size: 14px;
 
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: var(--transition);
 }
 
 .login-form input::placeholder {
-  color: #9ca3af;
+  color: var(--text-light);
+}
+
+.login-form input:hover {
+  border-color: #a9cabb;
+
+  background: var(--white);
 }
 
 .login-form input:focus {
-  border-color: #111827;
+  border-color: var(--green);
 
-  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+  background: var(--white);
+
+  box-shadow:
+    0 0 0 4px rgba(11, 107, 69, 0.1);
 }
 
 /* ========================================
@@ -141,32 +209,43 @@
 .login-form button {
   width: 100%;
 
-  height: 44px;
+  height: 46px;
 
   margin-top: 5px;
 
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 
-  background: #111827;
+  background: linear-gradient(
+    135deg,
+    var(--green-dark),
+    var(--green)
+  );
 
-  color: #ffffff;
+  color: var(--white);
 
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 
   cursor: pointer;
 
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  box-shadow:
+    0 7px 18px rgba(6, 59, 42, 0.18);
+
+  transition: var(--transition);
 }
 
 .login-form button:hover:not(:disabled) {
-  background: #000000;
+  background: linear-gradient(
+    135deg,
+    var(--green),
+    var(--green-deep)
+  );
 
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(6, 59, 42, 0.25);
 }
 
 .login-form button:active:not(:disabled) {
@@ -181,6 +260,8 @@
   cursor: not-allowed;
 
   opacity: 0.65;
+
+  box-shadow: none;
 }
 
 /* ========================================
@@ -193,7 +274,9 @@
   }
 
   .login-form {
-    padding: 26px 20px;
+    padding: 32px 20px 26px;
+
+    border-radius: var(--radius-md);
   }
 
   .login-form h1 {
@@ -203,10 +286,10 @@
   }
 
   .login-form input {
-    height: 43px;
+    height: 45px;
   }
 
   .login-form button {
-    height: 43px;
+    height: 45px;
   }
 }

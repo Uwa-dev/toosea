@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { getReceptionistDashboard } from "../../../services/analyticsApi.js";
 import "./receptDashboard.css";
@@ -15,7 +16,9 @@ const ReceptDashboard = () => {
     todayDepartures: 0,
     occupiedApartments: 0,
     availableApartments: 0,
-    upcomingCheckouts: []
+    upcomingCheckouts: [],
+    upcomingCheckins: [],
+    occupiedApartmentDetails: []
   });
 
   const [loading, setLoading] = useState(true);
@@ -37,7 +40,7 @@ const ReceptDashboard = () => {
         error
       );
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Unable to load dashboard."
       );
@@ -204,6 +207,164 @@ const ReceptDashboard = () => {
           </div>
 
         </div>
+
+      </div>
+
+      {/* Upcoming Check-ins */}
+
+      <div className="reception-dashboard-section">
+
+        <div className="reception-dashboard-section-header">
+          <div>
+            <h2>Upcoming Check-ins</h2>
+
+            <p>
+              Online guests expected to arrive soon.
+            </p>
+          </div>
+
+          <button
+            className="reception-dashboard-view-all"
+            onClick={() =>
+              navigate("/receptionist/todaybookings")
+            }
+          >
+            View All
+          </button>
+        </div>
+
+        {stats.upcomingCheckins?.length > 0 ? (
+
+          <div className="reception-dashboard-checkout-list">
+
+            {stats.upcomingCheckins.map((booking) => (
+
+              <div
+                className="reception-dashboard-checkout-card"
+                key={booking._id}
+              >
+
+                <div className="reception-dashboard-checkout-icon">
+                  🛬
+                </div>
+
+                <div className="reception-dashboard-checkout-info">
+
+                  <strong>
+                    {booking.customer?.fullName || "Guest"}
+                  </strong>
+
+                  <span>
+                    {booking.apartment?.name ||
+                      booking.apartment?.apartmentCode ||
+                      "Apartment"}
+                  </span>
+
+                </div>
+
+                <div className="reception-dashboard-checkout-date">
+
+                  <span>Check-in</span>
+
+                  <strong>
+                    {new Date(
+                      booking.checkInDate
+                    ).toLocaleDateString("en-NG", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric"
+                    })}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div className="reception-dashboard-empty">
+            <span>✓</span>
+            <p>No upcoming check-ins.</p>
+          </div>
+
+        )}
+
+      </div>
+
+      {/* Occupied Apartments */}
+
+      <div className="reception-dashboard-section">
+
+        <div className="reception-dashboard-section-header">
+
+          <div>
+            <h2>Occupied Apartments</h2>
+
+            <p>
+              Apartments currently occupied by guests.
+            </p>
+          </div>
+
+        </div>
+
+        {stats.occupiedApartmentDetails?.length > 0 ? (
+
+          <div className="reception-dashboard-checkout-list">
+
+            {stats.occupiedApartmentDetails.map((booking) => (
+
+              <div
+                className="reception-dashboard-checkout-card"
+                key={booking._id}
+              >
+
+                <div className="reception-dashboard-checkout-icon">
+                  🏠
+                </div>
+
+                <div className="reception-dashboard-checkout-info">
+
+                  <strong>
+                    {booking.apartment?.name ||
+                      "Apartment"}
+                  </strong>
+
+                  <span>
+                    {booking.apartment?.apartmentCode ||
+                      "No apartment code"}
+                  </span>
+
+                </div>
+
+                <div className="reception-dashboard-checkout-date">
+
+                  <span>Guest</span>
+
+                  <strong>
+                    {booking.customer?.fullName ||
+                      "Guest"}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div className="reception-dashboard-empty">
+            <span>✓</span>
+            <p>No apartments are currently occupied.</p>
+          </div>
+
+        )}
 
       </div>
 

@@ -3,7 +3,7 @@
   min-height: 100vh;
   padding: 24px;
   box-sizing: border-box;
-  background: #f8f9fb;
+  background: var(--off-white);
 }
 
 /* ============================= */
@@ -20,31 +20,33 @@
 
 .reception-dashboard-header h1 {
   margin: 0;
-  color: #111827;
+  color: var(--green-dark);
   font-size: 26px;
   font-weight: 700;
 }
 
 .reception-dashboard-header p {
   margin: 6px 0 0;
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 14px;
 }
 
 .reception-dashboard-refresh {
   padding: 10px 18px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #374151;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-deep);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .reception-dashboard-refresh:hover {
-  background: #f3f4f6;
+  background: var(--green-light);
+  border-color: var(--green);
+  color: var(--green-dark);
 }
 
 /* ============================= */
@@ -59,27 +61,46 @@
 }
 
 .reception-dashboard-stat-card {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 15px;
   min-height: 125px;
   padding: 20px;
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.reception-dashboard-stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--green);
+}
+
+.reception-dashboard-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .reception-dashboard-stat-icon {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: #f3f4f6;
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  color: var(--green);
   font-size: 22px;
 }
 
@@ -90,20 +111,20 @@
 }
 
 .reception-dashboard-stat-title {
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 13px;
   font-weight: 500;
 }
 
 .reception-dashboard-stat-value {
-  color: #111827;
+  color: var(--green-dark);
   font-size: 26px;
   line-height: 1.2;
   font-weight: 700;
 }
 
 .reception-dashboard-stat-description {
-  color: #9ca3af;
+  color: var(--text-light);
   font-size: 11px;
 }
 
@@ -124,14 +145,14 @@
 
 .reception-dashboard-section-header h2 {
   margin: 0;
-  color: #111827;
+  color: var(--green-dark);
   font-size: 18px;
   font-weight: 700;
 }
 
 .reception-dashboard-section-header p {
   margin: 5px 0 0;
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 13px;
 }
 
@@ -150,10 +171,16 @@
   align-items: center;
   gap: 15px;
   padding: 20px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.reception-dashboard-operation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .reception-dashboard-operation-icon {
@@ -163,8 +190,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: #f3f4f6;
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  color: var(--green);
   font-size: 21px;
 }
 
@@ -176,30 +204,32 @@
 }
 
 .reception-dashboard-operation-card span {
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 13px;
 }
 
 .reception-dashboard-operation-card strong {
-  color: #111827;
+  color: var(--green-dark);
   font-size: 24px;
   font-weight: 700;
 }
 
 .reception-dashboard-operation-card button {
   padding: 8px 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 7px;
-  background: #ffffff;
-  color: #374151;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--green-light);
+  color: var(--green-deep);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .reception-dashboard-operation-card button:hover {
-  background: #f3f4f6;
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
 }
 
 /* ============================= */
@@ -217,20 +247,26 @@
   align-items: center;
   justify-content: space-between;
   padding: 22px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.reception-dashboard-status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .reception-dashboard-status-card span {
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 14px;
   font-weight: 500;
 }
 
 .reception-dashboard-status-card strong {
-  color: #111827;
+  color: var(--green);
   font-size: 28px;
   font-weight: 700;
 }
@@ -240,24 +276,26 @@
 ========================================= */
 
 .reception-dashboard-view-all {
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  color: #374151;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--green-deep);
   padding: 9px 16px;
-  border-radius: 7px;
+  border-radius: var(--radius-sm);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
 }
 
 .reception-dashboard-view-all:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
 }
 
-
-/* Checkout list */
+/* ============================= */
+/* CHECKOUT LIST */
+/* ============================= */
 
 .reception-dashboard-checkout-list {
   display: flex;
@@ -265,133 +303,106 @@
   gap: 12px;
 }
 
-
-/* Individual checkout card */
-
 .reception-dashboard-checkout-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 16px 18px;
-
+  position: relative;
   display: flex;
   align-items: center;
   gap: 15px;
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
 }
 
 .reception-dashboard-checkout-card:hover {
-  transform: translateY(-1px);
-  border-color: #d1d5db;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: var(--green);
+  box-shadow: var(--shadow-md);
 }
-
-
-/* Icon */
 
 .reception-dashboard-checkout-icon {
   width: 44px;
   height: 44px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #f3f4f6;
-  border-radius: 9px;
-
+  background: var(--green-light);
+  border-radius: var(--radius-sm);
+  color: var(--green);
   font-size: 20px;
-
   flex-shrink: 0;
 }
 
-
-/* Guest information */
-
 .reception-dashboard-checkout-info {
   flex: 1;
-
   display: flex;
   flex-direction: column;
   gap: 5px;
-
   min-width: 0;
 }
 
 .reception-dashboard-checkout-info strong {
-  color: #111827;
+  color: var(--green-dark);
   font-size: 14px;
   font-weight: 600;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .reception-dashboard-checkout-info span {
-  color: #6b7280;
+  color: var(--text-light);
   font-size: 13px;
 }
-
-
-/* Checkout date */
 
 .reception-dashboard-checkout-date {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
-
   min-width: 120px;
 }
 
 .reception-dashboard-checkout-date span {
-  color: #9ca3af;
+  color: var(--text-light);
   font-size: 12px;
 }
 
 .reception-dashboard-checkout-date strong {
-  color: #374151;
+  color: var(--red);
   font-size: 13px;
   font-weight: 600;
 }
 
-
-/* Empty state */
+/* ============================= */
+/* EMPTY STATE */
+/* ============================= */
 
 .reception-dashboard-empty {
   min-height: 110px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-
-  color: #6b7280;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-light);
+  box-shadow: var(--shadow-sm);
 }
 
 .reception-dashboard-empty span {
   width: 36px;
   height: 36px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-bottom: 8px;
-
-  background: #f3f4f6;
+  background: var(--green-light);
   border-radius: 50%;
-
-  color: #4b5563;
+  color: var(--green);
   font-size: 18px;
 }
 
@@ -400,13 +411,112 @@
   font-size: 13px;
 }
 
+/* ============================= */
+/* QUICK ACTIONS */
+/* ============================= */
+
+.reception-dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.reception-dashboard-actions button {
+  min-height: 85px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.reception-dashboard-actions button:hover {
+  transform: translateY(-3px);
+  background: var(--green-light);
+  border-color: var(--green);
+  color: var(--green-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.reception-dashboard-actions button span {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green-light);
+  border-radius: 50%;
+  color: var(--green);
+  font-size: 18px;
+}
+
+/* ============================= */
+/* LOADING */
+/* ============================= */
+
+.reception-dashboard-loading {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green);
+  font-size: 15px;
+}
 
 /* =========================================
    TABLET
 ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 1100px) {
+  .reception-dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
+  .reception-dashboard-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   768px
+========================================= */
+
+@media (max-width: 768px) {
+  .reception-dashboard-page {
+    padding: 20px;
+  }
+
+  .reception-dashboard-header {
+    align-items: flex-start;
+  }
+
+  .reception-dashboard-header h1 {
+    font-size: 23px;
+  }
+
+  .reception-dashboard-operation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reception-dashboard-apartment-status {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   700px
+========================================= */
+
+@media (max-width: 700px) {
   .reception-dashboard-checkout-card {
     padding: 14px;
     gap: 12px;
@@ -440,142 +550,9 @@
   }
 }
 
-
 /* =========================================
    MOBILE
 ========================================= */
-
-@media (max-width: 480px) {
-
-  .reception-dashboard-section-header {
-    gap: 10px;
-  }
-
-  .reception-dashboard-checkout-card {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 12px;
-  }
-
-  .reception-dashboard-checkout-icon {
-    grid-row: span 2;
-  }
-
-  .reception-dashboard-checkout-info {
-    min-width: 0;
-  }
-
-  .reception-dashboard-checkout-date {
-    grid-column: 2;
-    align-items: flex-start;
-    min-width: auto;
-  }
-
-  .reception-dashboard-checkout-date {
-    flex-direction: row;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .reception-dashboard-checkout-date span {
-    font-size: 11px;
-  }
-
-  .reception-dashboard-checkout-date strong {
-    font-size: 12px;
-  }
-
-  .reception-dashboard-view-all {
-    padding: 7px 10px;
-  }
-}
-
-/* ============================= */
-/* QUICK ACTIONS */
-/* ============================= */
-
-.reception-dashboard-actions {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 15px;
-}
-
-.reception-dashboard-actions button {
-  min-height: 85px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #374151;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: 0.2s ease;
-}
-
-.reception-dashboard-actions button:hover {
-  transform: translateY(-2px);
-  border-color: #d1d5db;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
-}
-
-.reception-dashboard-actions button span {
-  font-size: 18px;
-}
-
-/* ============================= */
-/* LOADING */
-/* ============================= */
-
-.reception-dashboard-loading {
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-  font-size: 15px;
-}
-
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
-
-@media (max-width: 1100px) {
-  .reception-dashboard-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .reception-dashboard-actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .reception-dashboard-page {
-    padding: 20px;
-  }
-
-  .reception-dashboard-header {
-    align-items: flex-start;
-  }
-
-  .reception-dashboard-header h1 {
-    font-size: 23px;
-  }
-
-  .reception-dashboard-operation-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .reception-dashboard-apartment-status {
-    grid-template-columns: 1fr;
-  }
-}
 
 @media (max-width: 550px) {
   .reception-dashboard-page {
@@ -601,5 +578,46 @@
 
   .reception-dashboard-stat-card {
     min-height: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reception-dashboard-section-header {
+    gap: 10px;
+  }
+
+  .reception-dashboard-checkout-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .reception-dashboard-checkout-icon {
+    grid-row: span 2;
+  }
+
+  .reception-dashboard-checkout-info {
+    min-width: 0;
+  }
+
+  .reception-dashboard-checkout-date {
+    grid-column: 2;
+    align-items: flex-start;
+    min-width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .reception-dashboard-checkout-date span {
+    font-size: 11px;
+  }
+
+  .reception-dashboard-checkout-date strong {
+    font-size: 12px;
+  }
+
+  .reception-dashboard-view-all {
+    padding: 7px 10px;
   }
 }

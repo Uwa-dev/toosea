@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import {
   getYearlyBookings,
 } from "../../../services/bookingApi";
@@ -33,7 +34,7 @@ const YearBookings = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Unable to load yearly bookings."
       );

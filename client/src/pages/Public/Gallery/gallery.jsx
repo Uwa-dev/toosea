@@ -53,11 +53,6 @@ export default function Gallery() {
     <>
   
 
-      {/* HERO */}
-      <section className="heroooo">
-        {/* <h1>Luxury Experience Gallery</h1> */}
-      </section>
-
       {/* GALLERY */}
       <section className="gallery">
         {[

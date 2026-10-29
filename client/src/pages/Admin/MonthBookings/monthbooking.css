@@ -6,9 +6,16 @@
   width: 100%;
   padding: 30px;
   box-sizing: border-box;
-  background: #f7f8fa;
+  background:
+    linear-gradient(
+      135deg,
+      var(--off-white) 0%,
+      #f2f8f5 50%,
+      #edf6f1 100%
+    );
   min-height: 100vh;
 }
+
 
 /* ================================
    HEADER
@@ -16,10 +23,32 @@
 
 .monthly-bookings h2 {
   margin: 0 0 25px;
+  padding: 22px 24px;
   font-size: 26px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--white);
+  background: linear-gradient(
+    135deg,
+    var(--green-dark),
+    var(--green-deep)
+  );
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
 }
+
+.monthly-bookings h2::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -65px;
+  top: -85px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
 
 /* ================================
    FILTERS
@@ -29,35 +58,52 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #ffffff;
+  background: var(--white);
   padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-filters::before {
+  content: "";
+  width: 5px;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    var(--green),
+    var(--green-deep)
+  );
 }
 
 .booking-filters select {
   min-width: 170px;
   padding: 11px 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #374151;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--text);
   font-size: 14px;
   outline: none;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: var(--transition);
 }
 
 .booking-filters select:hover {
-  border-color: #9ca3af;
+  border-color: #b7d6c6;
+  background: var(--green-light);
 }
 
 .booking-filters select:focus {
-  border-color: #111827;
-  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(11, 107, 69, 0.1);
 }
+
 
 /* ================================
    SUMMARY
@@ -66,20 +112,33 @@
 .booking-summary {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 20px 24px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-summary::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--red);
 }
 
 .booking-summary h3 {
   margin: 0;
   font-size: 17px;
   font-weight: 600;
-  color: #374151;
+  color: var(--green-dark);
 }
+
 
 /* ================================
    TABLE CONTAINER
@@ -92,19 +151,24 @@
 .booking-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 12px;
+  background: var(--white);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
 }
+
 
 /* ================================
    TABLE HEADER
 ================================ */
 
 .booking-table thead {
-  background: #f3f4f6;
+  background: linear-gradient(
+    135deg,
+    var(--green-dark),
+    var(--green-deep)
+  );
 }
 
 .booking-table th {
@@ -112,12 +176,13 @@
   text-align: left;
   font-size: 12px;
   font-weight: 700;
-  color: #4b5563;
+  color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--green-deep);
   white-space: nowrap;
 }
+
 
 /* ================================
    TABLE BODY
@@ -126,31 +191,47 @@
 .booking-table td {
   padding: 15px 14px;
   font-size: 14px;
-  color: #374151;
-  border-bottom: 1px solid #f0f1f3;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
   white-space: nowrap;
 }
 
 .booking-table tbody tr {
-  transition: background 0.2s ease;
+  transition: var(--transition);
 }
 
 .booking-table tbody tr:hover {
-  background: #f9fafb;
+  background: var(--green-light);
+  box-shadow: inset 4px 0 0 var(--green);
 }
 
 .booking-table tbody tr:last-child td {
   border-bottom: none;
 }
 
+
+/* ================================
+   ALTERNATING ROWS
+================================ */
+
+.booking-table tbody tr:nth-child(even) {
+  background: #fbfdfc;
+}
+
+.booking-table tbody tr:nth-child(even):hover {
+  background: var(--green-light);
+}
+
+
 /* ================================
    SERIAL NUMBER
 ================================ */
 
 .booking-table td:first-child {
-  color: #6b7280;
-  font-weight: 600;
+  color: var(--green);
+  font-weight: 700;
 }
+
 
 /* ================================
    GUEST
@@ -158,8 +239,9 @@
 
 .booking-table td:nth-child(2) {
   font-weight: 600;
-  color: #111827;
+  color: var(--green-dark);
 }
+
 
 /* ================================
    APARTMENT
@@ -167,7 +249,9 @@
 
 .booking-table td:nth-child(3) {
   font-weight: 500;
+  color: var(--text);
 }
+
 
 /* ================================
    AMOUNT
@@ -175,30 +259,28 @@
 
 .booking-table td:nth-child(6) {
   font-weight: 700;
-  color: #111827;
+  color: var(--green);
 }
 
+
 /* ================================
-   STATUS BADGES
+   STATUS
 ================================ */
 
 .booking-table td:nth-child(9) {
-  font-weight: 600;
+  font-weight: 700;
+  color: #a66a00;
 }
 
-/* PENDING */
-
-.booking-table td:nth-child(9) {
-  color: #92400e;
-}
 
 /* ================================
    CREATED BY
 ================================ */
 
 .booking-table td:nth-child(10) {
-  color: #6b7280;
+  color: var(--text-light);
 }
+
 
 /* ================================
    EMPTY / LOADING
@@ -206,13 +288,19 @@
 
 .monthly-bookings > h3,
 .monthly-bookings > p {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 30px;
   text-align: center;
-  color: #6b7280;
+  color: var(--text-light);
+  box-shadow: var(--shadow-sm);
 }
+
+.monthly-bookings > h3 {
+  color: var(--green-dark);
+}
+
 
 /* ================================
    TABLE SCROLL
@@ -226,7 +314,26 @@
   .booking-table {
     min-width: 1100px;
   }
+
+  .monthly-bookings::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .monthly-bookings::-webkit-scrollbar-track {
+    background: var(--green-light);
+    border-radius: 10px;
+  }
+
+  .monthly-bookings::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 10px;
+  }
+
+  .monthly-bookings::-webkit-scrollbar-thumb:hover {
+    background: var(--green-dark);
+  }
 }
+
 
 /* ================================
    TABLET
@@ -239,11 +346,18 @@
 
   .monthly-bookings h2 {
     font-size: 22px;
+    padding: 19px 20px;
   }
 
   .booking-filters {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .booking-filters::before {
+    width: 100%;
+    height: 4px;
+    min-height: 4px;
   }
 
   .booking-filters select {
@@ -254,6 +368,7 @@
     padding: 17px 20px;
   }
 }
+
 
 /* ================================
    MOBILE
@@ -267,6 +382,8 @@
   .monthly-bookings h2 {
     font-size: 20px;
     line-height: 1.4;
+    padding: 18px;
+    margin-bottom: 18px;
   }
 
   .booking-filters {
@@ -274,7 +391,16 @@
     gap: 10px;
   }
 
+  .booking-summary {
+    padding: 16px 18px;
+  }
+
   .booking-summary h3 {
     font-size: 15px;
+  }
+
+  .monthly-bookings > h3,
+  .monthly-bookings > p {
+    padding: 24px 18px;
   }
 }

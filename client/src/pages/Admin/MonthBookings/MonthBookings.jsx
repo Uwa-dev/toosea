@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import {
   getMonthlyBookings,
 } from "../../../services/bookingApi";
@@ -40,7 +41,7 @@ const MonthBookings = () => {
     } catch (error) {
       console.error(error);
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
           "Unable to load monthly bookings."
       );

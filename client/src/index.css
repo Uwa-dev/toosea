@@ -1,3 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --green-dark: #063b2a;
+  --green-deep: #075437;
+  --green: #0b6b45;
+  --green-light: #eaf5ef;
+
+  --white: #ffffff;
+  --off-white: #f7faf8;
+
+  --red: #b3262e;
+  --red-dark: #8f1d24;
+
+  --text-dark: #17221d;
+  --text: #39453f;
+  --text-light: #68736d;
+
+  --border: #dce7e1;
+
+  --shadow-sm: 0 5px 20px rgba(6, 59, 42, 0.08);
+  --shadow-md: 0 12px 35px rgba(6, 59, 42, 0.12);
+  --shadow-lg: 0 20px 55px rgba(6, 59, 42, 0.18);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+
+  --transition: all 0.3s ease;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -5,8 +36,90 @@
     font-family: "Poppins", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+/* Prevent horizontal scrolling across the entire page */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+html,
 body {
+  overflow-x: clip;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
   font-family: "Poppins", sans-serif;
-  background: #f6f7fb;
-  color: #1a1a1a;
+
+  background: var(--white);
+  color: var(--text);
+
+  line-height: 1.7;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   GENERAL BUTTON
+========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+
+  padding: 12px 25px;
+
+  background: var(--green-dark);
+  color: var(--white);
+
+  border: 2px solid var(--green-dark);
+  border-radius: 7px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+
+  transition: var(--transition);
 }

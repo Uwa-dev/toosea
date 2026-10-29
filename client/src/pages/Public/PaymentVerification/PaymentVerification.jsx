@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { verifyPayment } from "../../../services/paymentApi";
+import "./paymentVerification.css"
 
 export default function PaymentVerification() {
   const [searchParams] = useSearchParams();
