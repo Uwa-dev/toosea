@@ -261,13 +261,16 @@ const Sidebar = ({
                 )}
               </div>
 
+
               {/* BOOKINGS */}
               <div className="dropdown">
                 <button
+                  type="button"
                   onClick={() => setBookingsOpen(!bookingsOpen)}
                   className={`dropdown-button ${
-                    location.pathname.includes("/admin/monthbookings") ||
-                    location.pathname.includes("/admin/yearbookings")
+                    location.pathname.includes("/admin/monthly") ||
+                    location.pathname.includes("/admin/yearly") ||
+                    location.pathname.includes("/admin/pending-bookings")
                       ? "active"
                       : ""
                   }`}
@@ -285,9 +288,21 @@ const Sidebar = ({
                 {bookingsOpen && (
                   <div className="dropdown-content">
                     <Link
+                      to="/admin/pending-bookings"
+                      className={`dropdown-link ${
+                        location.pathname === "/admin/pending-bookings"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      Pending Bookings
+                    </Link>
+
+                    <Link
                       to="/admin/monthly"
                       className={`dropdown-link ${
-                        location.pathname === "/admin/monthbookings"
+                        location.pathname === "/admin/monthly"
                           ? "active"
                           : ""
                       }`}
@@ -299,7 +314,7 @@ const Sidebar = ({
                     <Link
                       to="/admin/yearly"
                       className={`dropdown-link ${
-                        location.pathname === "/admin/yearbookings"
+                        location.pathname === "/admin/yearly"
                           ? "active"
                           : ""
                       }`}
@@ -437,15 +452,13 @@ const Sidebar = ({
               {/* BOOKINGS */}
               <div className="dropdown">
                 <button
+                  type="button"
                   onClick={() =>
-                    setManagerBookingsOpen(
-                      !managerBookingsOpen
-                    )
+                    setManagerBookingsOpen(!managerBookingsOpen)
                   }
                   className={`dropdown-button ${
-                    location.pathname.includes(
-                      "/manager/bookings"
-                    )
+                    location.pathname.includes("/manager/bookings") ||
+                    location.pathname === "/manager/pending-bookings"
                       ? "active"
                       : ""
                   }`}
@@ -463,16 +476,25 @@ const Sidebar = ({
                 {managerBookingsOpen && (
                   <div className="dropdown-content">
                     <Link
-                      to="/manager/bookings/today"
+                      to="/manager/pending-bookings"
                       className={`dropdown-link ${
-                        location.pathname ===
-                        "/manager/bookings/today"
+                        location.pathname === "/manager/pending-bookings"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() =>
-                        setSidebarOpen(false)
-                      }
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      Pending Bookings
+                    </Link>
+
+                    <Link
+                      to="/manager/bookings/today"
+                      className={`dropdown-link ${
+                        location.pathname === "/manager/bookings/today"
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() => setSidebarOpen(false)}
                     >
                       Today's Bookings
                     </Link>
@@ -480,14 +502,11 @@ const Sidebar = ({
                     <Link
                       to="/manager/bookings/month"
                       className={`dropdown-link ${
-                        location.pathname ===
-                        "/manager/bookings/month"
+                        location.pathname === "/manager/bookings/month"
                           ? "active"
                           : ""
                       }`}
-                      onClick={() =>
-                        setSidebarOpen(false)
-                      }
+                      onClick={() => setSidebarOpen(false)}
                     >
                       Monthly Bookings
                     </Link>

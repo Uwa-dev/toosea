@@ -1,0 +1,1036 @@
+
+/* =========================
+   PAGE
+========================= */
+
+.pending-bookings-page {
+  width: 100%;
+  min-width: 0;
+  padding: 30px;
+  color: var(--text-dark);
+  background: var(--off-white);
+  box-sizing: border-box;
+  animation: pendingFadeIn 0.35s ease;
+}
+
+.pending-bookings-page *,
+.pending-bookings-page *::before,
+.pending-bookings-page *::after {
+  box-sizing: border-box;
+}
+
+@keyframes pendingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.pending-bookings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.pending-bookings-eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.pending-bookings-header h1 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.8px;
+}
+
+.pending-bookings-header p {
+  margin: 10px 0 0;
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.pending-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-dark);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.pending-refresh-btn:hover:not(:disabled) {
+  border-color: var(--green);
+  background: var(--green-light);
+}
+
+.pending-refresh-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.pending-refresh-btn > span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.pending-spin {
+  display: inline-block;
+  animation: pendingRotate 0.8s linear infinite;
+}
+
+@keyframes pendingRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pending-cancel-confirm-modal {
+  width: min(440px, calc(100% - 32px));
+  padding: 32px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: pendingModalIn 0.2s ease-out;
+}
+
+.pending-cancel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: #fff0f0;
+  color: var(--red);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.pending-cancel-confirm-modal h2 {
+  margin: 0 0 12px;
+  color: var(--text-dark);
+  font-size: 22px;
+}
+
+.pending-cancel-confirm-modal p {
+  margin: 0 0 12px;
+  color: var(--text);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.pending-cancel-warning {
+  color: var(--red) !important;
+  font-size: 13px;
+}
+
+.pending-cancel-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.pending-cancel-actions button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pending-cancel-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pending-cancel-actions .pending-modal-secondary {
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+.pending-cancel-actions .pending-modal-secondary:hover:not(:disabled) {
+  background: var(--border);
+}
+
+.pending-cancel-actions .pending-modal-cancel {
+  background: var(--red);
+  color: var(--white);
+}
+
+.pending-cancel-actions .pending-modal-cancel:hover:not(:disabled) {
+  background: var(--red-dark);
+}
+
+@keyframes pendingModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .pending-cancel-confirm-modal {
+    padding: 24px 18px;
+  }
+
+  .pending-cancel-actions {
+    flex-direction: column-reverse;
+  }
+
+  .pending-cancel-actions button {
+    width: 100%;
+  }
+}
+
+/* =========================
+   SUMMARY CARD
+========================= */
+
+.pending-bookings-summary {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 28px;
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.pending-summary-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.pending-summary-icon svg {
+  width: 27px;
+  height: 27px;
+}
+
+.pending-bookings-summary > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pending-summary-label {
+  color: var(--text-light);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pending-summary-count {
+  color: var(--green-dark);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.pending-summary-caption {
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+/* =========================
+   MAIN BOOKINGS CARD
+========================= */
+
+.pending-bookings-card {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.pending-bookings-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 25px 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pending-bookings-toolbar h2 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.pending-bookings-toolbar p {
+  margin: 7px 0 0;
+  color: var(--text-light);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.pending-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 310px;
+  min-width: 190px;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  transition: var(--transition);
+}
+
+.pending-search:focus-within {
+  border-color: var(--green);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(11, 107, 69, 0.08);
+}
+
+.pending-search svg {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  color: var(--text-light);
+}
+
+.pending-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-dark);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.pending-search input::placeholder {
+  color: #929c96;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.pending-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.pending-bookings-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pending-bookings-table thead {
+  background: var(--off-white);
+}
+
+.pending-bookings-table th {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pending-bookings-table td {
+  padding: 19px 18px;
+  border-bottom: 1px solid #edf2ef;
+  color: var(--text);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.pending-bookings-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.pending-bookings-table tbody tr:hover {
+  background: #fbfdfc;
+}
+
+.pending-bookings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pending-reference {
+  display: block;
+  max-width: 180px;
+  overflow-wrap: anywhere;
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pending-guest-name,
+.pending-apartment-name {
+  display: block;
+  max-width: 190px;
+  overflow-wrap: anywhere;
+  color: var(--text-dark);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pending-cell-subtext {
+  display: block;
+  max-width: 190px;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+  color: var(--text-light);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.pending-date {
+  display: block;
+  color: var(--text-dark);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pending-amount {
+  color: var(--green-dark) !important;
+  font-size: 12px !important;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* =========================
+   PAYMENT BADGES
+========================= */
+
+.pending-payment-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 125px;
+  padding: 6px 10px;
+  border-radius: 30px;
+  background: var(--green-light);
+  color: var(--green-deep);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.pending-payment-pending {
+  background: #fff4db;
+  color: #8b5d00;
+}
+
+.pending-payment-paid,
+.pending-payment-success,
+.pending-payment-successful {
+  background: var(--green-light);
+  color: var(--green-deep);
+}
+
+.pending-payment-failed,
+.pending-payment-cancelled,
+.pending-payment-refunded {
+  background: #fcebed;
+  color: var(--red-dark);
+}
+
+/* =========================
+   ROW ACTIONS
+========================= */
+
+.pending-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.pending-view-btn,
+.pending-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pending-view-btn {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--green-dark);
+}
+
+.pending-view-btn:hover {
+  border-color: var(--green);
+  background: var(--green-light);
+}
+
+.pending-cancel-btn {
+  border-color: #f1d3d5;
+  background: #fff5f5;
+  color: var(--red);
+}
+
+.pending-cancel-btn:hover:not(:disabled) {
+  border-color: var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+.pending-cancel-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================
+   TABLE FOOTER
+========================= */
+
+.pending-table-footer {
+  padding: 17px 25px;
+  border-top: 1px solid var(--border);
+  background: #fcfdfc;
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+.pending-table-footer strong {
+  color: var(--green-dark);
+}
+
+/* =========================
+   LOADING / EMPTY STATES
+========================= */
+
+.pending-bookings-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+.pending-loader {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border: 3px solid var(--green-light);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: pendingRotate 0.8s linear infinite;
+}
+
+.pending-bookings-state > p {
+  margin: 14px 0 0;
+  color: var(--text-light);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.pending-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.pending-bookings-state h3 {
+  margin: 18px 0 0;
+  color: var(--green-dark);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.pending-bookings-state h3 + p {
+  max-width: 370px;
+  margin-top: 9px;
+}
+
+.pending-clear-search {
+  margin-top: 16px;
+  padding: 9px 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-dark);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pending-clear-search:hover {
+  background: var(--green-light);
+}
+
+/* =========================
+   DETAILS MODAL
+========================= */
+
+.pending-modal-overlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  background: rgba(10, 25, 18, 0.62);
+  backdrop-filter: blur(4px);
+  animation: pendingOverlayIn 0.2s ease;
+}
+
+@keyframes pendingOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.pending-modal {
+  width: 100%;
+  max-width: 760px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border: 1px solid rgba(220, 231, 225, 0.9);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  animation: pendingModalIn 0.25s ease;
+}
+
+@keyframes pendingModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.99);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pending-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 28px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--off-white);
+}
+
+.pending-modal-header h2 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.pending-modal-header p {
+  margin: 7px 0 0;
+  color: var(--text-light);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.pending-modal-close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--text-dark);
+  font-family: inherit;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pending-modal-close:hover {
+  border-color: var(--red);
+  background: #fff5f5;
+  color: var(--red);
+}
+
+.pending-modal-content {
+  padding: 24px 28px;
+}
+
+.pending-modal-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px;
+  padding: 15px 17px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fcfdfc;
+}
+
+.pending-detail-label {
+  display: block;
+  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pending-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 30px;
+  background: #fff4db;
+  color: #8b5d00;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.pending-detail-section {
+  margin-top: 25px;
+}
+
+.pending-detail-section h3 {
+  margin: 0 0 16px;
+  color: var(--green-dark);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.pending-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  border-top: 1px solid var(--border);
+}
+
+.pending-detail-item {
+  min-width: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+
+.pending-detail-item strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-dark);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.pending-modal-amount {
+  color: var(--green) !important;
+  font-size: 16px !important;
+}
+
+.pending-special-requests {
+  margin: 0;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.pending-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 28px;
+  border-top: 1px solid var(--border);
+  background: #fcfdfc;
+}
+
+.pending-modal-secondary,
+.pending-modal-cancel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pending-modal-secondary {
+  background: var(--white);
+  color: var(--text-dark);
+}
+
+.pending-modal-secondary:hover {
+  background: var(--green-light);
+  border-color: var(--green);
+}
+
+.pending-modal-cancel {
+  border-color: var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+.pending-modal-cancel:hover:not(:disabled) {
+  border-color: var(--red-dark);
+  background: var(--red-dark);
+}
+
+.pending-modal-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+.pending-bookings-page button:focus-visible,
+.pending-bookings-page input:focus-visible,
+.pending-modal button:focus-visible {
+  outline: 3px solid rgba(11, 107, 69, 0.28);
+  outline-offset: 3px;
+}
+
+/* =========================
+   RESPONSIVE: TABLET
+========================= */
+
+@media (max-width: 1000px) {
+  .pending-bookings-page {
+    padding: 24px 20px;
+  }
+
+  .pending-bookings-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pending-search {
+    max-width: none;
+  }
+}
+
+/* =========================
+   RESPONSIVE: MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .pending-bookings-page {
+    padding: 20px 12px;
+  }
+
+  .pending-bookings-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 17px;
+    margin-bottom: 22px;
+  }
+
+  .pending-bookings-header h1 {
+    font-size: 26px;
+  }
+
+  .pending-bookings-header p {
+    font-size: 12px;
+  }
+
+  .pending-refresh-btn {
+    min-height: 40px;
+  }
+
+  .pending-bookings-summary {
+    max-width: none;
+    margin-bottom: 20px;
+    padding: 18px;
+  }
+
+  .pending-bookings-card {
+    border-radius: var(--radius-md);
+  }
+
+  .pending-bookings-toolbar {
+    gap: 18px;
+    padding: 20px 16px;
+  }
+
+  .pending-bookings-toolbar h2 {
+    font-size: 16px;
+  }
+
+  .pending-search {
+    min-width: 0;
+  }
+
+  .pending-bookings-table th,
+  .pending-bookings-table td {
+    padding: 15px 13px;
+  }
+
+  .pending-table-footer {
+    padding: 15px 16px;
+  }
+
+  .pending-modal-overlay {
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .pending-modal {
+    max-height: calc(100vh - 24px);
+    border-radius: var(--radius-md);
+  }
+
+  .pending-modal-header {
+    padding: 20px 18px;
+  }
+
+  .pending-modal-header h2 {
+    font-size: 19px;
+  }
+
+  .pending-modal-content {
+    padding: 18px;
+  }
+
+  .pending-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pending-modal-footer {
+    position: sticky;
+    bottom: 0;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+
+  .pending-modal-secondary,
+  .pending-modal-cancel {
+    flex: 1;
+    min-width: 120px;
+    padding: 0 12px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .pending-bookings-page,
+  .pending-modal-overlay,
+  .pending-modal,
+  .pending-loader,
+  .pending-spin {
+    animation: none !important;
+  }
+
+  .pending-bookings-page *,
+  .pending-bookings-page *::before,
+  .pending-bookings-page *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

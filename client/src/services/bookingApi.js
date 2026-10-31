@@ -101,3 +101,11 @@ export const getAvailableApartments = async (
 
   return response.data;
 };
+
+export const getPendingBookings = async () =>
+  (await bookingApi.get("/pending")).data;
+
+export const cancelPendingBooking = async (id) => {
+  const response = await bookingApi.patch(`/${id}/cancel-pending`);
+  return response.data;
+};

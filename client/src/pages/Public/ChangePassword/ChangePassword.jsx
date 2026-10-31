@@ -61,9 +61,8 @@ const ChangePassword = () => {
       setLoading(true);
 
       // Call backend
-      const response = await changePassword(formData);
+      await changePassword(formData);
 
-      console.log("Change password response:", response);
 
       // Get current user
       const storedUser = JSON.parse(

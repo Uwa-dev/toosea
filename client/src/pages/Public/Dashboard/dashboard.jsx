@@ -54,8 +54,6 @@ const Dashboard = () => {
 
         const data = await getAllApartments();
 
-        console.log("API Response:", data);
-
         setApartments(data.apartments || []);
       } catch (error) {
         console.error("Error fetching apartments:", error);

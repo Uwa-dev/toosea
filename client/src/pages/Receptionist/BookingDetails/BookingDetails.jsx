@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+
+import {
+  ArrowLeft,
+  X,
+  AlertTriangle,
+  LogIn,
+  CalendarX,
+} from "lucide-react";
+
 import {
   getBookingById,
   checkInGuest,
   cancelBooking,
 } from "../../../services/bookingApi";
+
 import "./bookingdetails.css";
 
 const BookingDetails = () => {
@@ -16,10 +26,9 @@ const BookingDetails = () => {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
 
-  useEffect(() => {
-    fetchBooking();
-  }, [id]);
+  const [confirmationModal, setConfirmationModal] = useState(null);
 
+  // FETCH BOOKING
   const fetchBooking = async () => {
     try {
       setLoading(true);
@@ -28,7 +37,6 @@ const BookingDetails = () => {
 
       setBooking(data);
     } catch (err) {
-      console.log(err);
 
       toast.error(
         err.response?.data?.message ||
@@ -39,12 +47,25 @@ const BookingDetails = () => {
     }
   };
 
-  const handleCheckIn = async () => {
-    const confirmCheckIn = window.confirm(
-      "Check in this guest?"
-    );
+  useEffect(() => {
+    fetchBooking();
+  }, [id]);
 
-    if (!confirmCheckIn) return;
+  // OPEN CONFIRMATION MODAL
+  const openConfirmationModal = (action) => {
+    setConfirmationModal(action);
+  };
+
+  // CLOSE CONFIRMATION MODAL
+  const closeConfirmationModal = () => {
+    if (actionLoading) return;
+
+    setConfirmationModal(null);
+  };
+
+  // CHECK IN GUEST
+  const handleCheckIn = async () => {
+    if (!booking) return;
 
     try {
       setActionLoading(true);
@@ -53,9 +74,10 @@ const BookingDetails = () => {
 
       toast.info(response.message);
 
+      setConfirmationModal(null);
+
       await fetchBooking();
     } catch (err) {
-      console.log(err);
 
       toast.error(
         err.response?.data?.message ||
@@ -66,12 +88,9 @@ const BookingDetails = () => {
     }
   };
 
+  // CANCEL BOOKING
   const handleCancelBooking = async () => {
-    const confirmed = window.confirm(
-      "Are you sure you want to cancel this booking?"
-    );
-
-    if (!confirmed) return;
+    if (!booking) return;
 
     try {
       setActionLoading(true);
@@ -80,9 +99,11 @@ const BookingDetails = () => {
 
       toast.info(response.message);
 
+      setConfirmationModal(null);
+
       await fetchBooking();
     } catch (err) {
-      console.log(err);
+      (err);
 
       toast.error(
         err.response?.data?.message ||
@@ -93,6 +114,16 @@ const BookingDetails = () => {
     }
   };
 
+  // CONFIRM SELECTED ACTION
+  const handleConfirmAction = () => {
+    if (confirmationModal === "checkin") {
+      handleCheckIn();
+    } else if (confirmationModal === "cancel") {
+      handleCancelBooking();
+    }
+  };
+
+  // LOADING STATE
   if (loading) {
     return (
       <div className="booking-details-page">
@@ -103,6 +134,7 @@ const BookingDetails = () => {
     );
   }
 
+  // BOOKING NOT FOUND
   if (!booking) {
     return (
       <div className="booking-details-page">
@@ -119,10 +151,12 @@ const BookingDetails = () => {
       (1000 * 60 * 60 * 24)
   );
 
+  const isCheckIn = confirmationModal === "checkin";
+
   return (
     <div className="booking-details-page">
 
-      {/* Header */}
+      {/* HEADER */}
 
       <div className="booking-details-header">
 
@@ -130,7 +164,8 @@ const BookingDetails = () => {
           className="booking-details-back-btn"
           onClick={() => navigate(-1)}
         >
-          ← Back
+          <ArrowLeft size={18} />
+          Back
         </button>
 
         <div className="booking-details-heading">
@@ -143,11 +178,11 @@ const BookingDetails = () => {
 
       </div>
 
-      {/* Information Cards */}
+      {/* INFORMATION CARDS */}
 
       <div className="booking-details-grid">
 
-        {/* Apartment */}
+        {/* APARTMENT */}
 
         <div className="booking-details-card">
 
@@ -168,6 +203,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Name:</strong>
+
               <span>
                 {booking.apartment?.name || "N/A"}
               </span>
@@ -175,6 +211,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Location:</strong>
+
               <span>
                 {booking.apartment?.location || "N/A"}
               </span>
@@ -182,6 +219,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Price/Night:</strong>
+
               <span>
                 ₦
                 {booking.apartment?.pricePerNight?.toLocaleString() ||
@@ -193,7 +231,7 @@ const BookingDetails = () => {
 
         </div>
 
-        {/* Guest Information */}
+        {/* GUEST INFORMATION */}
 
         <div className="booking-details-card">
 
@@ -205,6 +243,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Name:</strong>
+
               <span>
                 {booking.customer?.fullName || "N/A"}
               </span>
@@ -212,6 +251,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Email:</strong>
+
               <span>
                 {booking.customer?.email || "N/A"}
               </span>
@@ -219,6 +259,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Phone:</strong>
+
               <span>
                 {booking.customer?.phone || "N/A"}
               </span>
@@ -228,7 +269,7 @@ const BookingDetails = () => {
 
         </div>
 
-        {/* Booking Information */}
+        {/* BOOKING INFORMATION */}
 
         <div className="booking-details-card">
 
@@ -240,6 +281,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Check In:</strong>
+
               <span>
                 {new Date(
                   booking.checkInDate
@@ -249,6 +291,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Check Out:</strong>
+
               <span>
                 {new Date(
                   booking.checkOutDate
@@ -258,11 +301,13 @@ const BookingDetails = () => {
 
             <p>
               <strong>Nights:</strong>
+
               <span>{nights}</span>
             </p>
 
             <p>
               <strong>Booking Source:</strong>
+
               <span>
                 {booking.bookingSource || "N/A"}
               </span>
@@ -272,7 +317,7 @@ const BookingDetails = () => {
 
         </div>
 
-        {/* Payment Information */}
+        {/* PAYMENT INFORMATION */}
 
         <div className="booking-details-card">
 
@@ -284,13 +329,16 @@ const BookingDetails = () => {
 
             <p>
               <strong>Total Amount:</strong>
+
               <span className="booking-details-total">
-                ₦{booking.totalPrice?.toLocaleString() || "0"}
+                ₦
+                {booking.totalPrice?.toLocaleString() || "0"}
               </span>
             </p>
 
             <p>
               <strong>Method:</strong>
+
               <span>
                 {booking.paymentMethod || "N/A"}
               </span>
@@ -298,6 +346,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Payment Status:</strong>
+
               <span
                 className={`booking-details-status booking-details-payment-${booking.paymentStatus?.toLowerCase()}`}
               >
@@ -307,6 +356,7 @@ const BookingDetails = () => {
 
             <p>
               <strong>Booking Status:</strong>
+
               <span
                 className={`booking-details-status booking-details-booking-${booking.bookingStatus?.toLowerCase()}`}
               >
@@ -320,19 +370,19 @@ const BookingDetails = () => {
 
       </div>
 
-      {/* Actions */}
+      {/* ACTIONS */}
 
       <div className="booking-details-actions">
 
         {booking.bookingStatus === "CONFIRMED" && (
           <button
             className="booking-details-checkin-btn"
-            onClick={handleCheckIn}
+            onClick={() =>
+              openConfirmationModal("checkin")
+            }
             disabled={actionLoading}
           >
-            {actionLoading
-              ? "Checking In..."
-              : "Check In Guest"}
+            Check In Guest
           </button>
         )}
 
@@ -359,11 +409,11 @@ const BookingDetails = () => {
           <button
             className="booking-details-cancel-btn"
             disabled={actionLoading}
-            onClick={handleCancelBooking}
+            onClick={() =>
+              openConfirmationModal("cancel")
+            }
           >
-            {actionLoading
-              ? "Cancelling..."
-              : "Cancel Booking"}
+            Cancel Booking
           </button>
         )}
 
@@ -377,6 +427,90 @@ const BookingDetails = () => {
         )}
 
       </div>
+
+      {/* CONFIRMATION MODAL */}
+
+      {confirmationModal && (
+        <div
+          className="booking-confirm-overlay"
+          onClick={closeConfirmationModal}
+        >
+          <div
+            className="booking-confirm-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <button
+              type="button"
+              className="booking-confirm-close"
+              onClick={closeConfirmationModal}
+              disabled={actionLoading}
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+
+            <div
+              className={`booking-confirm-icon ${
+                isCheckIn
+                  ? "checkin-modal-icon"
+                  : "cancel-modal-icon"
+              }`}
+            >
+              {isCheckIn ? (
+                <LogIn size={28} />
+              ) : (
+                <AlertTriangle size={28} />
+              )}
+            </div>
+
+            <h3>
+              {isCheckIn
+                ? "Check In Guest?"
+                : "Cancel Booking?"}
+            </h3>
+
+            <p>
+              {isCheckIn
+                ? `Are you sure you want to check in ${booking.customer?.fullName || "this guest"}?`
+                : `Are you sure you want to cancel the booking for ${booking.customer?.fullName || "this guest"}? This action cannot be undone.`}
+            </p>
+
+            <div className="booking-confirm-actions">
+
+              <button
+                type="button"
+                className="booking-confirm-cancel-btn"
+                onClick={closeConfirmationModal}
+                disabled={actionLoading}
+              >
+                Go Back
+              </button>
+
+              <button
+                type="button"
+                className={
+                  isCheckIn
+                    ? "booking-confirm-checkin-btn"
+                    : "booking-confirm-delete-btn"
+                }
+                onClick={handleConfirmAction}
+                disabled={actionLoading}
+              >
+                {actionLoading
+                  ? isCheckIn
+                    ? "Checking In..."
+                    : "Cancelling..."
+                  : isCheckIn
+                    ? "Yes, Check In"
+                    : "Yes, Cancel Booking"}
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+      )}
 
     </div>
   );

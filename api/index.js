@@ -18,8 +18,8 @@ connectDB();
 
 app.use(
   cors({
-    origin: "https://tooseagarden.com",
-    // origin: "http://localhost:5173",
+    // origin: "https://tooseagarden.com",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );

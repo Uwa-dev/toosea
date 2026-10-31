@@ -48,7 +48,6 @@ const CreateUsers = () => {
 
       const response = await createUser(dataToSend);
 
-      console.log("Create User Response:", response);
 
       setCreatedUser(response.user);
 
@@ -263,7 +262,7 @@ Password: ${createdUser.password}`
 
                     <p>
                       The staff member can log in using the
-                      credentials above.
+                      credentials above. A mail with this credentials has been sent to the registered email.
                     </p>
                   </div>
                 )}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Eye, UserRoundX } from "lucide-react";
+import { Eye, UserRoundX, X, AlertTriangle } from "lucide-react";
 import "./viewUser.css";
 import Load from "../../../components/reuse/Load.jsx";
 import {
@@ -13,6 +13,8 @@ const ViewStaff = () => {
   const [staff, setStaff] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedStaff, setSelectedStaff] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,17 +44,10 @@ const ViewStaff = () => {
   }, []);
 
   const filteredStaff = staff.filter((item) => {
-    const name =
-      item.fullName?.toLowerCase() || "";
-
-    const email =
-      item.email?.toLowerCase() || "";
-
-    const staffCode =
-      item.staffCode?.toLowerCase() || "";
-
-    const searchValue =
-      search.toLowerCase();
+    const name = item.fullName?.toLowerCase() || "";
+    const email = item.email?.toLowerCase() || "";
+    const staffCode = item.staffCode?.toLowerCase() || "";
+    const searchValue = search.toLowerCase();
 
     return (
       name.includes(searchValue) ||
@@ -65,43 +60,34 @@ const ViewStaff = () => {
     navigate(`/admin/staff/${staff._id}`);
   };
 
-  const handleDelete = async (staff) => {
-    const confirmed = window.confirm(
-      `Are you sure you want to remove ${staff.fullName}?`
-    );
-
-    if (!confirmed) {
-      return;
-    }
+  const handleDelete = async () => {
+    if (!selectedStaff) return;
 
     try {
-      setLoading(true);
+      setDeleting(true);
 
-      await deleteUser(staff._id);
+      await deleteUser(selectedStaff._id);
 
-      toast.info(
-        `${staff.fullName} has been removed successfully.`
+      toast.success(
+        `${selectedStaff.fullName} has been removed successfully.`
       );
 
-      // Remove the user immediately from the current list
       setStaff((currentStaff) =>
         currentStaff.filter(
-          (item) => item._id !== staff._id
+          (item) => item._id !== selectedStaff._id
         )
       );
 
+      setSelectedStaff(null);
     } catch (error) {
-      console.error(
-        "Delete User Error:",
-        error
-      );
+      console.error("Delete User Error:", error);
 
       toast.error(
         error.response?.data?.message ||
           "Failed to remove user."
       );
     } finally {
-      setLoading(false);
+      setDeleting(false);
     }
   };
 
@@ -110,7 +96,6 @@ const ViewStaff = () => {
       {loading && <Load />}
 
       <div className="view-staff-container">
-
         <div className="staff-header">
           <h2>View Staff</h2>
 
@@ -118,16 +103,12 @@ const ViewStaff = () => {
             type="text"
             placeholder="Search by name, email or staff code..."
             value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
         <div className="table-container">
-
           <table>
-
             <thead>
               <tr>
                 <th>S/N</th>
@@ -140,75 +121,37 @@ const ViewStaff = () => {
             </thead>
 
             <tbody>
-
               {filteredStaff.length > 0 ? (
+                filteredStaff.map((item, index) => (
+                  <tr key={item._id}>
+                    <td>{index + 1}</td>
+                    <td>{item.fullName}</td>
+                    <td>{item.email}</td>
+                    <td>{item.role}</td>
+                    <td>{item.staffCode}</td>
 
-                filteredStaff.map(
-                  (item, index) => (
+                    <td>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleView(item)}
+                        title="View staff"
+                      >
+                        <Eye size={18} />
+                      </button>
 
-                    <tr key={item._id}>
-
-                      <td>
-                        {index + 1}
-                      </td>
-
-                      <td>
-                        {item.fullName}
-                      </td>
-
-                      <td>
-                        {item.email}
-                      </td>
-
-                      <td>
-                        {item.role}
-                      </td>
-
-                      <td>
-                        {item.staffCode}
-                      </td>
-
-                      <td>
-
-                        {/* VIEW */}
-                        <button
-                          className="edit-btn"
-                          onClick={() =>
-                            handleView(item)
-                          }
-                          title="View staff"
-                        >
-                          <Eye size={18} />
-                        </button>
-
-                        {/* DELETE */}
-                        <button
-                          className="delete-btn"
-                          onClick={() =>
-                            handleDelete(item)
-                          }
-                          title="Remove staff"
-                        >
-                          <UserRoundX
-                            size={18}
-                          />
-                        </button>
-
-                      </td>
-
-                    </tr>
-
-                  )
-                )
-
+                      <button
+                        className="delete-btn"
+                        onClick={() => setSelectedStaff(item)}
+                        title="Remove staff"
+                      >
+                        <UserRoundX size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
               ) : (
-
                 <tr>
-
-                  <td
-                    colSpan="6"
-                    className="no-data"
-                  >
+                  <td colSpan="6" className="no-data">
                     No staff found.
                   </td>
                 </tr>
@@ -217,6 +160,57 @@ const ViewStaff = () => {
           </table>
         </div>
       </div>
+
+      {/* DELETE CONFIRMATION MODAL */}
+      {selectedStaff && (
+        <div
+          className="delete-modal-overlay"
+          onClick={() => !deleting && setSelectedStaff(null)}
+        >
+          <div
+            className="delete-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="delete-modal-close"
+              onClick={() => setSelectedStaff(null)}
+              disabled={deleting}
+            >
+              <X size={20} />
+            </button>
+
+            <div className="delete-modal-icon">
+              <AlertTriangle size={28} />
+            </div>
+
+            <h3>Remove Staff?</h3>
+
+            <p>
+              Are you sure you want to remove{" "}
+              <strong>{selectedStaff.fullName}</strong>?
+              This action cannot be undone.
+            </p>
+
+            <div className="delete-modal-actions">
+              <button
+                className="cancel-delete-btn"
+                onClick={() => setSelectedStaff(null)}
+                disabled={deleting}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="confirm-delete-btn"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? "Removing..." : "Remove Staff"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

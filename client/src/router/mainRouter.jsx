@@ -41,7 +41,9 @@ const YearlyBookings = lazy(() => import("../pages/Admin/YearlyBookings/YearlyBo
 const ApartmentImages = lazy(() => import("../pages/Admin/UploadApartmentImage/ApartmentImages.jsx"));
 const ChangePassword = lazy(() => import("../pages/Public/ChangePassword/ChangePassword.jsx"));
 const PendingApprovals = lazy(() => import("../pages/Admin/PendingApprovals/PendingApprovals.jsx"));
-const AllApprovals = lazy(() => import("../pages/Admin/AllApprovals/AllApprovals.jsx"))
+const AllApprovals = lazy(() => import("../pages/Admin/AllApprovals/AllApprovals.jsx"));
+const UpdateApartment = lazy(() => import("../pages/Admin/UpdateApartment/UpdateApartment.jsx"));
+const PendingBookings = lazy(() => import("../pages/Admin/PendingBookings/PendingBookings.jsx")) 
 
 const routesConfig = [
   {
@@ -162,6 +164,12 @@ const routesConfig = [
       }, {
         path: "allapprovals",
         element: <AllApprovals />
+      }, {
+        path: "apartment/edit/:id",
+        element: <UpdateApartment />
+      }, {
+        path: "pending-bookings",
+        element: <PendingBookings />
       }
     ]
   }, {
@@ -186,14 +194,30 @@ const routesConfig = [
         element: <AllUsers />
       }, {
         path: "apartments",
-        element: <AllApartments />
+        // element: <AllApartments />
+        element: <ViewApartments role="MANAGER" />
       }, {
         path: "bookings/today",
         element: <TodaysBookings />
       }, {
         path: "bookings/month",
         element: <MonthlyBookings />
-      }, 
+      }, {
+        path: "update-apartment",
+        element: <UpdateApartment />
+      }, {
+        path: "apartment/:id",
+        element: <SingleApartment />
+      }, {
+        path: "apartment/:id/images",
+        element: <ApartmentImages />
+      }, {
+        path: "pending-bookings",
+        element: <PendingBookings/>
+      }, {
+        path: "apartment/edit/:id",
+        element: <UpdateApartment />
+      },
     ]
   },
   {

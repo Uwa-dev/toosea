@@ -1,0 +1,456 @@
+
+.update-apartment-page {
+  min-height: 100vh;
+  padding: 32px 24px 60px;
+  background: var(--off-white);
+  color: var(--text-dark);
+}
+
+.update-apartment-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.update-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 26px;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  color: var(--green-deep);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.update-back-btn:hover {
+  color: var(--green);
+  transform: translateX(-3px);
+}
+
+.update-apartment-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.update-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  background: var(--green-light);
+  color: var(--green-deep);
+}
+
+.update-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.update-apartment-header h1 {
+  margin: 0 0 8px;
+  color: var(--green-dark);
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 750;
+  letter-spacing: -0.8px;
+}
+
+.update-apartment-header p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.update-apartment-card {
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.update-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 24px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.update-card-heading h2 {
+  margin: 0 0 8px;
+  color: var(--green-dark);
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.update-card-heading p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.update-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px 22px;
+}
+
+.update-form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 9px;
+}
+
+.update-full-width {
+  grid-column: 1 / -1;
+}
+
+.update-form-group label {
+  color: var(--text-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.update-form-group input,
+.update-form-group select,
+.update-form-group textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--white);
+  color: var(--text-dark);
+  font: inherit;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.update-form-group input,
+.update-form-group select {
+  min-height: 48px;
+}
+
+.update-form-group textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.update-form-group input::placeholder,
+.update-form-group textarea::placeholder {
+  color: #9aa69f;
+}
+
+.update-form-group input:hover,
+.update-form-group select:hover,
+.update-form-group textarea:hover {
+  border-color: #a7c8b6;
+}
+
+.update-form-group input:focus,
+.update-form-group select:focus,
+.update-form-group textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(11, 107, 69, 0.1);
+}
+
+.update-form-group small {
+  color: var(--text-light);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.update-amenities-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.update-amenities-preview span {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 7px 11px;
+  overflow-wrap: anywhere;
+  border: 1px solid #d3e8db;
+  border-radius: 30px;
+  background: var(--green-light);
+  color: var(--green-deep);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.update-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 27px;
+  margin-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.update-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 12px 21px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.update-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.update-btn-primary {
+  background: var(--green-dark);
+  color: var(--white);
+}
+
+.update-btn-primary:hover:not(:disabled) {
+  background: var(--green-deep);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.update-btn-secondary {
+  border-color: var(--border);
+  background: var(--white);
+  color: var(--text);
+}
+
+.update-btn-secondary:hover:not(:disabled) {
+  border-color: var(--green);
+  background: var(--green-light);
+  color: var(--green-dark);
+}
+
+.update-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 17px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.update-alert > svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.update-alert > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.update-alert strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.update-alert p {
+  margin: 0;
+}
+
+.update-alert button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.update-alert-error {
+  border-color: #f0c5c8;
+  background: #fff0f1;
+  color: var(--red-dark);
+}
+
+.update-alert-success {
+  border-color: #c5e6d1;
+  background: var(--green-light);
+  color: var(--green-deep);
+}
+
+.update-alert-pending {
+  border-color: #ead9a7;
+  background: #fff9e8;
+  color: #785c12;
+}
+
+.update-apartment-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 15px;
+  color: var(--green-deep);
+}
+
+.update-apartment-loading p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.update-spin {
+  animation: update-apartment-spin 1s linear infinite;
+}
+
+@keyframes update-apartment-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.update-apartment-error-card {
+  max-width: 540px;
+  margin: 70px auto;
+  text-align: center;
+}
+
+.update-apartment-error-card > svg {
+  color: var(--red);
+}
+
+.update-apartment-error-card h2 {
+  margin: 16px 0 10px;
+  color: var(--green-dark);
+  font-size: 22px;
+}
+
+.update-apartment-error-card p {
+  margin: 0 0 22px;
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.update-apartment-error-card .update-btn {
+  margin: 0 auto;
+}
+
+.update-apartment-note {
+  margin: 18px 0 0;
+  color: var(--text-light);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .update-apartment-page {
+    padding: 22px 14px 40px;
+  }
+
+  .update-back-btn {
+    margin-bottom: 20px;
+  }
+
+  .update-apartment-header {
+    align-items: flex-start;
+    gap: 13px;
+    margin-bottom: 22px;
+  }
+
+  .update-header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 11px;
+  }
+
+  .update-header-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .update-apartment-header h1 {
+    font-size: 25px;
+  }
+
+  .update-apartment-header p {
+    font-size: 13px;
+  }
+
+  .update-apartment-card {
+    padding: 21px 17px;
+    border-radius: var(--radius-md);
+  }
+
+  .update-card-heading {
+    padding-bottom: 19px;
+    margin-bottom: 22px;
+  }
+
+  .update-card-heading h2 {
+    font-size: 18px;
+  }
+
+  .update-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 21px;
+  }
+
+  .update-full-width {
+    grid-column: auto;
+  }
+
+  .update-form-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .update-form-footer .update-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .update-apartment-page *,
+  .update-apartment-page *::before,
+  .update-apartment-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

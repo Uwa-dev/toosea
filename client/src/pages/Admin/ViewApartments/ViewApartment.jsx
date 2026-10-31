@@ -1,24 +1,34 @@
+
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Eye, Camera} from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Eye, Camera } from "lucide-react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { getAllApartments } from "../../../services/apartmentApi";
 
 import "./viewApartments.css";
 
-function ViewApartments() {
+function ViewApartments({ role = "OWNER" }) {
   const [apartments, setApartments] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
+
+  const basePath = role === "MANAGER" ? "/manager" : "/admin";
+
+  const handleView = (apartment) => {
+    navigate(`${basePath}/apartment/${apartment._id}`);
+  };
+
+  const handleImages = (apartment) => {
+    navigate(`${basePath}/apartment/${apartment._id}/images`);
+  };
 
   const fetchApartments = async () => {
     try {
       setLoading(true);
 
       const data = await getAllApartments();
-
-      setApartments(data.apartments);
+      setApartments(data.apartments || []);
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -27,10 +37,6 @@ function ViewApartments() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleView = (apartment) => {
-    navigate(`/admin/apartment/${apartment._id}`);
   };
 
   useEffect(() => {
@@ -42,13 +48,18 @@ function ViewApartments() {
       <div className="page-header">
         <div>
           <h1>View Apartments</h1>
-          <p>Manage all available apartments.</p>
+          <p>Manage and view all apartments.</p>
         </div>
 
-        <Link to="/admin/apartments">
-          <button className="add-btn">
-            + Create Apartment
-          </button>
+        <Link
+          to={
+            role === "MANAGER"
+              ? "/manager/apartments/create"
+              : "/admin/apartments"
+          }
+          className="add-btn"
+        >
+          + Create Apartment
         </Link>
       </div>
 
@@ -87,13 +98,13 @@ function ViewApartments() {
                   <td>{apartment.name}</td>
 
                   <td>
-                    {apartment.description.length > 60
+                    {(apartment.description || "").length > 60
                       ? apartment.description.substring(0, 60) + "..."
                       : apartment.description}
                   </td>
 
                   <td>
-                    ₦{apartment.pricePerNight.toLocaleString()}
+                    ₦{Number(apartment.pricePerNight || 0).toLocaleString()}
                   </td>
 
                   <td>
@@ -102,26 +113,27 @@ function ViewApartments() {
                   </td>
 
                   <td>
-                    {apartment.amenities.join(", ")}
+                    {(apartment.amenities || []).join(", ")}
                   </td>
 
                   <td className="actions">
-                    <button className="view" onClick={() => handleView(apartment)}>
+                    <button
+                      type="button"
+                      className="view"
+                      title="View apartment"
+                      onClick={() => handleView(apartment)}
+                    >
                       <Eye size={18} />
                     </button>
 
-                      <button
-                        className="images"
-                        onClick={() =>
-                          navigate(
-                            `/admin/apartment/${apartment._id}/images`
-                          )
-                        }
-                        title="Manage images"
-                      >
-                        <Camera size={18} />
-                      </button>
-
+                    <button
+                      type="button"
+                      className="images"
+                      title="Manage images"
+                      onClick={() => handleImages(apartment)}
+                    >
+                      <Camera size={18} />
+                    </button>
                   </td>
                 </tr>
               ))

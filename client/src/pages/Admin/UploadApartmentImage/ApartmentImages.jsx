@@ -26,33 +26,26 @@ const ApartmentImages = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [apartment, setApartment] =
-    useState(null);
+  const [apartment, setApartment] = useState(null);
 
-  const [selectedFiles, setSelectedFiles] =
-    useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [previewUrls, setPreviewUrls] = useState([]);
 
-  const [previewUrls, setPreviewUrls] =
-    useState([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [deletingImageId, setDeletingImageId] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [deletingImage, setDeletingImage] = useState(false);
 
-  const [uploading, setUploading] =
-    useState(false);
-
-  const [deletingImageId, setDeletingImageId] =
-    useState(null);
-
+  // FETCH APARTMENT
   const fetchApartment = async () => {
     try {
       setLoading(true);
 
-      const data =
-        await singleApartment(id);
+      const data = await singleApartment(id);
 
       setApartment(data.apartment);
-
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -67,7 +60,7 @@ const ApartmentImages = () => {
     fetchApartment();
   }, [id]);
 
-  // Create previews when files are selected
+  // CREATE PREVIEWS WHEN FILES ARE SELECTED
   useEffect(() => {
     const urls = selectedFiles.map((file) =>
       URL.createObjectURL(file)
@@ -82,16 +75,13 @@ const ApartmentImages = () => {
     };
   }, [selectedFiles]);
 
-  const currentImages =
-    apartment?.images || [];
+  const currentImages = apartment?.images || [];
 
-  const remainingSlots =
-    15 - currentImages.length;
+  const remainingSlots = 15 - currentImages.length;
 
+  // SELECT IMAGES
   const handleFileChange = (e) => {
-    const files = Array.from(
-      e.target.files
-    );
+    const files = Array.from(e.target.files);
 
     if (files.length === 0) {
       return;
@@ -100,9 +90,7 @@ const ApartmentImages = () => {
     if (files.length > remainingSlots) {
       toast.error(
         `You can only add ${remainingSlots} more image${
-          remainingSlots === 1
-            ? ""
-            : "s"
+          remainingSlots === 1 ? "" : "s"
         }.`
       );
 
@@ -116,97 +104,100 @@ const ApartmentImages = () => {
     e.target.value = "";
   };
 
+  // REMOVE SELECTED IMAGE BEFORE UPLOAD
   const removeSelectedFile = (index) => {
     setSelectedFiles((current) =>
       current.filter(
-        (_, fileIndex) =>
-          fileIndex !== index
+        (_, fileIndex) => fileIndex !== index
       )
     );
   };
 
-  const handleDeleteImage = async (image) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this image?"
-    );
+  // OPEN DELETE CONFIRMATION MODAL
+  const openDeleteModal = (image) => {
+    setSelectedImage(image);
+  };
 
-    if (!confirmed) return;
+  // CLOSE DELETE CONFIRMATION MODAL
+  const closeDeleteModal = () => {
+    if (deletingImage) return;
+
+    setSelectedImage(null);
+  };
+
+  // DELETE APARTMENT IMAGE
+  const handleDeleteImage = async () => {
+    if (!selectedImage) return;
 
     try {
-      setDeletingImageId(image.publicId);
+      setDeletingImage(true);
+      setDeletingImageId(selectedImage.publicId);
 
       const data = await deleteApartmentImage(
         id,
-        image.publicId
+        selectedImage.publicId
       );
 
       toast.success(
-        data.message ||
-          "Image deleted successfully."
+        data.message || "Image deleted successfully."
       );
 
       setApartment((current) => ({
         ...current,
         images: current.images.filter(
           (item) =>
-            item.publicId !== image.publicId
+            item.publicId !== selectedImage.publicId
         ),
       }));
 
+      setSelectedImage(null);
     } catch (error) {
+      console.error("Delete Image Error:", error);
+
       toast.error(
         error.response?.data?.message ||
           "Failed to delete image."
       );
     } finally {
+      setDeletingImage(false);
       setDeletingImageId(null);
     }
   };
 
+  // UPLOAD IMAGES
   const handleUpload = async () => {
     if (selectedFiles.length === 0) {
-      toast.error(
-        "Please select at least one image."
-      );
-
+      toast.error("Please select at least one image.");
       return;
     }
 
     if (
-      currentImages.length +
-        selectedFiles.length >
+      currentImages.length + selectedFiles.length >
       15
     ) {
       toast.error(
         "An apartment cannot have more than 15 images."
       );
-
       return;
     }
 
     try {
       setUploading(true);
 
-      const data =
-        await uploadApartmentImages(
-          id,
-          selectedFiles
-        );
+      const data = await uploadApartmentImages(
+        id,
+        selectedFiles
+      );
 
       toast.success(
-        data.message ||
-          "Images uploaded successfully."
+        data.message || "Images uploaded successfully."
       );
 
       setSelectedFiles([]);
 
       await fetchApartment();
-
     } catch (error) {
-      console.error(
-        "Upload Images Error:",
-        error
-      );
+      console.error("Upload Images Error:", error);
 
       toast.error(
         error.response?.data?.message ||
@@ -217,33 +208,28 @@ const ApartmentImages = () => {
     }
   };
 
+  // LOADING STATE
   if (loading) {
     return (
       <div className="apartment-images-page loading-page">
         <div className="loading-content">
           <Camera size={40} />
-          <h2>
-            Loading apartment...
-          </h2>
+          <h2>Loading apartment...</h2>
         </div>
       </div>
     );
   }
 
+  // APARTMENT NOT FOUND
   if (!apartment) {
     return (
       <div className="apartment-images-page">
         <div className="empty-page">
           <Camera size={50} />
-          <h2>
-            Apartment not found
-          </h2>
 
-          <button
-            onClick={() =>
-              navigate(-1)
-            }
-          >
+          <h2>Apartment not found</h2>
+
+          <button onClick={() => navigate(-1)}>
             Go Back
           </button>
         </div>
@@ -257,63 +243,45 @@ const ApartmentImages = () => {
       {/* HEADER */}
 
       <div className="images-header">
-
         <button
           className="back-btn"
-          onClick={() =>
-            navigate(-1)
-          }
+          onClick={() => navigate(-1)}
         >
           <ArrowLeft size={18} />
           Back
         </button>
 
         <div className="header-content">
-          <h1>
-            {apartment.name}
-          </h1>
-
-          <p>
-            Manage apartment images
-          </p>
+          <h1>{apartment.name}</h1>
+          <p>Manage apartment images</p>
         </div>
-
       </div>
 
       {/* IMAGE COUNT */}
 
       <div className="image-count-card">
-
         <div className="count-info">
           <div className="count-icon">
             <Camera size={22} />
           </div>
 
           <div>
-            <h3>
-              Apartment Images
-            </h3>
+            <h3>Apartment Images</h3>
 
             <p>
-              {currentImages.length}{" "}
-              of 15 images uploaded
+              {currentImages.length} of 15 images uploaded
             </p>
           </div>
         </div>
 
         <div className="count-status">
-
           {remainingSlots > 0 ? (
             <>
-              <strong>
-                {remainingSlots}
-              </strong>
+              <strong>{remainingSlots}</strong>
 
               <span>
                 slot
-                {remainingSlots === 1
-                  ? ""
-                  : "s"} remaining
+                {remainingSlots === 1 ? "" : "s"} remaining
               </span>
             </>
           ) : (
@@ -321,71 +289,53 @@ const ApartmentImages = () => {
               Maximum reached
             </span>
           )}
-
         </div>
-
       </div>
 
       {/* PROGRESS */}
 
       <div className="image-progress">
-
         <div
           className="image-progress-bar"
           style={{
             width: `${
-              (currentImages.length /
-                15) *
-              100
+              (currentImages.length / 15) * 100
             }%`,
           }}
         />
-
       </div>
 
       {/* CURRENT IMAGES */}
 
       <div className="images-section">
-
         <div className="section-heading">
           <div>
-            <h2>
-              Current Images
-            </h2>
+            <h2>Current Images</h2>
 
             <p>
-              Click the delete button
-              to remove an image.
+              Click the delete button to remove an image.
             </p>
           </div>
         </div>
 
         {currentImages.length === 0 ? (
           <div className="no-images">
-
             <Camera size={45} />
 
-            <h3>
-              No images uploaded
-            </h3>
+            <h3>No images uploaded</h3>
 
             <p>
-              Upload images using the
-              section below.
+              Upload images using the section below.
             </p>
-
           </div>
         ) : (
-
           <div className="image-grid">
-
             {currentImages.map((image, index) => (
               <div
                 className="image-card"
                 key={image.publicId}
               >
                 <div className="image-wrapper">
-
                   <img
                     src={image.imageUrl}
                     alt={`${apartment.name} ${index + 1}`}
@@ -396,10 +346,9 @@ const ApartmentImages = () => {
                   </div>
 
                   <button
+                    type="button"
                     className="delete-image-btn"
-                    onClick={() =>
-                      handleDeleteImage(image)
-                    }
+                    onClick={() => openDeleteModal(image)}
                     disabled={
                       deletingImageId === image.publicId
                     }
@@ -411,203 +360,194 @@ const ApartmentImages = () => {
                       <Trash2 size={18} />
                     )}
                   </button>
-
                 </div>
 
                 <div className="image-card-footer">
-                  <span>
-                    Image {index + 1}
-                  </span>
+                  <span>Image {index + 1}</span>
                 </div>
               </div>
             ))}
-
           </div>
-
         )}
-
       </div>
 
       {/* UPLOAD SECTION */}
 
       {remainingSlots > 0 && (
-
         <div className="upload-section">
-
           <div className="section-heading">
-
             <div>
-              <h2>
-                Add More Images
-              </h2>
+              <h2>Add More Images</h2>
 
               <p>
                 Add up to{" "}
-                <strong>
-                  {remainingSlots}
-                </strong>{" "}
+                <strong>{remainingSlots}</strong>{" "}
                 more image
-                {remainingSlots === 1
-                  ? ""
-                  : "s"}.
+                {remainingSlots === 1 ? "" : "s"}.
               </p>
             </div>
-
           </div>
 
           {/* FILE SELECTOR */}
 
           <label className="upload-box">
-
             <div className="upload-icon">
               <Upload size={30} />
             </div>
 
-            <h3>
-              Select Images
-            </h3>
+            <h3>Select Images</h3>
 
             <p>
-              Click here to select
-              images from your device
+              Click here to select images from your device
             </p>
 
             <small>
-              You can select up to{" "}
-              {remainingSlots}{" "}
-              image
-              {remainingSlots === 1
-                ? ""
-                : "s"}
+              You can select up to {remainingSlots} image
+              {remainingSlots === 1 ? "" : "s"}
             </small>
 
             <input
               type="file"
               accept="image/*"
               multiple
-              onChange={
-                handleFileChange
-              }
+              onChange={handleFileChange}
             />
-
           </label>
 
           {/* SELECTED FILES */}
 
-          {selectedFiles.length >
-            0 && (
-
+          {selectedFiles.length > 0 && (
             <div className="selected-files">
-
               <div className="selected-header">
-                <h3>
-                  Selected Images
-                </h3>
+                <h3>Selected Images</h3>
 
                 <span>
-                  {
-                    selectedFiles.length
-                  }{" "}
-                  selected
+                  {selectedFiles.length} selected
                 </span>
               </div>
 
               <div className="selected-grid">
+                {selectedFiles.map((file, index) => (
+                  <div
+                    className="selected-image"
+                    key={`${file.name}-${index}`}
+                  >
+                    <img
+                      src={previewUrls[index]}
+                      alt={file.name}
+                    />
 
-                {selectedFiles.map(
-                  (file, index) => (
-
-                    <div
-                      className="selected-image"
-                      key={`${file.name}-${index}`}
+                    <button
+                      type="button"
+                      className="remove-selected"
+                      onClick={() =>
+                        removeSelectedFile(index)
+                      }
+                      title="Remove selected image"
                     >
+                      <X size={16} />
+                    </button>
 
-                      <img
-                        src={
-                          previewUrls[index]
-                        }
-                        alt={file.name}
-                      />
-
-                      <button
-                        type="button"
-                        className="remove-selected"
-                        onClick={() =>
-                          removeSelectedFile(
-                            index
-                          )
-                        }
-                        title="Remove selected image"
-                      >
-                        <X size={16} />
-                      </button>
-
-                      <span>
-                        {file.name}
-                      </span>
-
-                    </div>
-
-                  )
-                )}
-
+                    <span>{file.name}</span>
+                  </div>
+                ))}
               </div>
 
               <button
+                type="button"
                 className="upload-btn"
-                onClick={
-                  handleUpload
-                }
+                onClick={handleUpload}
                 disabled={uploading}
               >
                 <Upload size={18} />
 
                 {uploading
                   ? "Uploading..."
-                  : `Upload ${
-                      selectedFiles.length
-                    } Image${
-                      selectedFiles.length ===
-                      1
-                        ? ""
-                        : "s"
+                  : `Upload ${selectedFiles.length} Image${
+                      selectedFiles.length === 1 ? "" : "s"
                     }`}
               </button>
-
             </div>
-
           )}
-
         </div>
-
       )}
 
       {/* MAXIMUM REACHED */}
 
       {remainingSlots === 0 && (
-
         <div className="maximum-message">
-
           <div className="maximum-icon">
             <Camera size={30} />
           </div>
 
           <div>
-            <h3>
-              Maximum number of images
-              reached
-            </h3>
+            <h3>Maximum number of images reached</h3>
 
             <p>
-              This apartment has 15
-              images. Delete an existing
-              image if you want to upload
-              a replacement.
+              This apartment has 15 images. Delete an
+              existing image if you want to upload a
+              replacement.
             </p>
           </div>
-
         </div>
+      )}
 
+      {/* DELETE IMAGE CONFIRMATION MODAL */}
+
+      {selectedImage && (
+        <div
+          className="image-delete-overlay"
+          onClick={closeDeleteModal}
+        >
+          <div
+            className="image-delete-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="image-modal-close"
+              onClick={closeDeleteModal}
+              disabled={deletingImage}
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="image-delete-icon">
+              <Trash2 size={28} />
+            </div>
+
+            <h3>Delete Image?</h3>
+
+            <p>
+              Are you sure you want to delete this image
+              from <strong>{apartment.name}</strong>?
+              This action cannot be undone.
+            </p>
+
+            <div className="image-delete-actions">
+              <button
+                type="button"
+                className="image-cancel-btn"
+                onClick={closeDeleteModal}
+                disabled={deletingImage}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="image-confirm-btn"
+                onClick={handleDeleteImage}
+                disabled={deletingImage}
+              >
+                {deletingImage
+                  ? "Deleting..."
+                  : "Yes, Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>

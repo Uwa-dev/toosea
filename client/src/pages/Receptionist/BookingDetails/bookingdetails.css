@@ -395,6 +395,156 @@
   font-weight: 600;
 }
 
+/* BOOKING CONFIRMATION MODAL */
+
+.booking-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  animation: bookingModalFade 0.2s ease;
+}
+
+.booking-confirm-modal {
+  position: relative;
+  background: #fff;
+  width: 100%;
+  max-width: 430px;
+  padding: 35px 30px 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+  animation: bookingModalSlide 0.25s ease;
+}
+
+.booking-confirm-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.booking-confirm-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkin-modal-icon {
+  background: #e8f5ed;
+  color: #087443;
+}
+
+.cancel-modal-icon {
+  background: #fff0ed;
+  color: #dc4938;
+}
+
+.booking-confirm-modal h3 {
+  color: #183b2b;
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+.booking-confirm-modal p {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.booking-confirm-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.booking-confirm-actions button {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.booking-confirm-cancel-btn {
+  background: #f3f4f3;
+  border: 1px solid #ddd;
+  color: #444;
+}
+
+.booking-confirm-cancel-btn:hover {
+  background: #e8eae8;
+}
+
+.booking-confirm-checkin-btn {
+  background: #087443;
+  border: 1px solid #087443;
+  color: #fff;
+}
+
+.booking-confirm-checkin-btn:hover {
+  background: #065c35;
+}
+
+.booking-confirm-delete-btn {
+  background: #c9362b;
+  border: 1px solid #c9362b;
+  color: #fff;
+}
+
+.booking-confirm-delete-btn:hover {
+  background: #a92720;
+}
+
+.booking-confirm-actions button:disabled,
+.booking-confirm-close:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes bookingModalFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bookingModalSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-confirm-modal {
+    padding: 30px 20px 22px;
+  }
+
+  .booking-confirm-actions {
+    flex-direction: column-reverse;
+  }
+}
 
 /* =========================================
    TABLET

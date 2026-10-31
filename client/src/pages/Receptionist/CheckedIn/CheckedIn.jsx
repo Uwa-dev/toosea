@@ -4,13 +4,23 @@ import {
   getCheckedInGuests,
   checkOutGuest,
 } from "../../../services/bookingApi";
-import { LogOut, RefreshCw } from "lucide-react";
+import {
+  RefreshCw,
+  LogOut,
+  X,
+  AlertTriangle,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./checkedin.css";
 
 const CheckedIn = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Confirmation modal state
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [confirmationAction, setConfirmationAction] = useState(null);
+  const [actionLoading, setActionLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,48 +33,67 @@ const CheckedIn = () => {
       setLoading(true);
 
       const data = await getCheckedInGuests();
-
       setBookings(data.bookings);
     } catch (err) {
       toast.error(
-        err.response?.data?.message ||
-          "Unable to load guests."
+        err.response?.data?.message || "Unable to load guests."
       );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCheckOut = async (id) => {
-    const confirmCheckout = window.confirm(
-      "Check out this guest?"
-    );
+  // Open confirmation modal
+  const openConfirmation = (booking, action) => {
+    setSelectedBooking(booking);
+    setConfirmationAction(action);
+  };
 
-    if (!confirmCheckout) return;
+  // Close confirmation modal
+  const closeConfirmation = () => {
+    if (actionLoading) return;
+
+    setSelectedBooking(null);
+    setConfirmationAction(null);
+  };
+
+  // Check out guest
+  const handleCheckOut = async () => {
+    if (!selectedBooking) return;
 
     try {
-      const response = await checkOutGuest(id);
+      setActionLoading(true);
 
-      toast.info(response.message);
+      const response = await checkOutGuest(selectedBooking._id);
 
-      fetchGuests();
+      toast.info(response.message || "Guest checked out successfully.");
+
+      setSelectedBooking(null);
+      setConfirmationAction(null);
+
+      await fetchGuests();
     } catch (err) {
       toast.error(
-        err.response?.data?.message ||
-          "Unable to check out guest."
+        err.response?.data?.message || "Unable to check out guest."
       );
+    } finally {
+      setActionLoading(false);
     }
   };
 
-  const handleRebook = async (booking) => {
-    const confirmRebook = window.confirm(
-      "This will check out the guest and open a new booking form. Continue?"
-    );
-
-    if (!confirmRebook) return;
+  // Check out guest and open a new booking form
+  const handleRebook = async () => {
+    if (!selectedBooking) return;
 
     try {
-      await checkOutGuest(booking._id);
+      setActionLoading(true);
+
+      await checkOutGuest(selectedBooking._id);
+
+      const booking = selectedBooking;
+
+      setSelectedBooking(null);
+      setConfirmationAction(null);
 
       navigate("/receptionist/walkin", {
         state: {
@@ -74,9 +103,18 @@ const CheckedIn = () => {
       });
     } catch (err) {
       toast.error(
-        err.response?.data?.message ||
-          "Unable to rebook guest."
+        err.response?.data?.message || "Unable to rebook guest."
       );
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleConfirmAction = () => {
+    if (confirmationAction === "checkout") {
+      handleCheckOut();
+    } else if (confirmationAction === "rebook") {
+      handleRebook();
     }
   };
 
@@ -112,9 +150,7 @@ const CheckedIn = () => {
               <tr
                 key={booking._id}
                 onClick={() =>
-                  navigate(
-                    `/receptionist/bookings/${booking._id}`
-                  )
+                  navigate(`/receptionist/bookings/${booking._id}`)
                 }
                 style={{ cursor: "pointer" }}
               >
@@ -127,22 +163,17 @@ const CheckedIn = () => {
                 <td>{booking.customer?.phone}</td>
 
                 <td>
-                  {new Date(
-                    booking.checkInDate
-                  ).toLocaleDateString()}
+                  {new Date(booking.checkInDate).toLocaleDateString()}
                 </td>
 
                 <td>
-                  {new Date(
-                    booking.checkOutDate
-                  ).toLocaleDateString()}
+                  {new Date(booking.checkOutDate).toLocaleDateString()}
                 </td>
 
                 <td>
                   <span
                     className={
-                      booking.bookingStatus ===
-                      "EXPIRED"
+                      booking.bookingStatus === "EXPIRED"
                         ? "expired"
                         : "checkedin"
                     }
@@ -151,19 +182,13 @@ const CheckedIn = () => {
                   </span>
                 </td>
 
-                <td
-                  onClick={(e) =>
-                    e.stopPropagation()
-                  }
-                >
+                <td onClick={(e) => e.stopPropagation()}>
                   <div className="table-actions">
                     <button
                       className="action-btn checkout-btn"
                       title="Check Out Guest"
                       onClick={() =>
-                        handleCheckOut(
-                          booking._id
-                        )
+                        openConfirmation(booking, "checkout")
                       }
                     >
                       <LogOut size={18} />
@@ -173,7 +198,7 @@ const CheckedIn = () => {
                       className="action-btn rebook-btn"
                       title="Create New Booking"
                       onClick={() =>
-                        handleRebook(booking)
+                        openConfirmation(booking, "rebook")
                       }
                     >
                       <RefreshCw size={18} />
@@ -184,6 +209,93 @@ const CheckedIn = () => {
             ))}
           </tbody>
         </table>
+      )}
+
+      {/* Confirmation Modal */}
+      {selectedBooking && confirmationAction && (
+        <div
+          className="checkedin-modal-overlay"
+          onClick={closeConfirmation}
+        >
+          <div
+            className="checkedin-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="checkedin-modal-close"
+              onClick={closeConfirmation}
+              disabled={actionLoading}
+            >
+              <X size={20} />
+            </button>
+
+            <div
+              className={`checkedin-modal-icon ${
+                confirmationAction === "rebook"
+                  ? "rebook-modal-icon"
+                  : "checkout-modal-icon"
+              }`}
+            >
+              {confirmationAction === "rebook" ? (
+                <RefreshCw size={28} />
+              ) : (
+                <AlertTriangle size={28} />
+              )}
+            </div>
+
+            <h3>
+              {confirmationAction === "rebook"
+                ? "Rebook Guest?"
+                : "Check Out Guest?"}
+            </h3>
+
+            <p>
+              {confirmationAction === "rebook" ? (
+                <>
+                  This will check out{" "}
+                  <strong>
+                    {selectedBooking.customer?.fullName}
+                  </strong>{" "}
+                  and open a new booking form. Do you want to continue?
+                </>
+              ) : (
+                <>
+                  Are you sure you want to check out{" "}
+                  <strong>
+                    {selectedBooking.customer?.fullName}
+                  </strong>
+                  ?
+                </>
+              )}
+            </p>
+
+            <div className="checkedin-modal-actions">
+              <button
+                className="checkedin-cancel-btn"
+                onClick={closeConfirmation}
+                disabled={actionLoading}
+              >
+                Cancel
+              </button>
+
+              <button
+                className={
+                  confirmationAction === "rebook"
+                    ? "checkedin-rebook-btn"
+                    : "checkedin-confirm-btn"
+                }
+                onClick={handleConfirmAction}
+                disabled={actionLoading}
+              >
+                {actionLoading
+                  ? "Processing..."
+                  : confirmationAction === "rebook"
+                  ? "Continue"
+                  : "Check Out"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -41,8 +41,6 @@ const Dashboard = () => {
       try {
         const response = await getOwnerDashboardStats();
 
-        console.log("Owner Dashboard Response:", response);
-
         setStats({
           ...defaultStats,
           ...response?.dashboard,
